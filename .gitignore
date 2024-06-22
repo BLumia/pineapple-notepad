@@ -1,0 +1,5 @@
+# Common build folder
+[Bb]uild/
+
+# IDE stuff
+CMakeLists.txt.user*
