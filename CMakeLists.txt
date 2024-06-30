@@ -27,6 +27,7 @@ target_sources(pineapple-notepad
 PRIVATE
     main.cpp
     mainwindow.cpp mainwindow.h
+    editorviewhelper.cpp editorviewhelper.h
     generalsettings.ui
 
     appsettings.kcfg

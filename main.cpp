@@ -6,6 +6,7 @@
 #include <KLocalizedString>
 #include <KIconTheme>
 #include <KStyleManager>
+#include <QSci/qsciglobal.h>
 
 int main(int argc, char *argv[])
 {
@@ -25,6 +26,8 @@ int main(int argc, char *argv[])
                          QString(),
                          QString(),
                          QStringLiteral("https://blumia.net"));
+    aboutData.addComponent("QsciScintilla", "A port to Qt6 of Neil Hodgson's Scintilla C++ editor class",
+                            QSCINTILLA_VERSION_STR, "https://www.riverbankcomputing.com/software/qscintilla/intro");
     KAboutData::setApplicationData(aboutData);
     a.setWindowIcon(QIcon::fromTheme(QStringLiteral("accessories-text-editor")));
 

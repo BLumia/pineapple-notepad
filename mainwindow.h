@@ -1,7 +1,10 @@
+#pragma once
+
 #include <KXmlGuiWindow>
 
 #include "ui_GeneralSettings.h"
 
+class QLabel;
 class QsciScintilla;
 class MainWindow : public KXmlGuiWindow
 {
@@ -14,8 +17,10 @@ public:
 private:
     void setupActions();
     void showSettings();
+    void applyLexer(const QString & lexer);
 
     QsciScintilla * m_editor;
+    QLabel * m_cursorPosStatusLabel;
 };
 
 // plainly for KConfigDialog

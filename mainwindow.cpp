@@ -1,9 +1,13 @@
 #include "mainwindow.h"
 
 #include "appsettings.h"
+#include "editorviewhelper.h"
 
+#include <QActionGroup>
 #include <QApplication>
 #include <QMenu>
+#include <QStringBuilder>
+#include <QStatusBar>
 
 #include <KActionCollection>
 #include <KStandardAction>
@@ -14,12 +18,16 @@
 #include <QSpinBox>
 
 #include <Qsci/qsciscintilla.h>
+#include <Qsci/qscilexer.h>
 
 MainWindow::MainWindow(QWidget *parent)
     : KXmlGuiWindow(parent)
     , m_editor(new QsciScintilla(this))
+    , m_cursorPosStatusLabel(new QLabel(QString("Ln: ?  Col: ?")))
 {
     setCentralWidget(m_editor);
+
+    statusBar()->addPermanentWidget(m_cursorPosStatusLabel);
 
     QFont font(AppSettings::self()->editorFont());
     m_editor->setFont(font);
@@ -27,10 +35,17 @@ MainWindow::MainWindow(QWidget *parent)
 
     m_editor->setMarginLineNumbers(1, true);
     m_editor->setMarginWidth(1, 40);
+    m_editor->setFolding(QsciScintilla::BoxedTreeFoldStyle);
     m_editor->setBraceMatching(QsciScintilla::SloppyBraceMatch);
 
     m_editor->setTabWidth(AppSettings::self()->tabWidth());
     m_editor->setEolMode(QsciScintilla::EolUnix);
+
+    connect(m_editor, &QsciScintilla::cursorPositionChanged, this, [this](int line, int index){
+        // FIXME: not get called at all?
+        qDebug() << line << index;
+        m_cursorPosStatusLabel->setText(QString("Ln: %1  Col: %2").arg(line, index));
+    });
 
     setupActions();
 }
@@ -81,6 +96,14 @@ void MainWindow::setupActions()
     connect(lexerNoneAction, &QAction::triggered, this, [this](){
         m_editor->setLexer(nullptr);
     });
+
+    for (int i = 0; i <= LexerGroupActionMenu::LANG_GRP_LAST; i++) {
+        LexerGroupActionMenu::LanguageGroup group = static_cast<LexerGroupActionMenu::LanguageGroup>(i);
+        const QString groupName(LexerGroupActionMenu::groupName(group));
+        LexerGroupActionMenu *lexerGroupMenu = new LexerGroupActionMenu(groupName, group, this);
+        actionCollection()->addAction(QStringLiteral("lexer_group_") % groupName.toLower(), lexerGroupMenu);
+        connect(lexerGroupMenu, &LexerGroupActionMenu::lexerSelected, this, &MainWindow::applyLexer);
+    }
 
     // Toolbar actions
     KStandardAction::zoomIn(this, [this](){
@@ -146,4 +169,13 @@ void MainWindow::showSettings()
     });
 
     dialog->show();
+}
+
+void MainWindow::applyLexer(const QString &lexer)
+{
+    QsciLexer * ret = LexerGroupActionMenu::createLexerByLanguage(lexer);
+    if (ret) {
+        ret->setFont(AppSettings::self()->editorFont());
+    }
+    m_editor->setLexer(ret);
 }

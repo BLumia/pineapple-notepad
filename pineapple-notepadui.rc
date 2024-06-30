@@ -20,7 +20,7 @@ Template: https://github.com/KDE/kxmlgui/blob/master/src/ui_standards.rc
       <Action name="edit_find_prev" />
       <Action name="edit_replace" />
     </Menu>
-    <Menu name="view"><text>&amp;View</text>
+    <Menu name="view">
 <!--      <Menu><text>&amp;Zoom</text>
         <Action name="view_zoom_in"/>
         <Action name="view_zoom_out"/>
@@ -31,16 +31,26 @@ Template: https://github.com/KDE/kxmlgui/blob/master/src/ui_standards.rc
     </Menu>
     <Menu name="language"><text>&amp;Language</text>
       <Action name="lexer_none" />
+      <Separator/>
+      <!-- FIXME: those lexer_group_ actions should be exclude from Edit ToolBar dialog -->
+      <Action name="lexer_group_b" />
+      <Action name="lexer_group_c" />
+      <Action name="lexer_group_d" />
+      <Action name="lexer_group_h" />
+      <Action name="lexer_group_j" />
+      <Action name="lexer_group_l" />
+      <Action name="lexer_group_m" />
+      <Action name="lexer_group_p" />
+      <Action name="lexer_group_r" />
+      <Action name="lexer_group_x" />
+      <Action name="lexer_group_y" />
     </Menu>
-    <Menu name="settings"><text>&amp;Settings</text>
+    <Menu name="settings">
       <Action name="colorscheme_menu"/>
     </Menu>
-    <!-- this is not enough, user can still see actions like About KDE from other places
-    <menu name="help" noMerge="1"><text>&amp;Help</text>
-      <Action name="open_kcommand_bar"/>
-      <Separator/>
-      <Action name="help_about_app"/>
-    </menu> -->
+    <!-- FIXME: This is NOT a KDE project -->
+    <menu name="help">
+    </menu>
   </MenuBar>
   <ToolBar name="mainToolBar" >
     <text>Main Toolbar</text>
