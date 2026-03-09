@@ -4,7 +4,30 @@ Pineapple Notepad aims to be a simple, lightweight, and easy to use notepad appl
 
 ## Pricing
 
-Pineapple Notepad itself is free of charge. Note that it is closed source. See the following section if you want to support Pineapple Notepad and make it open source.
+Pineapple Notepad itself will be free of charge. Note that it *might* be closed source at launch. See the following section if you want to support Pineapple Notepad and make it open source.
+
+## Feature Comparation Table
+
+| Feature | `Pineapple Notepad` | `Notepad++` | `Notepad Next` | `Notepad--` | `Kate` |
+| ------- | ------------------- | ----------- | -------------- | ----------- | ------ |
+| Open Source |         ❔[^1] |      ✅     |      ✅        |    ❌      | ✅     |
+| Cross Platform |      ✅     | ❌ (Win-only) |    ✅        |    ✅      | ✅     |
+| Text Encoding |       ✅     |      ✅     |      ❌        |    ✅      | ✅     |
+| Show All Characters | ✅     |      ✅     |      ⚠️[^2]    |    ⚠️[^2]  | ❌[^5] |
+| Session Restore |     ✅     |      ✅     |      ✅        |    ✅      | ✅     |
+| Hi-DPI Support |      ✅     |      ⚠️[^3] |      ✅        |    ⚠️[^3]  | ✅     |
+| Dark Theme Support |  ✅     |      ✅     |      ❌        |    ❌      | ✅     |
+| Side-by-Side View |   ❌[^6] |      ✅     |      ⚠️[^4]    |    ❌      | ✅     |
+| Customizable Toolbar | ✅    |      ❌     |      ❌        |    ❌      | ✅     |
+| Macro Recording |     ✅     |      ✅     |      ✅        |    ✅      | ❌     |
+| Editor Engine |    Scintilla  |   Scintilla |   Scintilla     | QScintilla | KTextEdit |
+
+[^1]: Currently not released yet. Planned to be Open Source once Open Source Sponsor Goal is reached.
+[^2]: Some non-printable characters are not able to be shown.
+[^3]: Some components have known issues with Hi-DPI support.
+[^4]: Available as custom-tailored docking system.
+[^5]: I created an add-on for this feature, but currently showing line ending is not possible to implement.
+[^6]: Not planned in the initial release, might be added in the future.
 
 ## Open Source Goal
 
@@ -21,3 +44,9 @@ Before the goal is reached, if you support Pineapple Notepad for equial or more 
 [![ko-fi](https://ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/blumia)
 
 [![Afdian](https://static.afdiancdn.com/static/img/logo/logo.png)Afdian](https://afdian.com/a/BLumia)
+
+## License
+
+Depends on if we can reach the Open Source Sponsor Goal. This section will be updated once the goal is reached.
+
+Before that happens, Pineapple Notepad is planned to be released under the [CC-BY-ND-4.0](https://spdx.org/licenses/CC-BY-ND-4.0.html) license.
