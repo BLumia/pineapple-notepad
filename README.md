@@ -20,6 +20,7 @@ Pineapple Notepad itself will be free of charge. Note that it *might* be closed 
 | Side-by-Side View |   ❌[^6] |      ✅     |      ⚠️[^4]    |    ❌      | ✅     |
 | Customizable Toolbar | ✅    |      ❌     |      ❌        |    ❌      | ✅     |
 | Macro Recording |     ✅     |      ✅     |      ✅        |    ✅      | ❌     |
+| Change History |      ✅     |      ✅     |      ❌        |    ✅      | ✅     |
 | Editor Engine |    Scintilla  |   Scintilla |   Scintilla     | QScintilla | KTextEdit |
 
 [^1]: Currently not released yet. Planned to be Open Source once Open Source Sponsor Goal is reached.
