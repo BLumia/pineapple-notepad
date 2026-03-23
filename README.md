@@ -1,10 +1,15 @@
 # Pineapple Notepad
 
-Pineapple Notepad aims to be a simple, lightweight, and easy to use notepad application that can be a cross-platform alternative to Notepad++. It's based on [Scintilla](https://www.scintilla.org/), [Qt](https://www.qt.io/) and [KDE Framework](https://develop.kde.org/products/frameworks/), and plan to be available on Windows, Linux and macOS.
+Pineapple Notepad aims to be a simple, lightweight, and easy to use notepad application that can be a cross-platform alternative to Notepad++. It's based on [Scintilla](https://www.scintilla.org/), [Qt](https://www.qt.io/) and [KDE Framework](https://develop.kde.org/products/frameworks/), available on Windows, Linux[^7] and macOS[^8].
+
+[^7]: Before reaching the Open Source sponsor goal, it will only available on deepin 25 amd64 version. Please consider become a sponsor to make me be able to reach the Open Source goal so it will be available on more distros and make porting possible.
+[^8]: Available in later updates. Bundle will not be signed.
 
 ## Pricing
 
-Pineapple Notepad itself will be free of charge. Note that it *might* be closed source at launch. See the following section if you want to support Pineapple Notepad and make it open source.
+Pineapple Notepad itself is free of charge, even for commercial purposes. Please review `LICENSE` file for details.
+
+Note that it's *currently* closed source. See the "Open Source Goal" section if you want to support Pineapple Notepad and make it open source.
 
 ## Feature Comparation Table
 
@@ -48,6 +53,6 @@ Before the goal is reached, if you support Pineapple Notepad for equial or more 
 
 ## License
 
-Depends on if we can reach the Open Source Sponsor Goal. This section will be updated once the goal is reached.
+Pineapple Notepad is released under Pineapple Notepad End User License Agreement.
 
-Before that happens, Pineapple Notepad is planned to be released under the [CC-BY-ND-4.0](https://spdx.org/licenses/CC-BY-ND-4.0.html) license.
+This section will be updated once the Open Source goal is reached.
