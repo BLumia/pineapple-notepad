@@ -49,7 +49,7 @@ Please read the following details for sponsor benefits and possible restrictions
 
 <details>
 
-All listed benefits below only apply to sponsors who donate **before** we reach the Open Source goal. One-time donation is okay, no subscription needed.
+All listed benefits below only apply to sponsors who donate **before** we reach the Open Source goal.
 
 #### Tier 1: 10 USD
 
