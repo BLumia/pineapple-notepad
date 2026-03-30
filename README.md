@@ -21,7 +21,7 @@ Note that it's *currently* closed source. See the "Open Source Goal" section if 
 | Show All Characters | ✅     |      ✅     |      ⚠️[^2]    |    ⚠️[^2]  | ❌[^5] |
 | Session Restore |     ✅     |      ✅     |      ✅        |    ✅      | ✅     |
 | Hi-DPI Support |      ✅     |      ⚠️[^3] |      ✅        |    ⚠️[^3]  | ✅     |
-| Dark Theme Support |  ✅     |      ✅     |      ❌        |    ❌      | ✅     |
+| Dark Theme Support |  ✅     |      ✅     |      ❌        |    ✅      | ✅     |
 | Side-by-Side View |   ❌[^6] |      ✅     |      ⚠️[^4]    |    ❌      | ✅     |
 | Customizable Toolbar | ✅    |      ❌     |      ❌        |    ❌      | ✅     |
 | Macro Recording |     ✅     |      ✅     |      ✅        |    ✅      | ❌     |
