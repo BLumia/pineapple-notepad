@@ -2,7 +2,7 @@
 
 菠萝记事本致力于成为一个简单、轻量且易于使用的记事本应用程序，可以作为 Notepad++ 的跨平台替代品。它基于 [Scintilla](https://www.scintilla.org/)、[Qt](https://www.qt.io/) 和 [KDE Framework](https://develop.kde.org/products/frameworks/)，可在 Windows、Linux[^7] 和 macOS[^8] 上使用。
 
-[^7]: 在达到开源赞助目标之前，它将仅在 deepin 25 amd64 版本上可用。请考虑成为赞助者，使我能够达到开源目标，这样它将在更多发行版上可用，并使移植成为可能。
+[^7]: 在达到开源赞助目标之前，它将仅在 debian 13 与 deepin 25 的 amd64 版本上可用。请考虑成为赞助者，使我能够达到开源目标，这样它将在更多发行版上可用，并使移植成为可能。
 [^8]: 从 `0.2.0` 版本开始可用。捆绑包将不会被签名。
 
 ## 定价

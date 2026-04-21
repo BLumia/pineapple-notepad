@@ -2,7 +2,7 @@
 
 Pineapple Notepad aims to be a simple, lightweight, and easy to use notepad application that can be a cross-platform alternative to Notepad++. It's based on [Scintilla](https://www.scintilla.org/), [Qt](https://www.qt.io/) and [KDE Framework](https://develop.kde.org/products/frameworks/), available on Windows, Linux[^7] and macOS[^8].
 
-[^7]: Before reaching the Open Source sponsor goal, it will only available on deepin 25 amd64 version. Please consider become a sponsor to make me be able to reach the Open Source goal so it will be available on more distros and make porting possible.
+[^7]: Before reaching the Open Source sponsor goal, it will only available on debian 13 and deepin 25 amd64 version. Please consider become a sponsor to make me be able to reach the Open Source goal so it will be available on more distros and make porting possible.
 [^8]: Available since `0.2.0`. Bundle will not be signed.
 
 ## Pricing
