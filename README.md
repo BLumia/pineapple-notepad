@@ -18,24 +18,25 @@ Note that it's *currently* closed source. See the "Open Source Goal" section if 
 | Open Source |         ❔[^1] |      ✅     |      ✅        |    ❌      | ✅     |
 | Cross Platform |      ✅     | ❌ (Win-only) |    ✅        |    ✅      | ✅     |
 | Text Encoding |       ✅     |      ✅     |      ❌        |    ✅      | ✅     |
-| Show All Characters | ✅     |      ✅     |      ⚠️[^2]    |    ⚠️[^2]  | ❌[^5] |
+| Show All Characters | ✅     |      ✅     |      ⚠️[^2]    |    ⚠️[^2]  | ❌[^4] |
 | Session Restore |     ✅     |      ✅     |      ✅        |    ✅      | ✅     |
 | Hi-DPI Support |      ✅     |      ⚠️[^3] |      ✅        |    ⚠️[^3]  | ✅     |
 | Dark Theme Support |  ✅     |      ✅     |      ❌        |    ✅      | ✅     |
-| Side-by-Side View |   ❌[^6] |      ✅     |      ⚠️[^4]    |    ❌      | ✅     |
+| Side-by-Side View |   ℹ️[^5] |      ✅     |      ✅        |    ❌      | ✅     |
 | Customizable Toolbar | ✅    |      ❌     |      ❌        |    ❌      | ✅     |
 | Macro Recording |     ✅     |      ✅     |      ✅        |    ✅      | ❌     |
 | Change History |      ✅     |      ✅     |      ❌        |    ✅      | ✅     |
-| Smart Highlight [^9] | ✅    |      ✅     |      ✅        |    ✅      | ✅     |
+| Smart Highlight [^6] | ✅    |      ✅     |      ✅        |    ✅      | ✅     |
+| `tail -f` Mode |      ✅     |      ✅     |      ❌        |    ✅      | ⚠️[^9] |
 | Editor Engine |    Scintilla  |   Scintilla |   Scintilla     | QScintilla | KTextEdit |
 
-[^1]: Currently not open-sourced. Planned to be Open Source once Open Source Sponsor Goal is reached (please consider donate!).
+[^1]: Currently not open-sourced. Planned to be Open Source once Open Source Sponsor Goal is reached (please consider donate!). Tier 2 sponsors can also get the full source code for building and auditing‌ purpose before the goal is reached.
 [^2]: Some non-printable characters are not able to be shown.
 [^3]: Some components have known issues with Hi-DPI support.
-[^4]: Available as custom-tailored docking system.
-[^5]: I created an add-on for this feature, but currently showing line ending is not possible to implement.
-[^6]: Not planned in the initial release, might be added in the future.
-[^9]: Highlight selected word in the editor.
+[^4]: I created an add-on for this feature, but currently showing line ending is not possible to implement.
+[^5]: Currently only available as an experimental version in sponsor tier, will be available in future releases once Open Source Sponsor Goal is reached.
+[^6]: Highlight selected word in the editor.
+[^9]: Enable "Read-only" mode and also enable "Auto-reload" mode to get similar experience.
 
 ## Open Source Goal
 
@@ -54,6 +55,7 @@ All listed benefits below only apply to sponsors who donate **before** we reach 
 #### Tier 1: 10 USD
 
 - Get pre-released builds of Pineapple Notepad.
+- Get experimental builds of Pineapple Notepad.
 - You (individual) will be credited within the application's About dialog as a kickstart supporter.
   - The name will be kept for at least 10 releases, after that, the name might be moved a standalone `THANKS` file in the source repository.
   - Optional email and/or home page could be provided.
