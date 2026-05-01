@@ -2,7 +2,7 @@
 
 Pineapple Notepad aims to be a simple, lightweight, and easy to use notepad application that can be a cross-platform alternative to Notepad++. It's based on [Scintilla](https://www.scintilla.org/), [Qt](https://www.qt.io/) and [KDE Framework](https://develop.kde.org/products/frameworks/), available on Windows, Linux[^7] and macOS[^8].
 
-[^7]: Before reaching the Open Source sponsor goal, it will only available on debian 13 and deepin 25 amd64 version. Please consider become a sponsor to make me be able to reach the Open Source goal so it will be available on more distros and make porting possible.
+[^7]: Before reaching the Open Source sponsor goal, it will only available on Debian 13, Ubuntu 26.04 and deepin 25 amd64 version. Please consider become a sponsor to make me be able to reach the Open Source goal so it will be available on more distros and make porting possible.
 [^8]: Available since `0.2.0`. Bundle will not be signed.
 
 ## Pricing
@@ -18,7 +18,7 @@ Note that it's *currently* closed source. See the "Open Source Goal" section if 
 | Open Source |         ❔[^1] |      ✅     |      ✅        |    ❌      | ✅     |
 | Cross Platform |      ✅     | ❌ (Win-only) |    ✅        |    ✅      | ✅     |
 | Text Encoding |       ✅     |      ✅     |      ❌        |    ✅      | ✅     |
-| Show All Characters | ✅     |      ✅     |      ⚠️[^2]    |    ⚠️[^2]  | ❌[^4] |
+| Show All Characters | ✅     |      ✅     |      ⚠️[^2]    |    ⚠️[^2]  | ⚠️[^4] |
 | Session Restore |     ✅     |      ✅     |      ✅        |    ✅      | ✅     |
 | Hi-DPI Support |      ✅     |      ⚠️[^3] |      ✅        |    ⚠️[^3]  | ✅     |
 | Dark Theme Support |  ✅     |      ✅     |      ❌        |    ✅      | ✅     |
@@ -27,7 +27,7 @@ Note that it's *currently* closed source. See the "Open Source Goal" section if 
 | Macro Recording |     ✅     |      ✅     |      ✅        |    ✅      | ❌     |
 | Change History |      ✅     |      ✅     |      ❌        |    ✅      | ✅     |
 | Smart Highlight [^6] | ✅    |      ✅     |      ✅        |    ✅      | ✅     |
-| `tail -f` Mode |      ✅     |      ✅     |      ❌        |    ✅      | ⚠️[^9] |
+| `tail -f` Mode |      ✅     |      ✅     |      ❌        |    ✅      | ℹ️[^9] |
 | Editor Engine |    Scintilla  |   Scintilla |   Scintilla     | QScintilla | KTextEdit |
 
 [^1]: Currently not open-sourced. Planned to be Open Source once Open Source Sponsor Goal is reached (please consider donate!). Tier 2 sponsors can also get the full source code for building and auditing‌ purpose before the goal is reached.
