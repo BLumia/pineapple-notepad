@@ -28,6 +28,8 @@ Note that it's *currently* closed source. See the "Open Source Goal" section if 
 | Change History |      ✅     |      ✅     |      ❌        |    ✅      | ✅     |
 | Smart Highlight [^6] | ✅    |      ✅     |      ✅        |    ✅      | ✅     |
 | `tail -f` Mode |      ✅     |      ✅     |      ❌        |    ✅      | ℹ️[^9] |
+| Search Result Pane |  ✅     |      ✅     |      ✅        |    ✅      | ✅     |
+| Folder Pane |        🚧[^10] |      ✅     |      ✅        |    ✅      | ✅     |
 | Editor Engine |    Scintilla  |   Scintilla |   Scintilla     | QScintilla | KTextEdit |
 
 [^1]: Currently not open-sourced. Planned to be Open Source once Open Source Sponsor Goal is reached (please consider donate!). Tier 2 sponsors can also get the full source code for building and auditing‌ purpose before the goal is reached.
@@ -37,6 +39,7 @@ Note that it's *currently* closed source. See the "Open Source Goal" section if 
 [^5]: Currently only available as an experimental version in sponsor tier, will be available in future releases once Open Source Sponsor Goal is reached.
 [^6]: Highlight selected word in the editor.
 [^9]: Enable "Read-only" mode and also enable "Auto-reload" mode to get similar experience.
+[^10]: Currently WIP, planned to be available in 0.7.0 releases (or 0.6.z for sponsor early access).
 
 ## Open Source Goal
 
