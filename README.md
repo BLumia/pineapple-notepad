@@ -30,7 +30,10 @@ Note that it's *currently* closed source. See the "Open Source Goal" section if 
 | `tail -f` Mode |      ✅     |      ✅     |      ❌        |    ✅      | ℹ️[^9] |
 | Search Result Pane |  ✅     |      ✅     |      ✅        |    ✅      | ✅     |
 | Folder Pane |        🚧[^10] |      ✅     |      ✅        |    ✅      | ✅     |
+| Document Map |       🚧[^10] |      ✅     |      ❌        |    ❌      | ✅     |
+| "Run..." Dialog |    🚧[^10] |      ✅     |      ❌        |    ❌      | ❌     |
 | Editor Engine |    Scintilla  |   Scintilla |   Scintilla     | QScintilla | KTextEdit |
+| Regex Engine | RESearch [^11] | Boost.Regex | QRegularExpression | Boost.Regex [^12] | QRegularExpression |
 
 [^1]: Currently not open-sourced. Planned to be Open Source once Open Source Sponsor Goal is reached (please consider donate!). Tier 2 sponsors can also get the full source code for building and auditing‌ purpose before the goal is reached.
 [^2]: Some non-printable characters are not able to be shown.
@@ -40,6 +43,8 @@ Note that it's *currently* closed source. See the "Open Source Goal" section if 
 [^6]: Highlight selected word in the editor.
 [^9]: Enable "Read-only" mode and also enable "Auto-reload" mode to get similar experience.
 [^10]: Currently WIP, planned to be available in 0.7.0 releases (or 0.6.z for sponsor early access).
+[^11]: RESearch is Scintilla's built-in regex engine. I do plan to replace it with a QRegularExpression-based solution in 0.8.0 release.
+[^12]: According to their pre-existing legacy code and their current dynamic library, they are reusing the same implementation that Notepad++ is using (BoostRegExSearch).
 
 ## Open Source Goal
 
