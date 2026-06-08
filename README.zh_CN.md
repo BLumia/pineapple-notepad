@@ -20,7 +20,7 @@
 | 文本编码  |       ✅     |      ✅     |      ❌        |    ✅      | ✅     |
 | 显示所有字符 |    ✅      |      ✅     |      ⚠️[^2]    |    ⚠️[^2]  | ⚠️[^4] |
 | 会话恢复     |    ✅      |      ✅     |      ✅        |    ✅      | ✅     |
-| 高分辨率支持 |     ✅     |      ⚠️[^3] |      ✅        |    ⚠️[^3]  | ✅     |
+| 高分屏支持   |     ✅     |      ⚠️[^3] |      ✅        |    ⚠️[^3]  | ✅     |
 | 深色主题支持 |    ✅      |      ✅     |      ❌        |    ✅      | ✅     |
 | 并排视图     |   ℹ️[^5]   |      ✅     |      ✅        |    ❌      | ✅     |
 | 可自定义工具栏 |   ✅      |      ❌     |      ❌        |    ❌      | ✅     |
@@ -29,9 +29,10 @@
 | 智能高亮 [^6] |    ✅     |      ✅     |      ✅        |    ✅      | ✅     |
 | `tail -f` 模式 |   ✅     |      ✅     |      ❌        |    ✅      | ℹ️[^9] |
 | 搜索结果面板 |      ✅     |      ✅     |      ✅        |    ✅      | ✅     |
-| 文件夹面板 |       🚧[^10] |      ✅     |      ✅        |    ✅      | ✅     |
-| 文档结构图 |       🚧[^10] |      ✅     |      ❌        |    ❌      | ✅     |
-| 运行对话框 |       🚧[^10] |      ✅     |      ❌        |    ❌      | ❌     |
+| 文件夹面板 |        ✅     |      ✅     |      ✅        |    ✅      | ✅     |
+| 文档结构图 |        ✅     |      ✅     |      ❌        |    ❌      | ✅     |
+| 运行对话框 |        ✅     |      ✅     |      ❌        |    ❌      | ❌     |
+| 定时周期备份 |     🚧[^10] |      ✅     |      ❌        |    ✅      | ✅     |
 | 编辑器引擎    | Scintilla  |   Scintilla |   Scintilla     | QScintilla | KTextEdit |
 | 正则引擎 | RESearch [^11] | Boost.Regex | QRegularExpression | Boost.Regex [^12] | QRegularExpression |
 
@@ -42,7 +43,7 @@
 [^5]: 当前仅作为实验性版本提供给赞助者，若开源目标达成后则会在未来版本中可用。
 [^6]: 在编辑器中高亮选中的单词。
 [^9]: 需启用只读模式并启用自动重载来获得近似体验。
-[^10]: 当前施工中，计划在 0.7.0 版本（或者面向赞助者的 0.6.z 版本）中提供。
+[^10]: 当前施工中，计划在 0.8.0 版本（或者面向赞助者的 0.7.z 版本）中提供。
 [^11]: RESearch 是 Scintilla 的内置正则引擎。我计划在 0.8.0 版本将其替换为基于 QRegularExpression 的解决方案。
 [^12]: 根据其原有旧代码和当前的动态库的情况，其目前实现复用了来自 Notepad++ 的正则引擎实现（BoostRegExSearch）。
 
@@ -89,6 +90,14 @@
 [![ko-fi](https://ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/blumia)
 
 [![爱发电](https://static.afdiancdn.com/static/img/logo/logo.png)爱发电](https://afdian.com/a/BLumia)
+
+### 相关的开源项目
+
+一些与此项目关联的项目已开源：
+
+- [kf6redist](https://github.com/BLumia/kf6redist): KDE Framework 再分发版本的构建脚本和相关补丁。
+- [libintl](https://github.com/BLumia/libintl): 可供 CMake 构建的 libintl 版本。
+- [icoutils-rs](https://github.com/BLumia/icoutils-rs): icoutils 的 `icotool` 工具的单可执行文件便携替代实现。
 
 ## 许可证
 

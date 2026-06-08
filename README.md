@@ -29,9 +29,10 @@ Note that it's *currently* closed source. See the "Open Source Goal" section if 
 | Smart Highlight [^6] | ✅    |      ✅     |      ✅        |    ✅      | ✅     |
 | `tail -f` Mode |      ✅     |      ✅     |      ❌        |    ✅      | ℹ️[^9] |
 | Search Result Pane |  ✅     |      ✅     |      ✅        |    ✅      | ✅     |
-| Folder Pane |        🚧[^10] |      ✅     |      ✅        |    ✅      | ✅     |
-| Document Map |       🚧[^10] |      ✅     |      ❌        |    ❌      | ✅     |
-| "Run..." Dialog |    🚧[^10] |      ✅     |      ❌        |    ❌      | ❌     |
+| Folder Pane |         ✅     |      ✅     |      ✅        |    ✅      | ✅     |
+| Document Map |        ✅     |      ✅     |      ❌        |    ❌      | ✅     |
+| "Run..." Dialog |     ✅     |      ✅     |      ❌        |    ❌      | ❌     |
+| Interval Backup |    🚧[^10] |      ✅     |      ❌        |    ✅      | ✅     |
 | Editor Engine |    Scintilla  |   Scintilla |   Scintilla     | QScintilla | KTextEdit |
 | Regex Engine | RESearch [^11] | Boost.Regex | QRegularExpression | Boost.Regex [^12] | QRegularExpression |
 
@@ -42,7 +43,7 @@ Note that it's *currently* closed source. See the "Open Source Goal" section if 
 [^5]: Currently only available as an experimental version in sponsor tier, will be available in future releases once Open Source Sponsor Goal is reached.
 [^6]: Highlight selected word in the editor.
 [^9]: Enable "Read-only" mode and also enable "Auto-reload" mode to get similar experience.
-[^10]: Currently WIP, planned to be available in 0.7.0 releases (or 0.6.z for sponsor early access).
+[^10]: Currently WIP, planned to be available in 0.8.0 releases (or 0.7.z for sponsor early access).
 [^11]: RESearch is Scintilla's built-in regex engine. I do plan to replace it with a QRegularExpression-based solution in 0.8.0 release.
 [^12]: According to their pre-existing legacy code and their current dynamic library, they are reusing the same implementation that Notepad++ is using (BoostRegExSearch).
 
@@ -90,6 +91,14 @@ All listed benefits below only apply to sponsors who donate **before** we reach 
 [![ko-fi](https://ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/blumia)
 
 [![Afdian](https://static.afdiancdn.com/static/img/logo/logo.png)Afdian](https://afdian.com/a/BLumia)
+
+### Related Open-Sourced Projects
+
+Some associated projects are already open-sourced:
+
+- [kf6redist](https://github.com/BLumia/kf6redist): KDE Framework redistribution building scripts and patches.
+- [libintl](https://github.com/BLumia/libintl): Patched libintl for easier build with CMake.
+- [icoutils-rs](https://github.com/BLumia/icoutils-rs): drop-in, portable replacement for icoutils's `icotool`.
 
 ## License
 
