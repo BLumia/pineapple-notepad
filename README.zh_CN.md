@@ -32,9 +32,10 @@
 | 文件夹面板 |        ✅     |      ✅     |      ✅        |    ✅      | ✅     |
 | 文档结构图 |        ✅     |      ✅     |      ❌        |    ❌      | ✅     |
 | 运行对话框 |        ✅     |      ✅     |      ❌        |    ❌      | ❌     |
-| 定时周期备份 |     🚧[^10] |      ✅     |      ❌        |    ✅      | ✅     |
+| 定时周期备份 |      ✅     |      ✅     |      ❌        |    ✅      | ✅     |
+| 自定义语言 |       🚧[^11] |      ✅     |      ❌        |    ⚠️[^12] | ✅     |
 | 编辑器引擎    | Scintilla  |   Scintilla |   Scintilla     | QScintilla | KTextEdit |
-| 正则引擎 | RESearch [^11] | Boost.Regex | QRegularExpression | Boost.Regex [^12] | QRegularExpression |
+| 正则引擎 | QRegularExpression | Boost.Regex | QRegularExpression | Boost.Regex [^10] | QRegularExpression |
 
 [^1]: 目前未开源。计划在达到开源赞助目标后开源（请考虑捐赠！）。第二档位的赞助者也可在开源目标达成前提前获取完整源码以供自行构建和代码审查。
 [^2]: 某些不可打印字符无法显示。
@@ -43,9 +44,9 @@
 [^5]: 当前仅作为实验性版本提供给赞助者，若开源目标达成后则会在未来版本中可用。
 [^6]: 在编辑器中高亮选中的单词。
 [^9]: 需启用只读模式并启用自动重载来获得近似体验。
-[^10]: 当前施工中，计划在 0.8.0 版本（或者面向赞助者的 0.7.z 版本）中提供。
-[^11]: RESearch 是 Scintilla 的内置正则引擎。我计划在 0.8.0 版本将其替换为基于 QRegularExpression 的解决方案。
-[^12]: 根据其原有旧代码和当前的动态库的情况，其目前实现复用了来自 Notepad++ 的正则引擎实现（BoostRegExSearch）。
+[^10]: 根据其原有旧代码和当前的动态库的情况，其目前实现非常可能复用了来自 Notepad++ 的正则引擎实现（BoostRegExSearch）。
+[^11]: 当前施工中，计划在 0.9.0 版本（或者面向赞助者的 0.8.z 版本）中提供灵活的用户自定义语言支持。
+[^12]: 仅支持基于 Lexilla 现有的 cpp lexer 进行关键词自定义。
 
 ## 开源目标
 
@@ -85,11 +86,13 @@
 
 *如果您对赞助权益有任何疑问，请通过创建 Issue 或在 Ko-fi 上给我留言或其他任何可以联系到我的方式与我取得联系。*
 
-### 资助
+### 赞助
 
 [![ko-fi](https://ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/blumia)
 
 [![爱发电](https://static.afdiancdn.com/static/img/logo/logo.png)爱发电](https://afdian.com/a/BLumia)
+
+[itch.io](https://blumia.itch.io/pineapple-notepad)
 
 ### 相关的开源项目
 

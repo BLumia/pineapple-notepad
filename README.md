@@ -32,9 +32,10 @@ Note that it's *currently* closed source. See the "Open Source Goal" section if 
 | Folder Pane |         ✅     |      ✅     |      ✅        |    ✅      | ✅     |
 | Document Map |        ✅     |      ✅     |      ❌        |    ❌      | ✅     |
 | "Run..." Dialog |     ✅     |      ✅     |      ❌        |    ❌      | ❌     |
-| Interval Backup |    🚧[^10] |      ✅     |      ❌        |    ✅      | ✅     |
+| Interval Backup |     ✅     |      ✅     |      ❌        |    ✅      | ✅     |
+| User Defined Language | 🚧[^11] |   ✅     |      ❌        |    ⚠️[^12] | ✅     |
 | Editor Engine |    Scintilla  |   Scintilla |   Scintilla     | QScintilla | KTextEdit |
-| Regex Engine | RESearch [^11] | Boost.Regex | QRegularExpression | Boost.Regex [^12] | QRegularExpression |
+| Regex Engine | QRegularExpression | Boost.Regex | QRegularExpression | Boost.Regex [^10] | QRegularExpression |
 
 [^1]: Currently not open-sourced. Planned to be Open Source once Open Source Sponsor Goal is reached (please consider donate!). Tier 2 sponsors can also get the full source code for building and auditing‌ purpose before the goal is reached.
 [^2]: Some non-printable characters are not able to be shown.
@@ -43,9 +44,9 @@ Note that it's *currently* closed source. See the "Open Source Goal" section if 
 [^5]: Currently only available as an experimental version in sponsor tier, will be available in future releases once Open Source Sponsor Goal is reached.
 [^6]: Highlight selected word in the editor.
 [^9]: Enable "Read-only" mode and also enable "Auto-reload" mode to get similar experience.
-[^10]: Currently WIP, planned to be available in 0.8.0 releases (or 0.7.z for sponsor early access).
-[^11]: RESearch is Scintilla's built-in regex engine. I do plan to replace it with a QRegularExpression-based solution in 0.8.0 release.
-[^12]: According to their pre-existing legacy code and their current dynamic library, they are reusing the same implementation that Notepad++ is using (BoostRegExSearch).
+[^10]: According to their pre-existing legacy code and their current dynamic library, they are very likely reusing the same implementation that Notepad++ is using (BoostRegExSearch).
+[^11]: Currently WIP, fully customizable user defined language support planned to be available in 0.9.0 releases (or 0.8.z for sponsor early access).
+[^12]: Only support keyword-level customization based on Lexilla's cpp lexer.
 
 ## Open Source Goal
 
@@ -91,6 +92,8 @@ All listed benefits below only apply to sponsors who donate **before** we reach 
 [![ko-fi](https://ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/blumia)
 
 [![Afdian](https://static.afdiancdn.com/static/img/logo/logo.png)Afdian](https://afdian.com/a/BLumia)
+
+[itch.io](https://blumia.itch.io/pineapple-notepad)
 
 ### Related Open-Sourced Projects
 
