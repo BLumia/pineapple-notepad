@@ -33,7 +33,7 @@ Note that it's *currently* closed source. See the "Open Source Goal" section if 
 | Document Map |        ✅     |      ✅     |      ❌        |    ❌      | ✅     |
 | "Run..." Dialog |     ✅     |      ✅     |      ❌        |    ❌      | ❌     |
 | Interval Backup |     ✅     |      ✅     |      ❌        |    ✅      | ✅     |
-| User Defined Language | 🚧[^11] |   ✅     |      ❌        |    ⚠️[^12] | ✅     |
+| User Defined Language | ✅   |      ✅     |      ❌        |    ⚠️[^11] | ✅     |
 | Editor Engine |    Scintilla  |   Scintilla |   Scintilla     | QScintilla | KTextEdit |
 | Regex Engine | QRegularExpression | Boost.Regex | QRegularExpression | Boost.Regex [^10] | QRegularExpression |
 
@@ -45,8 +45,7 @@ Note that it's *currently* closed source. See the "Open Source Goal" section if 
 [^6]: Highlight selected word in the editor.
 [^9]: Enable "Read-only" mode and also enable "Auto-reload" mode to get similar experience.
 [^10]: According to their pre-existing legacy code and their current dynamic library, they are very likely reusing the same implementation that Notepad++ is using (BoostRegExSearch).
-[^11]: Currently WIP, fully customizable user defined language support planned to be available in 0.9.0 releases (or 0.8.z for sponsor early access).
-[^12]: Only support keyword-level customization based on Lexilla's cpp lexer.
+[^11]: Only support keyword-level customization based on Lexilla's cpp lexer.
 
 ## Open Source Goal
 
