@@ -33,6 +33,7 @@ Note that it's *currently* closed source. See the "Open Source Goal" section if 
 | Document Map |        ✅     |      ✅     |      ❌        |    ❌      | ✅     |
 | "Run..." Dialog |     ✅     |      ✅     |      ❌        |    ❌      | ❌     |
 | Interval Backup |     ✅     |      ✅     |      ❌        |    ✅      | ✅     |
+| Quick Switcher[^12] | ✅     |      ✅     |      ❌        |    ❌      | ✅     |
 | User Defined Language | ✅   |      ✅     |      ❌        |    ⚠️[^11] | ✅     |
 | Editor Engine |    Scintilla  |   Scintilla |   Scintilla     | QScintilla | KTextEdit |
 | Regex Engine | QRegularExpression | Boost.Regex | QRegularExpression | Boost.Regex [^10] | QRegularExpression |
@@ -46,6 +47,7 @@ Note that it's *currently* closed source. See the "Open Source Goal" section if 
 [^9]: Enable "Read-only" mode and also enable "Auto-reload" mode to get similar experience.
 [^10]: According to their pre-existing legacy code and their current dynamic library, they are very likely reusing the same implementation that Notepad++ is using (BoostRegExSearch).
 [^11]: Only support keyword-level customization based on Lexilla's cpp lexer.
+[^12]: Use <kbd>Ctrl+Tab</kbd> to switch between recently viewed opened documents.
 
 ## Open Source Goal
 
