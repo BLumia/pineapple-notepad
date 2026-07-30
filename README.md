@@ -55,34 +55,28 @@ Pineapple Notepad is currently not an open source project, but the goal is to ma
 
 ### Sponsor Benefits
 
-Before the goal is reached, if you support Pineapple Notepad for equial or more than $10, you can be credited within the application's About dialog as a kickstart supporter.
-
-Please read the following details for sponsor benefits and possible restrictions.
+As a token of gratitude, sponsors will be able to receive a sponsor license and unlock some nice-to-have features before we reach the open-source sponsorship goals. Additionally, depending on the sponsor's donation, sponsors might be able to get credited within the application and access the source code before the open-source sponsorship goals are reached. Details are as follows:
 
 <details>
 
 All listed benefits below only apply to sponsors who donate **before** we reach the Open Source goal.
 
-#### Tier 1: 10 USD
+### Tier 0: 2 USD
 
-- Get pre-released builds of Pineapple Notepad.
-- Get experimental builds of Pineapple Notepad.
-- You (individual) will be credited within the application's About dialog as a kickstart supporter.
-  - The name will be kept for at least 10 releases, after that, the name might be moved a standalone `THANKS` file in the source repository.
-  - Optional email and/or home page could be provided.
-  - Restriction applies (Please reach out if you have any questions or not sure if it applies to you):
-    - The name, email and/or link to your home page should not contain political content, any emoji or other contents might cause me trouble.
+- Get a sponsor license, which can be used to unlock some nice-to-have features in the free release version. Currently, the following features are available:
+  - Theme color editor (to tweak a specific color in a theme)
+- Get credited within the blog of the next release
 
-#### Tier 2: 35 USD
+### Tier 1: 10 USD
 
-- All benefits of Tier 1
-- Get full source code of Pineapple Notepad that allows you build it from source or audit it.
-- You (company/organization) will be credited within the application's About dialog as a sponsor.
-  - The name will be kept for at least 10 releases, after that, the name might be moved a standalone `THANKS` file in the source repository.
-  - Optional email and/or home page could be provided.
-  - Restriction applies (Please reach out if you have any questions or not sure if it applies to you):
-    - The name, email and/or link to your home page should not contain political content, any emoji or other contents might cause me trouble.
-    - Gambling, blockchain, adult content and/or other similar contents are not allowed.
+- All tier 0 rights, and
+- For at least the next 10 versions, get credited within the application's "About" dialog at "Special Thanks" tab
+- Get pre-release / sponsor-edition of Pineapple Notepad on itch.io (the sponsor license is full featured without requiring a sponsor license)
+
+### Tier 2: 35 USD
+
+- All tier 1 rights, and
+- Get source code access on itch.io before the open-source sponsor goal is reached (for auditing and building from source)
 
 </details>
 
