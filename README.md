@@ -65,6 +65,7 @@ All listed benefits below only apply to sponsors who donate **before** we reach 
 
 - Get a sponsor license, which can be used to unlock some nice-to-have features in the free release version. Currently, the following features are available:
   - Theme color editor (to tweak a specific color in a theme)
+  - Customizable context menu (for the editor area)
 - Get credited within the blog of the next release
 
 ### Tier 1: 10 USD
