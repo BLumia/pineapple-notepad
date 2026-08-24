@@ -98,6 +98,7 @@ Some associated projects are already open-sourced:
 - [kf6redist](https://github.com/BLumia/kf6redist): KDE Framework redistribution building scripts and patches.
 - [libintl](https://github.com/BLumia/libintl): Patched libintl for easier build with CMake.
 - [icoutils-rs](https://github.com/BLumia/icoutils-rs): drop-in, portable replacement for icoutils's `icotool`.
+- [pineapple-msix](https://github.com/BLumia/pineapple-msix): MSIX packaging utility.
 
 ## License
 

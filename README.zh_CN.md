@@ -98,6 +98,7 @@
 - [kf6redist](https://github.com/BLumia/kf6redist): KDE Framework 再分发版本的构建脚本和相关补丁。
 - [libintl](https://github.com/BLumia/libintl): 可供 CMake 构建的 libintl 版本。
 - [icoutils-rs](https://github.com/BLumia/icoutils-rs): icoutils 的 `icotool` 工具的单可执行文件便携替代实现。
+- [pineapple-msix](https://github.com/BLumia/pineapple-msix): MSIX 便捷打包工具。
 
 ## 许可证
 
