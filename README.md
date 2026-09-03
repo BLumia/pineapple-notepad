@@ -51,7 +51,7 @@ Note that it's *currently* closed source. See the "Open Source Goal" section if 
 
 ## Open Source Goal
 
-Pineapple Notepad is currently not an open source project, but the goal is to make Pineapple Notepad open source. I've set-up a $150 Ko-fi goal that Pineapple Notepad will be released as an Open-Source project if the goal is reached. Please read [this post](https://ko-fi.com/post/Pineapple-Notepad-A-Cross-platform-Notepad--Alte-G2G71V8JPX) for details. If you're interested, please use the following links to support this project.
+Pineapple Notepad is currently not an open source project, but the goal is to make Pineapple Notepad open source. I've set-up a $150 Ko-fi goal that Pineapple Notepad will be released as an Open-Source project if the goal is reached. Please read [this post](https://ko-fi.com/post/Pineapple-Notepad-A-Cross-platform-Notepad--Alte-G2G71V8JPX) for details. You can track the progress of the goal [in this page](https://pineapple-notepad.blumia.net/sponsor). If you're interested, please use the following links to support this project.
 
 ### Sponsor Benefits
 

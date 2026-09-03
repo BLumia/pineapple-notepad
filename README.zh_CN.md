@@ -51,7 +51,7 @@
 
 ## 开源目标
 
-菠萝记事本目前不是一个开源项目，但目标是使菠萝记事本成为开源软件。我已设定了一个 1000 元的开源目标，如果达到该目标，Pineapple Notepad 将作为开源项目发布。请阅读[这篇文章](https://ko-fi.com/post/Pineapple-Notepad-A-Cross-platform-Notepad--Alte-G2G71V8JPX)了解详情。如果您有兴趣，请使用以下链接支持此项目。
+菠萝记事本目前不是一个开源项目，但目标是使菠萝记事本成为开源软件。我已设定了一个 1000 元的开源目标，如果达到该目标，Pineapple Notepad 将作为开源项目发布。请阅读[这篇文章](https://ko-fi.com/post/Pineapple-Notepad-A-Cross-platform-Notepad--Alte-G2G71V8JPX)了解详情。您可以在[这个页面](https://pineapple-notepad.blumia.net/sponsor)了解开源赞助目标的当前进度。如果感兴趣，可以使用以下链接支持此项目。
 
 ### 赞助权益
 
