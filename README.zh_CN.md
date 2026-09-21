@@ -35,6 +35,8 @@
 | 定时周期备份 |      ✅     |      ✅     |      ❌        |    ✅      | ✅     |
 | 自定义语言 |        ✅     |      ✅     |      ❌        |    ⚠️[^11] | ✅     |
 | 文档快捷切换[^12] | ✅     |      ✅     |      ❌        |    ❌      | ✅     |
+| 文本标记   |        ✅     |      ✅     |      ✅        |    ✅      | ❌     |
+| HTML 导出 |         ✅     |     ℹ️[^13] |      ✅        |    ❌      | ✅     |
 | 编辑器引擎    | Scintilla  |   Scintilla |   Scintilla     | QScintilla | KTextEdit |
 | 正则引擎 | QRegularExpression | Boost.Regex | QRegularExpression | Boost.Regex [^10] | QRegularExpression |
 
@@ -48,6 +50,7 @@
 [^10]: 根据其原有旧代码和当前的动态库的情况，其目前实现非常可能复用了来自 Notepad++ 的正则引擎实现（BoostRegExSearch）。
 [^11]: 仅支持基于 Lexilla 现有的 cpp lexer 进行关键词自定义。
 [^12]: <kbd>Ctrl+Tab</kbd> 快速切换最近查看过的已打开文档。
+[^13]: 通过插件支持。
 
 ## 开源目标
 
