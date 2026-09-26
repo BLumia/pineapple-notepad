@@ -36,7 +36,8 @@ Note that it's *currently* closed source. See the "Open Source Goal" section if 
 | Quick Switcher[^12] | ✅     |      ✅     |      ❌        |    ❌      | ✅     |
 | User Defined Language | ✅   |      ✅     |      ❌        |    ⚠️[^11] | ✅     |
 | Text Marking |        ✅     |      ✅     |      ✅        |    ✅      | ❌     |
-| HTML Export |         ✅     |     ℹ️[^13] |      ✅        |    ❌      | ✅     |
+| HTML Export |         ✅     |      🧩     |      ✅        |    ❌      | ✅     |
+| Spell Check |         ✅     |      🧩     |      ❌        |    ❌      | ✅     |
 | Editor Engine |    Scintilla  |   Scintilla |   Scintilla     | QScintilla | KTextEdit |
 | Regex Engine | QRegularExpression | Boost.Regex | QRegularExpression | Boost.Regex [^10] | QRegularExpression |
 
@@ -50,7 +51,6 @@ Note that it's *currently* closed source. See the "Open Source Goal" section if 
 [^10]: According to their pre-existing legacy code and their current dynamic library, they are very likely reusing the same implementation that Notepad++ is using (BoostRegExSearch).
 [^11]: Only support keyword-level customization based on Lexilla's cpp lexer.
 [^12]: Use <kbd>Ctrl+Tab</kbd> to switch between recently viewed opened documents.
-[^13]: Via plugin.
 
 ## Open Source Goal
 
@@ -77,7 +77,7 @@ All listed benefits below only apply to sponsors who donate **before** we reach 
 - For at least the next 10 versions, get credited within the application's "About" dialog at "Special Thanks" tab
 - Get pre-release / sponsor-edition of Pineapple Notepad on itch.io (the sponsor license is full featured without requiring a sponsor license)
 
-### Tier 2: 35 USD
+### Tier 2: 25 USD
 
 - All tier 1 rights, and
 - Get source code access on itch.io before the open-source sponsor goal is reached (for auditing and building from source)
