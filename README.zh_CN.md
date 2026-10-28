@@ -38,6 +38,7 @@
 | 文本标记   |        ✅     |      ✅     |      ✅        |    ✅      | ❌     |
 | HTML 导出 |         ✅     |      🧩     |      ✅        |    ❌      | ✅     |
 | 拼写检查   |        ✅     |      🧩     |      ❌        |    ❌      | ✅     |
+| 在搜索结果中查找 |   ✅     |      ✅     |      ❌        |    ⚠️[^13] | ❌     |
 | 编辑器引擎    | Scintilla  |   Scintilla |   Scintilla     | QScintilla | KTextEdit |
 | 正则引擎 | QRegularExpression | Boost.Regex | QRegularExpression | Boost.Regex [^10] | QRegularExpression |
 
@@ -51,6 +52,7 @@
 [^10]: 根据其原有旧代码和当前的动态库的情况，其目前实现非常可能复用了来自 Notepad++ 的正则引擎实现（BoostRegExSearch）。
 [^11]: 仅支持基于 Lexilla 现有的 cpp lexer 进行关键词自定义。
 [^12]: <kbd>Ctrl+Tab</kbd> 快速切换最近查看过的已打开文档。
+[^13]: 是对搜索结果面板提供了一个快速搜索框，而非针对搜索结果面板内的结果再次进行查找。
 
 ## 开源目标
 

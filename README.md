@@ -38,6 +38,7 @@ Note that it's *currently* closed source. See the "Open Source Goal" section if 
 | Text Marking |        ✅     |      ✅     |      ✅        |    ✅      | ❌     |
 | HTML Export |         ✅     |      🧩     |      ✅        |    ❌      | ✅     |
 | Spell Check |         ✅     |      🧩     |      ❌        |    ❌      | ✅     |
+| Find in Search Results | ✅  |      ✅     |      ❌        |    ⚠️[^13] | ❌     |
 | Editor Engine |    Scintilla  |   Scintilla |   Scintilla     | QScintilla | KTextEdit |
 | Regex Engine | QRegularExpression | Boost.Regex | QRegularExpression | Boost.Regex [^10] | QRegularExpression |
 
