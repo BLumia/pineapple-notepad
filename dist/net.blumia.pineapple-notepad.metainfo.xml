@@ -5,7 +5,7 @@
   <summary>Scintilla-based Cross-platform Text Editor</summary>
   <summary xml:lang="zh-CN">基于 Scintilla 的跨平台文本编辑器</summary>
   <metadata_license>CC0-1.0</metadata_license>
-  <project_license>Proprietary</project_license>
+  <project_license>GPL-3.0</project_license>
   <description>
     <p>Pineapple Notepad is a Scintilla-based, free, cross-platform text editor.</p>
     <p xml:lang="zh-CN">菠萝记事本一个基于 Scintilla 的免费跨平台文本编辑器。</p>
