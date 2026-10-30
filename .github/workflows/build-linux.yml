@@ -1,0 +1,24 @@
+name: Linux Build
+
+on: [push, pull_request, workflow_dispatch]
+
+jobs:
+  build-flatpak:
+    runs-on: ubuntu-24.04
+    container:
+      image: ghcr.io/flathub-infra/flatpak-github-actions:kde-6.11
+      options: --privileged
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v6
+      with:
+        submodules: recursive
+
+    - name: Build Flatpak
+      uses: flatpak/flatpak-github-actions/flatpak-builder@v6
+      with:
+        bundle: net.blumia.pineapple-notepad.yml
+        manifest-path: net.blumia.pineapple-notepad.yml
+        cache-key: flatpak-builder-${{ github.sha }}
+        upload-artifact: true
