@@ -1,0 +1,71 @@
+{
+    "version": 2,
+    "themes": {
+        "Pineapple Notepad Light": {
+            "dark-variant": "Pineapple Notepad Dark",
+            "extensions": {
+                "editor.CodeFolding.bg": "#808080",
+                "editor.CodeFolding.highlight": "#AB5757",
+                "editor.BracketMatching.fg": "#0000FF",
+                "editor.tagMatchHighlight": "#80FFFF"
+            }
+        },
+        "Pineapple Notepad Dark": {
+            "light-variant": "Pineapple Notepad Light",
+            "extensions": {
+                "editor.CodeFolding.bg": "#808080",
+                "editor.CodeFolding.highlight": "#AB5757",
+                "editor.BracketMatching.fg": "#569CD6",
+                "editor.tagMatchHighlight": "#264F78"
+            }
+        },
+        "Breeze Light": {
+            "dark-variant": "Breeze Dark"
+        },
+        "Breeze Dark": {
+            "light-variant": "Breeze Light"
+        },
+        "Solarized Light": {
+            "dark-variant": "Solarized Dark"
+        },
+        "Solarized Dark": {
+            "light-variant": "Solarized Light"
+        },
+        "Gruvbox Light": {
+            "dark-variant": "Gruvbox Dark"
+        },
+        "Gruvbox Dark": {
+            "light-variant": "Gruvbox Light"
+        },
+        "GitHub Light": {
+            "dark-variant": "GitHub Dark"
+        },
+        "GitHub Dark": {
+            "light-variant": "GitHub Light"
+        },
+        "Atom One Light": {
+            "dark-variant": "Atom One Dark"
+        },
+        "Atom One Dark": {
+            "light-variant": "Atom One Light"
+        },
+        "Ayu Light": {
+            "dark-variant": "Ayu Dark"
+        },
+        "Ayu Dark": {
+            "light-variant": "Ayu Light"
+        },
+        "Catppuccin Latte": {
+            "dark-variant": "Catppuccin Mocha"
+        },
+        "Catppuccin Mocha": {
+            "light-variant": "Catppuccin Latte"
+        },
+        "Tokyo Night Light": {
+            "dark-variant": "Tokyo Night Storm"
+        },
+        "Tokyo Night Storm": {
+            "light-variant": "Tokyo Night Light"
+        }
+    }
+}

@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>AutoCompletionSettings</class>
+ <widget class="QWidget" name="AutoCompletionSettings">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>406</width>
+    <height>206</height>
+   </rect>
+  </property>
+  <layout class="QVBoxLayout" name="verticalLayout">
+   <item>
+    <widget class="QGroupBox" name="kcfg_autoCompletionEnabled">
+     <property name="title">
+      <string>Auto Completion</string>
+     </property>
+     <property name="checkable">
+      <bool>true</bool>
+     </property>
+     <layout class="QFormLayout" name="formLayout">
+      <item row="0" column="0">
+       <widget class="QLabel" name="label_triggerLength">
+        <property name="text">
+         <string>Trigger length</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="1">
+       <widget class="QSpinBox" name="kcfg_autoCompletionTriggerLength">
+        <property name="toolTip">
+         <string>Minimum number of characters to trigger auto completion (1-9)</string>
+        </property>
+        <property name="minimum">
+         <number>1</number>
+        </property>
+        <property name="maximum">
+         <number>9</number>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="0" colspan="2">
+       <widget class="QCheckBox" name="kcfg_autoCompletionIgnoreNumbers">
+        <property name="toolTip">
+         <string>Do not suggest pure numeric words</string>
+        </property>
+        <property name="text">
+         <string>Ignore numbers</string>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="0" colspan="2">
+       <widget class="QCheckBox" name="kcfg_autoCompletionBrief">
+        <property name="toolTip">
+         <string>When enabled, the completion list is regenerated on each keystroke. When disabled, the list is shown once and filtered by Scintilla.</string>
+        </property>
+        <property name="text">
+         <string>Brief mode (regenerate list on each keystroke)</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </item>
+   <item>
+    <spacer name="verticalSpacer">
+     <property name="orientation">
+      <enum>Qt::Orientation::Vertical</enum>
+     </property>
+     <property name="sizeHint" stdset="0">
+      <size>
+       <width>20</width>
+       <height>40</height>
+      </size>
+     </property>
+    </spacer>
+   </item>
+  </layout>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

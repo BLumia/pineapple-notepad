@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>FileWatchSettings</class>
+ <widget class="QWidget" name="FileWatchSettings">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>440</width>
+    <height>360</height>
+   </rect>
+  </property>
+  <layout class="QVBoxLayout" name="verticalLayout">
+   <item>
+    <widget class="QGroupBox" name="autoDetectionGroup">
+     <property name="title">
+      <string>File Status Auto-Detection</string>
+     </property>
+     <layout class="QFormLayout" name="autoDetectionFormLayout">
+      <item row="0" column="0">
+       <widget class="QLabel" name="scopeLabel">
+        <property name="text">
+         <string>Auto-detection scope</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="1">
+       <widget class="QComboBox" name="kcfg_fileStatusAutoDetection">
+        <property name="toolTip">
+         <string>Which opened files are checked for external changes on disk.</string>
+        </property>
+        <item>
+         <property name="text">
+          <string>Disable</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>Enable for current file</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>Enable for all opened files</string>
+         </property>
+        </item>
+       </widget>
+      </item>
+      <item row="1" column="0">
+       <widget class="QLabel" name="backendLabel">
+        <property name="text">
+         <string>Detection backend</string>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="1">
+       <widget class="QComboBox" name="kcfg_fileChangeDetectionBackend">
+        <property name="toolTip">
+         <string>File system watcher reports changes immediately while the document is open. Timestamp checking only looks at the file when the application is activated, the document is switched to, or a document is opened, which may behave more reliably on network drives.</string>
+        </property>
+        <item>
+         <property name="text">
+          <string>File system watcher (real-time)</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>Timestamp check (on activation and tab switch)</string>
+         </property>
+        </item>
+       </widget>
+      </item>
+      <item row="2" column="0">
+       <widget class="QLabel" name="silentLabel">
+        <property name="text">
+         <string>Update silently when unmodified</string>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="1">
+       <widget class="QCheckBox" name="kcfg_fileUpdateSilently">
+        <property name="toolTip">
+         <string>Reload the file from disk without asking when it has no unsaved changes. Documents with unsaved changes still ask before reloading.</string>
+        </property>
+        <property name="text">
+         <string>Enabled</string>
+        </property>
+       </widget>
+      </item>
+      <item row="3" column="0">
+       <widget class="QLabel" name="scrollLabel">
+        <property name="text">
+         <string>Scroll to end after reload</string>
+        </property>
+       </widget>
+      </item>
+      <item row="3" column="1">
+       <widget class="QCheckBox" name="kcfg_fileUpdateScrollToEnd">
+        <property name="toolTip">
+         <string>After the document is reloaded due to an external change, scroll the view to the end of the document, like tail -f does.</string>
+        </property>
+        <property name="text">
+         <string>Enabled</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </item>
+   <item>
+    <widget class="QGroupBox" name="monitoringGroup">
+     <property name="title">
+      <string>Monitor File (tail -f)</string>
+     </property>
+     <layout class="QFormLayout" name="monitoringFormLayout">
+      <item row="0" column="0">
+       <widget class="QLabel" name="monitorScrollLabel">
+        <property name="text">
+         <string>Always scroll to end on update</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="1">
+       <widget class="QCheckBox" name="kcfg_monitorAlwaysScrollToEnd">
+        <property name="toolTip">
+         <string>When monitoring a file (tail -f), always scroll to the end on update. When disabled, scrolling is skipped if the view is not already at the end of the document.</string>
+        </property>
+        <property name="text">
+         <string>Enabled</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </item>
+   <item>
+    <spacer name="verticalSpacer">
+     <property name="orientation">
+      <enum>Qt::Vertical</enum>
+     </property>
+     <property name="sizeHint" stdset="0">
+      <size>
+       <width>20</width>
+       <height>40</height>
+      </size>
+     </property>
+    </spacer>
+   </item>
+  </layout>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

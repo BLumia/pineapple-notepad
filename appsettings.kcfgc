@@ -1,8 +1,0 @@
-File=appsettings.kcfg
-ClassName=AppSettings
-Mutators=true
-DefaultValueGetters=true
-GenerateProperties=true
-ParentInConstructor=true
-Notifiers=true
-Singleton=true

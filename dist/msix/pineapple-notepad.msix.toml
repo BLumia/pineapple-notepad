@@ -1,0 +1,80 @@
+[package]
+name = "ChestnutSoftware.PineappleNotepad"
+version = "1.5.0.0"
+
+[display]
+name = "Pineapple Notepad"
+publisherName = "Chestnut Software"
+
+[display.zh-CN]
+name = "菠萝记事本"
+
+[application]
+id = "PineappleNotepad"
+executable = "pnotepad.exe"
+
+[icon]
+source = "../../icons/pineapple-notepad.svg"
+
+[[fileAssociations]]
+name = "plaintext"
+extensions = ["txt"]
+logo = "txt.svg"
+
+[[fileAssociations]]
+name = "jsonfile"
+extensions = ["json", "jsonc", "jsonl", "resjson"]
+logo = "json.svg"
+
+[[fileAssociations]]
+name = "yamlfile"
+extensions = ["yml", "yaml"]
+logo = "yaml.svg"
+
+[[fileAssociations]]
+name = "tomlfile"
+extensions = ["toml"]
+logo = "toml.svg"
+
+[[fileAssociations]]
+name = "markdownfile"
+extensions = ["md", "markdown"]
+logo = "md.svg"
+
+[[fileAssociations]]
+name = "generictext"
+extensions = ["log", "csv", "properties", "lrc"]
+logo = "generic-text.svg"
+
+[[fileAssociations]]
+name = "genericxml"
+extensions = ["xml", "xaml"]
+logo = "generic-xml.svg"
+
+[[fileAssociations]]
+name = "genericsrc"
+extensions = ["qml"]
+logo = "generic-src.svg"
+
+[[fileAssociations]]
+name = "genericscript"
+extensions = ["sh", "bash", "zsh"]
+logo = "generic-script.svg"
+
+[contextMenu]
+dll = "pnotepadshellext.dll"
+clsid = "51B3ABEB-D342-4DD3-8AC0-D4C1FE61BB9F"
+verb = "PineappleNotepadEdit"
+itemTypes = ["*"]
+
+[resources]
+languages = ["zh-CN", "en-US"]
+
+[payload]
+exclude = [
+    "lexer_info*.exe",
+    "runwithconsole.bat",
+    "passoc.exe",
+    "*.pacfg",
+    "icons/",
+]

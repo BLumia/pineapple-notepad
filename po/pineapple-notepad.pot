@@ -1,0 +1,143 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the pineapple-notepad package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+
+msgid ""
+msgstr ""
+"Project-Id-Version: pineapple-notepad\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-09-13 19:02+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=CHARSET\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: src/pineapple-notepadui.rc
+msgid "Favo&rites"
+msgstr ""
+
+#: src/pineapple-notepadui.rc
+msgid "Export"
+msgstr ""
+
+#: src/pineapple-notepadui.rc
+msgid "Copy to Clipboard"
+msgstr ""
+
+#: src/pineapple-notepadui.rc
+msgid "Indent"
+msgstr ""
+
+#: src/pineapple-notepadui.rc
+msgid "Convert Case to"
+msgstr ""
+
+#: src/pineapple-notepadui.rc
+msgid "Line Operations"
+msgstr ""
+
+#: src/pineapple-notepadui.rc
+msgid "Comment/Uncomment"
+msgstr ""
+
+#: src/pineapple-notepadui.rc
+msgid "EOL Conversion"
+msgstr ""
+
+#: src/pineapple-notepadui.rc
+msgid "Blank Operations"
+msgstr ""
+
+#: src/pineapple-notepadui.rc
+msgid "&Search"
+msgstr ""
+
+#: src/pineapple-notepadui.rc
+msgid "Change &History"
+msgstr ""
+
+#: src/pineapple-notepadui.rc
+msgid "Style &All Occurrences of Token"
+msgstr ""
+
+#: src/pineapple-notepadui.rc
+msgid "Style &One Token"
+msgstr ""
+
+#: src/pineapple-notepadui.rc
+msgid "Clear St&yle"
+msgstr ""
+
+#: src/pineapple-notepadui.rc
+msgid "Jump &Up"
+msgstr ""
+
+#: src/pineapple-notepadui.rc
+msgid "Jump &Down"
+msgstr ""
+
+#: src/pineapple-notepadui.rc
+msgid "&Copy Styled Text"
+msgstr ""
+
+#: src/pineapple-notepadui.rc
+msgid "&Bookmark"
+msgstr ""
+
+#: src/pineapple-notepadui.rc
+msgid "Show Symbol"
+msgstr ""
+
+#: src/pineapple-notepadui.rc
+msgid "&Zoom"
+msgstr ""
+
+#: src/pineapple-notepadui.rc
+msgid "&Tab"
+msgstr ""
+
+#: src/pineapple-notepadui.rc
+msgid "E&ncoding"
+msgstr ""
+
+#: src/pineapple-notepadui.rc
+msgid "&Language"
+msgstr ""
+
+#: src/pineapple-notepadui.rc
+msgid "User Defined Language"
+msgstr ""
+
+#: src/pineapple-notepadui.rc
+msgid "T&ools"
+msgstr ""
+
+#: src/pineapple-notepadui.rc
+msgid "Base64"
+msgstr ""
+
+#: src/pineapple-notepadui.rc
+msgid "URL Encode/Decode"
+msgstr ""
+
+#: src/pineapple-notepadui.rc
+msgid "HEX Converter"
+msgstr ""
+
+#: src/pineapple-notepadui.rc
+msgid "M&acro"
+msgstr ""
+
+#: src/pineapple-notepadui.rc
+msgid "&Run"
+msgstr ""
+
+#: src/pineapple-notepadui.rc
+msgid "Main Toolbar"
+msgstr ""

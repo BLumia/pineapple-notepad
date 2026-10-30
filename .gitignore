@@ -1,5 +1,22 @@
 # Common build folder
 [Bb]uild/
+build-*/
+install-*/
+output/
+
+# Offline download folder
+offline/
 
 # IDE stuff
 CMakeLists.txt.user*
+.qtcreator/
+.idea/
+
+# Clangd
+.cache/
+
+# Why, macOS, why?
+.DS_Store
+
+# keys
+private_key.*

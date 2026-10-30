@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>SearchSettings</class>
+ <widget class="QWidget" name="SearchSettings">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>440</width>
+    <height>400</height>
+   </rect>
+  </property>
+  <layout class="QVBoxLayout" name="verticalLayout">
+   <item>
+    <widget class="QGroupBox" name="searchResultsGroup">
+     <property name="title">
+      <string>Search Results</string>
+     </property>
+     <layout class="QVBoxLayout" name="searchResultsLayout">
+      <item>
+       <widget class="QCheckBox" name="kcfg_searchResultOneEntryPerLine">
+        <property name="toolTip">
+         <string>When a line contains several matches, show it once in the Search Results panel and highlight every match on it. Matches outside the displayed (truncated) part of the line still get their own entry.</string>
+        </property>
+        <property name="text">
+         <string>Show only one entry per found line if possible</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </item>
+   <item>
+    <widget class="QGroupBox" name="findDialogGroup">
+     <property name="title">
+      <string>Find Dialog</string>
+     </property>
+     <layout class="QFormLayout" name="findDialogFormLayout">
+      <item row="0" column="0" colspan="2">
+       <widget class="QCheckBox" name="kcfg_fillFindFieldWithSelection">
+        <property name="toolTip">
+         <string>When the Find dialog is opened, fill the find field with the selected text if it is not longer than the limit below.</string>
+        </property>
+        <property name="text">
+         <string>Fill find field with selected text</string>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="0">
+       <widget class="QLabel" name="fillLimitLabel">
+        <property name="text">
+         <string>Maximum characters to fill from selection:</string>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="1">
+       <widget class="QSpinBox" name="kcfg_fillFindFieldMaxChars">
+        <property name="toolTip">
+         <string>Selected text longer than this is not used to fill the find field. Set to 0 to disable filling from selection.</string>
+        </property>
+        <property name="specialValueText">
+         <string>Disabled</string>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="0" colspan="2">
+       <widget class="QCheckBox" name="kcfg_fillFindFieldWithWordAtCaret">
+        <property name="toolTip">
+         <string>When nothing is selected, fill the find field with the word under the caret instead.</string>
+        </property>
+        <property name="text">
+         <string>Use the word under the caret when nothing is selected</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </item>
+   <item>
+    <widget class="QGroupBox" name="findInFilesGroup">
+     <property name="title">
+      <string>Find in Files</string>
+     </property>
+     <layout class="QVBoxLayout" name="findInFilesLayout">
+      <item>
+       <widget class="QCheckBox" name="kcfg_fillDirFieldFromDocument">
+        <property name="toolTip">
+         <string>When the Find in Files tab is opened, fill the directory field with the directory of the current document.</string>
+        </property>
+        <property name="text">
+         <string>Fill directory field with current document's directory</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </item>
+   <item>
+    <spacer name="verticalSpacer">
+     <property name="orientation">
+      <enum>Qt::Vertical</enum>
+     </property>
+     <property name="sizeHint" stdset="0">
+      <size>
+       <width>20</width>
+       <height>40</height>
+      </size>
+     </property>
+    </spacer>
+   </item>
+  </layout>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

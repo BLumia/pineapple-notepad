@@ -1,0 +1,15 @@
+[Desktop Entry]
+Categories=Qt;TextEditor;Utility;
+Exec=pnotepad %f
+Icon=net.blumia.pineapple-notepad
+MimeType=text/plain;
+StartupNotify=true
+Type=Application
+Terminal=false
+Name=Pineapple Notepad
+Name[zh_CN]=菠萝记事本
+GenericName=Text Editor
+GenericName[zh_CN]=文本编辑器
+Comment=A Scintilla-based Text Editor
+Comment[zh_CN]=一个基于 Scintilla 的文本编辑器
+Keywords=notepad;pnotepad;text;editor;

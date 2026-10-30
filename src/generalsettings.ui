@@ -1,0 +1,207 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>GeneralSettings</class>
+ <widget class="QWidget" name="GeneralSettings">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>406</width>
+    <height>300</height>
+   </rect>
+  </property>
+  <layout class="QFormLayout" name="formLayout">
+   <item row="0" column="0">
+    <widget class="QLabel" name="label_7">
+     <property name="text">
+      <string>Use native file dialog</string>
+     </property>
+    </widget>
+   </item>
+   <item row="0" column="1">
+    <widget class="QCheckBox" name="kcfg_useNativeFileDialog">
+     <property name="text">
+      <string>Enabled</string>
+     </property>
+    </widget>
+   </item>
+   <item row="1" column="0">
+    <widget class="QLabel" name="label_9">
+     <property name="text">
+      <string>Wrap indent style</string>
+     </property>
+    </widget>
+   </item>
+   <item row="1" column="1">
+    <widget class="QComboBox" name="kcfg_wrapIndentMode">
+     <property name="toolTip">
+      <string>How wrapped lines are indented relative to the original line</string>
+     </property>
+     <item>
+      <property name="text">
+       <string>No extra indent</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>Align to original line</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>Indent one level</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>Indent two levels</string>
+      </property>
+     </item>
+    </widget>
+   </item>
+   <item row="2" column="0">
+    <widget class="QLabel" name="label_10">
+     <property name="text">
+      <string>Wrap mode</string>
+     </property>
+    </widget>
+   </item>
+   <item row="2" column="1">
+    <widget class="QComboBox" name="kcfg_wrapMode">
+     <property name="toolTip">
+      <string>Determine where line breaks occur when word wrap is enabled</string>
+     </property>
+     <item>
+      <property name="text">
+       <string>Never enable word wrap</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>At word boundaries</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>At any character</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>After whitespace</string>
+      </property>
+     </item>
+    </widget>
+   </item>
+   <item row="3" column="0">
+    <widget class="QLabel" name="label_11">
+     <property name="text">
+      <string>New document line ending</string>
+     </property>
+    </widget>
+   </item>
+   <item row="3" column="1">
+    <widget class="QComboBox" name="kcfg_newDocumentEolMode">
+     <property name="toolTip">
+      <string>Line ending format for new documents</string>
+     </property>
+     <item>
+      <property name="text">
+       <string>Windows (CRLF)</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>Macintosh (CR)</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>Unix (LF)</string>
+      </property>
+     </item>
+    </widget>
+   </item>
+    <item row="4" column="0">
+     <widget class="QLabel" name="label_13">
+      <property name="text">
+       <string>Allow scrolling beyond last line</string>
+      </property>
+     </widget>
+    </item>
+    <item row="4" column="1">
+     <widget class="QCheckBox" name="kcfg_scrollBeyondLastLine">
+      <property name="toolTip">
+       <string>Allow scrolling past the last line so the end of the document can always be positioned at the top of the view if you want.</string>
+      </property>
+      <property name="text">
+       <string>Enabled</string>
+      </property>
+     </widget>
+    </item>
+    <item row="5" column="0">
+     <widget class="QLabel" name="label_14">
+      <property name="text">
+       <string>Recent files max items</string>
+      </property>
+     </widget>
+    </item>
+    <item row="5" column="1">
+     <widget class="QSpinBox" name="kcfg_recentFilesMaxItems">
+      <property name="toolTip">
+       <string>Maximum number of recent files shown in the Open Recent menu (0 to disable)</string>
+      </property>
+      <property name="minimum">
+       <number>0</number>
+      </property>
+      <property name="maximum">
+       <number>99</number>
+      </property>
+     </widget>
+    </item>
+    <item row="6" column="0">
+     <widget class="QLabel" name="label_15">
+      <property name="text">
+       <string>Clickable links</string>
+      </property>
+     </widget>
+    </item>
+    <item row="6" column="1">
+     <widget class="QCheckBox" name="kcfg_urlScanEnabled">
+      <property name="toolTip">
+       <string>Detect and highlight URLs so they can be opened with Ctrl+click. Disable this if you experience performance issues with files containing very long lines.</string>
+      </property>
+      <property name="text">
+       <string>Enabled</string>
+      </property>
+     </widget>
+    </item>
+    <item row="7" column="0">
+     <widget class="QLabel" name="label_16">
+      <property name="text">
+       <string>New tab placement</string>
+      </property>
+     </widget>
+    </item>
+    <item row="7" column="1">
+     <widget class="QComboBox" name="kcfg_newTabPlacement">
+      <property name="toolTip">
+       <string>Where the new tab is placed when creating a new document via the menu or shortcut. Double-clicking the empty area of the tab bar always appends at the end.</string>
+      </property>
+      <item>
+       <property name="text">
+        <string>At the end of the tab bar</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>After the current tab</string>
+       </property>
+      </item>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+  <resources/>
+ <connections/>
+</ui>

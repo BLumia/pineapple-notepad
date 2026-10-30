@@ -1,0 +1,717 @@
+{
+  "version": 1,
+  "defaultLanguageMenu": [
+    "cpp", "csound", "python", "hypertext", "xml", "json", "css", "cmake", "props", "bash",
+    "kix", "batch", "gui4cli", "lua", "makefile", "log", "diff", "ruby", "rust",
+    "swift", "tcl", "pascal", "powershell", "asm", "fortran", "ocaml", "haskell",
+    "asciidoc", "dart", "julia", "lisp", "latex", "vb", "perl", "sql", "nix",
+    "nimrod", "coffeescript", "d", "erlang", "nsis", "objc", "r", "rebol",
+    "registry", "scheme", "vhdl", "zig", "go", "javascript", "typescript",
+    "ksh:Groovy", "ksh:QML", "java", "toml", "gdscript", "php", "po", "meson", "rc",
+    "dockerfile", "ksh:reStructuredText", "inno", "avs", "verilog",
+    "ksh:Markdown", "ksh:YAML", "ksh:SASS", "ksh:Org Mode"
+  ],
+  "languages": {
+    "cpp": {
+      "displayName": "C++",
+      "extensions": ["c", "cc", "cpp", "cxx", "c++", "h", "hh", "hpp", "hxx", "ipp", "inl"],
+      "singleLineComment": "//",
+      "multiLineComment": {
+        "start": "/*",
+        "end": "*/"
+      },
+      "keywords": {
+        "0": "alignas alignof and and_eq asm auto bitand bitor bool break case catch char char8_t char16_t char32_t class compl concept const consteval constexpr constinit const_cast continue co_await co_return co_yield decltype default delete do double dynamic_cast else enum explicit export extern false float for friend goto if inline int long mutable namespace new noexcept not not_eq nullptr operator or or_eq private protected public register reinterpret_cast requires return short signed sizeof static static_assert static_cast struct switch template this thread_local throw true try typedef typeid typename union unsigned using virtual void volatile wchar_t while xor xor_eq",
+        "1": "int8_t int16_t int32_t int64_t uint8_t uint16_t uint32_t uint64_t size_t ptrdiff_t",
+        "2": "a addindex addtogroup anchor arg attention author authors b brief bug c callergraph callgraph category cite class code cond copybrief copydetails copydoc copyright date def defgroup deprecated details diafile dir docbookonly dontinclude dot dotfile e else elseif em endcode endcond enddocbookonly enddot endhtmlonly endif endinternal endlatexonly endlink endmanonly endmsc endparblock endrtfonly endsecreflist enduml endverbatim endxmlonly enum example exception extends file fn headerfile hidecallergraph hidecallgraph hideinitializer htmlinclude htmlonly idlexcept if ifnot image implements include includelineno ingroup interface internal invariant latexinclude latexonly li line link mainpage manonly memberof msc mscfile n name namespace nosubgrouping note overload p package page par paragraph param parblock post pre private privatesection property protected protectedsection protocol public publicsection pure ref refitem related relatedalso relates relatesalso remark remarks result return returns retval rtfonly sa secreflist section see short showinitializer since skip skipline snippet startuml struct subpage subsection subsubsection tableofcontents test throw throws todo tparam typedef union until var verbatim verbinclude version vhdlflow warning weakgroup xmlonly xrefitem inheaderfile inmodule list endlist value"
+      }
+    },
+    "python": {
+      "displayName": "Python",
+      "extensions": ["py"],
+      "singleLineComment": "#",
+      "keywords": {
+        "0": "False None True and as assert async await break class continue def del elif else except finally for from global if import in is lambda nonlocal not or pass raise return try while with yield match case",
+        "1": "abs all any ascii bin bool breakpoint bytearray bytes callable chr classmethod compile complex delattr dict dir divmod enumerate eval exec filter float format frozenset getattr globals hasattr hash help hex id input int isinstance issubclass iter len list locals map max memoryview min next object oct open ord pow print property range repr reversed round set setattr slice sorted staticmethod str sum super tuple type vars zip __import__"
+      }
+    },
+    "hypertext": {
+      "displayName": "HTML",
+      "extensions": ["html", "htm"],
+      "multiLineComment": {
+        "start": "<!--",
+        "end": "-->"
+      },
+      "styles": {
+        "15": { "textStyle": "Others" },
+        "16": { "textStyle": "Others" },
+        "21": { "textStyle": "Others" }
+      },
+      "properties": {
+        "fold.html": "1"
+      }
+    },
+    "xml": {
+      "displayName": "XML",
+      "extensions": ["xml", "xsd", "xsl", "xslt", "xaml", "svg", "qrc", "ui"],
+      "multiLineComment": {
+        "start": "<!--",
+        "end": "-->"
+      },
+      "properties": {
+        "fold.html": "1"
+      }
+    },
+    "json": {
+      "displayName": "JSON",
+      "extensions": ["json", "jsonc", "resjson"],
+      "singleLineComment": "//",
+      "keywords": {
+        "0": "true false null"
+      },
+      "properties": {
+        "lexer.json.escape.sequence": "1",
+        "lexer.json.allow.comments": "1"
+      }
+    },
+    "css": {
+      "displayName": "CSS",
+      "extensions": ["css"],
+      "multiLineComment": {
+        "start": "/*",
+        "end": "*/"
+      }
+    },
+    "cmake": {
+      "displayName": "CMake",
+      "filenames": ["CMakeLists.txt"],
+      "extensions": ["cmake"],
+      "singleLineComment": "#",
+      "keywords": {
+        "0": "add_custom_command add_compile_definitions add_compile_options add_custom_command add_custom_target add_definitions add_dependencies add_executable add_library add_link_options add_subdirectory add_test aux_source_directory build_command build_name cmake_minimum_required configure_file create_test_sourcelist else elseif enable_language enable_testing endforeach endfunction endif endmacro endwhile exec_program execute_process export export_library_dependencies file find_file find_library find_package find_path find_program fltk_wrap_ui foreach function get_cmake_property get_directory_property get_filename_component get_source_file_property get_target_property get_test_property if include include_directories include_external_msproject include_regular_expression install install_files install_programs install_targets link_directories link_libraries list load_cache load_command macro make_directory mark_as_advanced math message option output_required_files project qt_wrap_cpp qt_wrap_ui remove remove_definitions separate_arguments set set_directory_properties set_source_files_properties set_target_properties set_tests_properties site_name source_group string subdir_depends subdirs target_compile_definitions target_compile_features target_compile_options target_include_directories target_link_directories target_link_libraries target_link_options target_sources try_compile try_run use_mangled_mesa utility_source variable_requires vtk_make_instantiator vtk_wrap_java vtk_wrap_python vtk_wrap_tcl while write_file",
+        "2": "ABSOLUTE ABSTRACT ADDITIONAL_MAKE_CLEAN_FILES ALL AND APPEND ARGS ASCII BEFORE CACHE CACHE_VARIABLES CLEAR COMMAND COMMANDS COMMAND_NAME COMMENT COMPARE COMPILE_FLAGS COPYONLY DEFINED DEFINE_SYMBOL DEPENDS DOC EQUAL ESCAPE_QUOTES EXCLUDE EXCLUDE_FROM_ALL EXISTS EXPORT_MACRO EXT EXTRA_INCLUDE FATAL_ERROR FILE FILES FORCE FUNCTION GENERATED GLOB GLOB_RECURSE GREATER GROUP_SIZE HEADER_FILE_ONLY HEADER_LOCATION IMMEDIATE INCLUDES INCLUDE_DIRECTORIES INCLUDE_INTERNALS INCLUDE_REGULAR_EXPRESSION LESS LINK_DIRECTORIES LINK_FLAGS LOCATION MACOSX_BUNDLE MACROS MAIN_DEPENDENCY MAKE_DIRECTORY MATCH MATCHALL MATCHES MODULE NAME NAME_WE NOT NOTEQUAL NO_SYSTEM_PATH OBJECT_DEPENDS OPTIONAL OR OUTPUT OUTPUT_VARIABLE PATH PATHS POST_BUILD POST_INSTALL_SCRIPT PREFIX PREORDER PRE_BUILD PRE_INSTALL_SCRIPT PRE_LINK PROGRAM PROGRAM_ARGS PROPERTIES QUIET RANGE READ REGEX REGULAR_EXPRESSION REPLACE REQUIRED RETURN_VALUE RUNTIME_DIRECTORY SEND_ERROR SHARED SOURCES STATIC STATUS STREQUAL STRGREATER STRLESS SUFFIX TARGET TOLOWER TOUPPER VAR VARIABLES VERSION WIN32 WRAP_EXCLUDE WRITE APPLE MINGW MSYS CYGWIN BORLAND WATCOM MSVC MSVC_IDE MSVC60 MSVC70 MSVC71 MSVC80 CMAKE_COMPILER_2005 OFF ON",
+        "3": "None"
+      }
+    },
+    "props": {
+      "displayName": "INI",
+      "extensions": ["ini", "properties", "pacfg"],
+      "singleLineComment": ";"
+    },
+    "bash": {
+      "filenames": [".bashrc", ".bash_profile", ".profile", ".zshrc"],
+      "extensions": ["sh", "bash", "zsh", "ksh", "csh", "bsh", "bashrc", "bash_profile", "profile"],
+      "singleLineComment": "#",
+      "keywords": {
+        "0": "7z adduser alias apt-get ar as asa autoconf automake awk banner base64 basename bash bc bdiff blkid break bsdcpio bsdtar bunzip2 bzcmp bzdiff bzegrep bzfgrep bzgrep bzip2 bzip2recover bzless bzmore c++ cal calendar case cat cc cd cfdisk chattr chgrp chmod chown chroot chvt cksum clang clang++ clear cmp col column comm compgen compress continue convert cp cpio crontab crypt csplit ctags curl cut date dc dd deallocvt declare deluser depmod deroff df dialog diff diff3 dig dircmp dirname disown dmesg do done dpkg dpkg-deb du echo ed egrep elif else env esac eval ex exec exit expand export expr fakeroot false fc fdisk ffmpeg fgrep fi file find flex flock fmt fold for fsck function functions fuser fusermount g++ gas gawk gcc gdb genisoimage getconf getopt getopts git gpg gpgsplit gpgv grep gres groff groups gunzip gzexe hash hd head help hexdump hg history httpd iconv id if ifconfig ifdown ifquery ifup in insmod integer inxi ip ip6tables ip6tables-save ip6tables-restore iptables iptables-save iptables-restore ip jobs join kill killall killall5 lc ld ldd let lex line ln local logname look ls lsattr lsb_release lsblk lscpu lshw lslocks lsmod lsusb lzcmp lzegrep lzfgrep lzgrep lzless lzma lzmainfo lzmore m4 mail mailx make man mkdir mkfifo mkswap mktemp modinfo modprobe mogrify more mount msgfmt mt mv nameif nasm nc ndisasm netcat newgrp nl nm nohup ntps objdump od openssl p7zip pacman passwd paste patch pathchk pax pcat pcregrep pcretest perl pg ping ping6 pivot_root poweroff pr print printf ps pwd python python2 python3 ranlib read readlink readonly reboot reset return rev rm rmdir rmmod rpm rsync sed select service set sh sha1sum sha224sum sha256sum sha3sum sha512sum shift shred shuf shutdown size sleep sort spell split start stop strings strip stty su sudo sum suspend switch_root sync systemctl tac tail tar tee test then time times touch tr trap troff true tsort tty type typeset ulimit umask umount unalias uname uncompress unexpand uniq unlink unlzma unset"
+      }
+    },
+    "kix": {
+      "displayName": "KiXtart",
+      "extensions": ["kix"],
+      "singleLineComment": ";",
+      "multiLineComment": {
+        "start": "/*",
+        "end": "*/"
+      },
+      "keywords": {
+        "0": "? and beep big break call cd cls color cookie1 copy debug del dim display do until exit flushkb for each next function endfunction get gets global go gosub goto if else endif md or password play quit rd redim return run select case endselect set setl setm settime shell sleep small use while loop",
+        "1": "abs addkey addprinterconnection addprogramgroup addprogramitem asc ascan at backupeventlog box cdbl chr cint cleareventlog close comparefiletimes createobject cstr dectohex delkey delprinterconnection delprogramgroup delprogramitem deltree delvalue dir enumgroup enumipinfo enumkey enumlocalgroup enumvalue execute exist existkey expandenvironmentvars fix formatnumber freefilehandle getdiskspace getfileattr getfilesize getfiletime getfileversion getobject iif ingroup instr instrrev int isdeclared join kbhit keyexist lcase left len loadhive loadkey logevent logoff ltrim memorysize messagebox open readline readprofilestring readtype readvalue redirectoutput right rnd round rtrim savekey sendkeys sendmessage setascii setconsole setdefaultprinter setfileattr setfocus setoption setsystemstate settitle setwallpaper showprogramgroup shutdown sidtoname split srnd substr trim ubound ucase unloadhive val vartype vartypename writeline writeprofilestring writevalue",
+        "2": "address build color comment cpu crlf csd curdir date day domain dos error fullname homedir homedrive homeshr hostname inwin ipaddress0 ipaddress1 ipaddress2 ipaddress3 kix lanroot ldomain ldrive lm logonmode longhomedir lserver maxpwage mdayno mhz monthno month msecs pid primarygroup priv productsuite producttype pwage ras result rserver scriptdir scriptexe scriptname serror sid site startdir syslang ticks time userid userlang wdayno wksta wuserid ydayno year"
+      }
+    },
+    "batch": {
+      "extensions": ["bat", "cmd", "nt"],
+      "keywords": {
+        "0": "assoc aux break call cd chcp chdir choice cls cmdextversion color com com1 com2 com3 com4 con copy country ctty date defined del dir do dpath echo else endlocal erase errorlevel exist exit for ftype goto if in loadfix loadhigh lpt lpt1 lpt2 lpt3 lpt4 md mkdir move not nul path pause popd prn prompt pushd rd rem ren rename rmdir set setlocal shift start time title type ver verify vol"
+      }
+    },
+    "gui4cli": {
+      "displayName": "Gui4Cli",
+      "extensions": ["gui"],
+      "singleLineComment": "//",
+      "multiLineComment": {
+        "start": "/*",
+        "end": "*/"
+      },
+      "keywords": {
+        "0": "G4C G4CU WINDOW NEWFILE TEXTFILE #INCLUDE #NEWFILE ###",
+        "1": "XBUTTON XCHECKBOX XBROWSER XTEXTIN XUPDOWN XLISTVIEW XAREA XRADIO XCOMBO XTAB XIMAGE XICON XEDBOX XTRACKBAR XTREEVIEW XSPLITER XPROGRESS XTEXTBOX XGROUPBOX XMENU XSTATUS XTOOLBAR XREBAR XSYSMENU XONLOAD XONOPEN XONCLOSE XONQUIT XROUTINE XONRMB XONACTIVE XONINACTIVE XONKEY XONDOUBLECLICK XONFAIL XONRELOAD XONRETURN XONLVDIR XONLVCLICK XTIMER XHOTKEY XONHELP XREQFILE XONWHEELUP XONWHEELDOWN XONMMB XONLMB XTBARICON XONDROP XONMARK XONBROWSER XATTR XENUM XONTEXTIN XWAIT XBEFORECLOSE XTEXTFILE XVARIABLE XSCRIPT XONRESIZE SCI.XSCI SCI.XONSCI XONLISTVIEW XONTREEVIEW XONDROPFAIL XRICHEDIT XONMOUSE XIBUTTON XBORDERBUTTON XBUFFER XCALENDAR XONRICHEDIT XONRDOUBLECLICK XONWARN XX PAN.XPAN TEST.XNOTHING TEST.XCOUNTER TEST.XANACLOCK SCI.XSCI SCI.XONSCI G4C_PROGRESS.XCONTROL G4C_RPROGRESS.XCONTROL G4C_GPROGRESS.XCONTROL",
+        "2": "ID ATTR LOCAL WINATTR",
+        "3": "BREAK IF ELSE ENDIF WHILE ENDWHILE LABEL GOTO RETURN IFEXISTS DOCASE CASE ENDCASE STOP OR AND ORIFEXISTS ANDIFEXISTS ELSEIF ELSEIFEXISTS FOR ENDFOR GOSUB BRANCH",
+        "4": "SETEVENT MAKEDIR UPDATE IMAGE MOVEEVENT BROWSER GUIWINDOW CD SAY DELETE SYSTEM REQFILE QUIT ENUM RUN DELAY WAIT FILE APPVAR SETVAR CUTVAR STATUS MSGBOX APPEND GUI HTMLHELP SENDKEY SET SETWINTITLE GUILOAD GUIOPEN GUICLOSE GUIQUIT SENDMOUSE DDUSE DDEXEC LISTVIEW LV CREATELINK RANDOM UPDOWN GETCOLOR GETFONT SLEEP WIN AWIN LAUNCH GCWIN EXTRACT JOINFILE TVSEARCH TVSEARCHVAR MOVE SCRIPT LVACTION GUIRENAME RENAME ASSIGN COPY MOVEWINDOW ADDCODE USE LVSEARCH PARSEVAR TERMINATEPROC INC DEC REPVAR LVREP SEARCHVAR LVSWITCH LVCLIP LVSUM SETATTR BEEP SETPOINTER EMPTYBIN LOADICON FREEICON LOADFONT FREEFONT GETCLIP SETCLIP POPMENU REGCREATE REGGET REGSET REGDELETE QUICKMENU COMBO SETICON SETWINATTR MCI EDBOX TV TREEVIEW ADDRESS SEND COMMAND TAB EVENT ICON PURGEFILES DELETEFILE PUMPMESSAGES LOADINI SAVEINI INI RICHEDIT PRINT TRIMVAR VAR BUFFER RES MENU NET FTP TOOLBAR CURSOR MNSPEC CALENDAR INPUT PIXEL SYSDLL SETSTRUCT CALL SCI.EXEC SCI.IO SCI.PRINT SCI.PRINTSETUP SCI.MAKECOLOR SCI.SET DX.CLEAR DX.PAN DX.ROUTINE DX.SET DX.SHOWIMAGE DX.STOP PAN.SET PAN.CLEAR PAN.ADD PAN.DXSHOW TEST.LIST TEST.TWICE PACK.ZIP PACK.UNZIP PACK.USE PACK.CREATE PACK.CLOSE PACK.ADD PACK.OPEN PACK.GETZIP PACK.UNZIPITEM PACK.ZUILOAD PACK.ENCRYPTFILE PACK.DECRYPTFILE PACK.PASSWORD DOS.LAUNCH DOS.SET DOS.ABORT DOS.INPUT DOS.RUN SQL.OPEN SQL.CLOSE SQL.EXEC SQL.STOP SQL.USE SQL3.OPEN SQL3.CLOSE SQL3.EXEC SQL3.STOP SQL3.USE SQL3.STOP SQL3.PREPARE SQL3.BINDSTR SQL3.BINDBLOB SQL3.RETURN_VAR SQL3.RETURN_BLOB SQL3.STEP SQL3.FINALIZE SQL3.DEBUG SQL3.DOWNLOAD_XBUF SQL3.UPLOAD_XBUF G4C_PROGRESS.CONTROL G4C_RPROGRESS.CONTROL G4C_GPROGRESS.CONTROL G4C_CMD.CPUINFO G4C_CMD.MEMORY G4C_CMD.MEMORYLOAD G4C_CMD.MEMORYCOMMIT G4C_CMD.MEMORYPHYSICAL G4C_CMD.MEMORYPAGED G4C_CMD.MEMORYNONPAGED GRAB.SCREEN GRAB.PAUSE GRAB.RESUME GRAB.STOP GRAB.SET CURL.CREATE CURL.FREE CURL.USE CURL.SET CURL.DATAFILE CURL.PERFORM CURL.ROUTINE CURL.ENUM CURL.ENUMABORT AVI.CREATE AVI.GETCOMPRESSION AVI.ADD AVI.ADDWAV AVI.CLOSE PIPE.TEST PIPE.INFO PIPE.OPEN PIPE.SEND PIPE.PEEK PIPE.READ PIPE.QUIT PIPE.WAIT"
+      }
+    },
+    "csound": {
+      "displayName": "Csound",
+      "extensions": ["orc", "sco", "csd"],
+      "singleLineComment": ";",
+      "keywords": {
+        "0": "a i db in or zr Add Dec Div Inc Mul Sub abs and cos dam dec div exp fin fof fog inh ino inq ins int inx inz lfo log mac mod mul not out pan pow rms rnd shl sin sqr sub sum tab tan tb0 tb1 tb2 tb3 tb4 tb5 tb6 tb7 tb8 tb9 urd vco xin xor zar zaw zir ziw zkr zkw adsr babo buzz cent clip comb cosh diff divz fini fink fmb3 fof2 fold fout frac ftsr gain goto in32 inch init line maca moog mute nrpn outc  outh outo outq outs outx outz peak port pset pvoc rand seed sinh  sqrt stix tabw tanh tb10 tb11 tb12 tb13 tb14 tb15 tone vadd vco2  vdiv vexp vibr vmap vmul vpow wrap xout xyin zacl zarg zawm ziwm  zkcl zkwm FLbox FLjoy FLrun adsyn ampdb atone birnd bqrez butbp  butbr buthp butlp clear ctrl7 dbamp dconv delay dumpk endin endop  event expon fouti foutk ftgen ftlen gauss gbuzz grain guiro igoto  ihold instr integ kgoto limit linen log10 loopg loopl lpf18 madsr  max_k metro noise nsamp oscil out32 outch outic outkc outq1 outq2  outq3 outq4 outs1 outs2 pareq pitch pluck portk print pvadd randh  randi rbjeq readk reson rezzy rnd31 scans scanu sense space tab_i  table tbvcf tempo timek times tival tonek tonex vaddv vbap4 vbap8  vbapz vcomb vcopy vdecr vdivv veloc vexpv vibes vincr vmult voice  vport vpowv vpvoc vsubv vwrap wgbow xadsr zamod zkmod FLhide FLkeyb  FLknob FLpack FLshow FLtabs FLtext active adsynt alpass areson  atonek atonex bamboo bbcutm bbcuts biquad cabasa cauchy cggoto  cigoto ckgoto clfilt cngoto convle cosinv cpsoct cpspch cpstun  cpuprc cross2 crunch ctrl14 ctrl21 delay1 delayk delayr delayw  deltap denorm diskin dumpk2 dumpk3 dumpk4 envlpx expseg filesr  fiopen fmbell follow foscil foutir ftlen2 ftload ftmorf ftsave  grain2 grain3 harmon hrtfer initc7 interp jitter linenr lineto  linseg locsig loopge loople lorenz loscil lowres lpread lpslot  mandel mandol mclock mdelay midic7 midiin midion mirror moscil  mpulse mrtmsg mxadsr nlfilt noteon notnum ntrpol octave octcps  octpch opcode oscbnk oscil1 oscil3 oscili osciln oscils oscilx  outiat outipb outipc outkat outkpb outkpc pchoct phasor planet  poscil printk prints pvread pvsftr pvsftw random readk2 readk3  readk4 reinit resonk resonr resonx resony resonz reverb rigoto  s16b14 s32b14 sekere sfload sfplay shaker sininv spat3d spdist  spsend strset table3 tablei tablew tabw_i taninv tigoto timout  turnon upsamp vbap16 vcella vco2ft vdel_k vdelay vlimit vmultv  vrandh vrandi wgclar xscans xscanu FLcolor FLcount FLgroup FLlabel  FLpanel FLvalue aftouch ampdbfs ampmidi aresonk balance bexprnd  biquada changed clockon cps2pch cpsmidi cpstmid cpstuni cpsxpch  dbfsamp dcblock deltap3 deltapi deltapn deltapx dispfft display  envlpxr exprand expsega expsegr filelen filter2 flanger fmmetal  fmrhode fmvoice follow2 foscili fprints ftchnls ftloadk ftlptim  ftsavek gogobel granule hilbert initc14 initc21 invalue jitter2  jspline linrand linsegr locsend logbtwo loopseg loscil3 lowresx  lphasor lposcil lpreson lpshold marimba massign midic14 midic21  midichn midion2 midiout moogvcf noteoff nreverb nstrnum octmidi  oscil1i outic14 outipat outkc14 outkpat pcauchy pchbend pchmidi  phaser1 phaser2 pinkish poisson polyaft poscil3 printk2 printks  product pvcross pvsanal pvsinfo pvsynth randomh randomi release  repluck reverb2 rspline rtclock seqtime sfilist sfinstr sfplay3  sfplaym sfplist slider8 sndwarp soundin spat3di spat3dt specsum  streson tableiw tablekt tableng tablera tablewa taninv2 tempest  tlineto transeg trigger trigseq trirand turnoff unirand valpass  vco2ift vdelay3 vdelayk vdelayx vexpseg vibrato vlinseg vlowres  vmirror waveset weibull wgbrass wgflute wgpluck wguide1 wguide2  xtratim zakinit FLbutton FLcolor2 FLprintk FLroller FLscroll  FLsetBox FLsetVal FLslider FLupdate betarand butterbp butterbr  butterhp butterlp chanctrl clockoff convolve cpsmidib ctrlinit  cuserrnd deltapxw distort1 downsamp duserrnd filepeak fmpercfl  fmwurlie fprintks hsboscil lowpass2 lpfreson lpinterp lposcil3  maxalloc midictrl multitap nestedap octmidib oscilikt outvalue  pchmidib powoftwo prealloc pvinterp pvsadsyn pvscross pvsfread  pvsmaska rireturn samphold schedule semitone sensekey setksmps  sfinstr3 sfinstrm sfplay3m sfpreset slider16 slider32 slider64  slider8f soundout specaddm specdiff specdisp specfilt spechist  specptrk specscal spectrum sprintks subinstr svfilter tablegpw  tableikt tablemix tableseg tablewkt tablexkt tb0_init tb1_init  tb2_init tb3_init tb4_init tb5_init tb6_init tb7_init tb8_init  tb9_init tempoval vco2init vdelayxq vdelayxs vdelayxw vecdelay  wgpluck2 wterrain xscanmap zfilter2 FLbutBank FLgetsnap FLpackEnd  FLprintk2 FLsetFont FLsetSize FLsetText FLsetsnap FLslidBnk  FLtabsEnd dripwater eventname ktableseg noteondur osciliktp  oscilikts pgmassign phasorbnk pitchamdf pvbufread readclock  sandpaper scantable schedwhen sfinstr3m sfpassign slider16f  slider32f slider64f sndwarpst soundoutc soundouts tablecopy  tableigpw tableimix tablexseg tb10_init tb11_init tb12_init  tb13_init tb14_init tb15_init timeinstk timeinsts vbap4move  vbap8move vbapzmove vdelayxwq vdelayxws xscansmap FLgroupEnd  FLloadsnap FLpack_end FLpanelEnd FLsavesnap FLsetAlign FLsetColor  FLsetVal_i FLtabs_end filenchnls noteondur2 scanhammer schedkwhen  tableicopy tambourine vbap16move vbaplsinit wgbowedbar FLgroup_end  FLpanel_end FLscrollEnd FLsetColor2 mididefault midinoteoff  sleighbells FLscroll_end subinstrinit FLsetPosition FLsetTextSize  FLsetTextType midinoteoncps midinoteonkey midinoteonoct  midinoteonpch midipitchbend schedwhenname FLsetTextColor  schedkwhenname midicontrolchange midiprogramchange  midipolyaftertouch midichannelaftertouch",
+        "1": "sr kr ar ksmps nchnls"
+      }
+    },
+
+    "lua": {
+      "displayName": "Lua",
+      "extensions": ["lua"],
+      "singleLineComment": "--",
+      "multiLineComment": {
+        "start": "--[[",
+        "end": "]]"
+      },
+      "keywords": {
+        "0": "and break do else elseif end false for function goto if in local nil not or repeat return then true until while",
+        "1": "_ENV _G _VERSION assert collectgarbage dofile error getfenv getmetatable ipairs load loadfile loadstring module next pairs pcall print rawequal rawget rawlen rawset require select setfenv setmetatable tonumber tostring type unpack xpcall string table math bit32 coroutine io os debug package __index __newindex __call __add __sub __mul __div __mod __pow __unm __concat __len __eq __lt __le __gc __mode",
+        "2": "byte char dump find format gmatch gsub len lower match rep reverse sub upper abs acos asin atan atan2 ceil cos cosh deg exp floor fmod frexp ldexp log log10 max min modf pow rad random randomseed sin sinh sqrt tan tanh arshift band bnot bor btest bxor extract lrotate lshift replace rrotate rshift shift string.byte string.char string.dump string.find string.format string.gmatch string.gsub string.len string.lower string.match string.rep string.reverse string.sub string.upper table.concat table.insert table.maxn table.pack table.remove table.sort table.unpack math.abs math.acos math.asin math.atan math.atan2 math.ceil math.cos math.cosh math.deg math.exp math.floor math.fmod math.frexp math.huge math.ldexp math.log math.log10 math.max math.min math.modf math.pi math.pow math.rad math.random math.randomseed math.sin math.sinh math.sqrt math.tan math.tanh bit32.arshift bit32.band bit32.bnot bit32.bor bit32.btest bit32.bxor bit32.extract bit32.lrotate bit32.lshift bit32.replace bit32.rrotate bit32.rshift",
+        "3": "close flush lines read seek setvbuf write clock date difftime execute exit getenv remove rename setlocale time tmpname coroutine.create coroutine.resume coroutine.running coroutine.status coroutine.wrap coroutine.yield io.close io.flush io.input io.lines io.open io.output io.popen io.read io.tmpfile io.type io.write io.stderr io.stdin io.stdout os.clock os.date os.difftime os.execute os.exit os.getenv os.remove os.rename os.setlocale os.time os.tmpname debug.debug debug.getfenv debug.gethook debug.getinfo debug.getlocal debug.getmetatable debug.getregistry debug.getupvalue debug.getuservalue debug.setfenv debug.sethook debug.setlocal debug.setmetatable debug.setupvalue debug.setuservalue debug.traceback debug.upvalueid debug.upvaluejoin package.cpath package.loaded package.loaders package.loadlib package.path package.preload package.seeall"
+      }
+    },
+    "makefile": {
+      "displayName": "Makefile",
+      "filenames": ["Makefile", "makefile", "GNUmakefile", "Justfile"],
+      "extensions": ["mk", "mak"],
+      "singleLineComment": "#"
+    },
+    "log": {
+      "displayName": "Log",
+      "lexer": "logplus",
+      "extensions": ["log"]
+    },
+    "diff": {
+      "displayName": "Diff",
+      "extensions": ["diff", "patch"]
+    },
+    "ruby": {
+      "displayName": "Ruby",
+      "filenames": ["Rakefile", "Gemfile"],
+      "extensions": ["rb", "rbw"],
+      "singleLineComment": "#",
+      "keywords": {
+        "0": "ARGF ARGV BEGIN END ENV FALSE DATA NIL RUBY_PATCHLEVEL RUBY_PLATFORM RUBY_RELEASE_DATE RUBY_VERSION PLATFORM RELEASE_DATE STDERR STDIN STDOUT TOPLEVEL_BINDING TRUE __ENCODING__ __END__ __FILE__ __LINE__ alias and begin break case class def defined? do else elsif end ensure false for if in module next nil not or redo rescue retry return self super then true undef unless until when while yield"
+      }
+    },
+    "rust": {
+      "displayName": "Rust",
+      "extensions": ["rs"],
+      "singleLineComment": "//",
+      "multiLineComment": {
+        "start": "/*",
+        "end": "*/"
+      },
+      "keywords": {
+        "0": "abstract as async become box break const continue crate do dyn else enum extern false final fn for if impl in let loop macro match mod move mut override priv pub ref return self static struct super trait true try type typeof unsafe unsized use virtual where while yield",
+        "1": "bool char f32 f64 i128 i16 i32 i64 i8 isize str u128 u16 u32 u64 u8 usize",
+        "2": "Self"
+      }
+    },
+    "swift": {
+      "displayName": "Swift",
+      "extensions": ["swift"],
+      "singleLineComment": "//",
+      "multiLineComment": {
+        "start": "/*",
+        "end": "*/"
+      },
+      "lexer": "cpp",
+      "keywords": {
+        "0": "class deinit enum extension func import init internal let operator private protocol public static struct subscript typealias var keywordclass.swift.statements=break case continue default do else fallthrough for if in return switch where while",
+        "2": "as dynamicType false is nil self Self super true __COLUMN__ __FILE__ __FUNCTION__ __LINE__",
+        "3": "associativity convenience dynamic didSet final get infix inout lazy left mutating none nonmutating optional override postfix precedence prefix Protocol required right set Type unowned weak willSet"
+      }
+    },
+    "tcl": {
+      "extensions": ["tcl"],
+      "keywords": {
+        "0": "after append apply array auto_execok auto_import auto_load auto_load_index auto_qualify auto_reset bgerror binary break catch cd chan clock close concat continue coroutine dde dict default else elseif encoding env eof error eval exec exit expr fblocked fconfigure fcopy file fileevent filename flush for foreach format gets glob global history if incr info interp join lappend lassign lindex linsert list llength lmap load lrange lrepeat lreplace lreverse lsearch lset lsort memory my namespace next nextto oo::class oo::copy oo::define oo::objdefine oo::object open package parray pid pkg_mkIndex platform proc puts pwd read regexp registry regsub rename return scan seek self set socket source split string subst switch tailcall tclLog tclMacPkgSearch tclPkgSetup tclPkgUnknown tell time trace try unknown unload unset update uplevel upvariable vwait while yield yeildto zlib",
+        "1": "bell bind bindtags button canvas checkbutton console destroy entry event focus font frame grab grid image label labelframe listbox lower menu menubutton message option pack panedwindow place radiobutton raise scale scrollbar selection send spinbox text tk tkerror tkwait toplevel ttk::button ttk::checkbutton ttk::combobox ttk::entry ttk::frame ttk::intro ttk::label ttk::labeframe ttk::menubutton ttk::notebook ttk::panedwindow ttk::progressbar ttk::radiobutton ttk::scale ttk::scrollbar ttk::sizegrip ttk::spinbox ttk::style winfo wm",
+        "2": "@scope body class code common component configbody constructor define destructor hull import inherit itcl itk itk_component itk_initialize itk_interior itk_option iwidgets keep method private protected public",
+        "3": "tkButtonDown tkButtonEnter tkButtonInvoke tkButtonLeave tkButtonUp tkCancelRepeat tkCheckRadioInvoke tkDarken tkEntryAutoScan tkEntryBackspace tkEntryClosestGap tkEntryInsert tkEntryKeySelect tkEntryMouseSelect tkEntryNextWord tkEntryPaste tkEntryPreviousWord tkEntrySeeInsert tkEntrySetCursor tkEntryTranspose tkEventMotifBindings tkFDGetFileTypes tkFirstMenu tkFocusGroup_Destroy tkFocusGroup_In tkFocusGroup_Out tkFocusOK tkListboxAutoScan tkListboxBeginExtend tkListboxBeginSelect tkListboxBeginToggle tkListboxCancel tkListboxDataExtend tkListboxExtendUpDown tkListboxMotion tkListboxSelectAll tkListboxUpDown tkMbButtonUp tkMbEnter tkMbLeave tkMbMotion tkMbPost tkMenuButtonDown tkMenuDownArrow tkMenuDup tkMenuEscape tkMenuFind tkMenuFindName tkMenuFirstMenu tkMenuFirstEntry tkMenuInvoke tkMenuLeave tkMenuLeftArrow tkMenuMotion tkMenuNextEntry tkMenuNextMenu tkMenuRightArrow tkMenuUnpost tkMenuUpArrow tkMessageBox tkPostOverPoint tkRecolorTree tkRestoreOldGrab tkSaveGrabInfo tkScaleActivate tkScaleButton2Down tkScaleButton2Motion tkScaleButtonDown tkScaleControlPress tkScaleDrag tkScaleEndDrag tkScaleIncrement tkScreenChanged tkScrollButton2Down tkScrollButtonDown tkScrollButtonUp tkScrollByPages tkScrollByUnits tkScrollDrag tkScrollEndDrag tkScrollSelect tkScrollStartDrag tkScrollToPos tkScrollTopBottom tkTabToWindow tkTearOffMenu tkTextAutoScan tkTextButton1 tkTextClosestGap tkTextInsert tkTextKeyExtend tkTextKeySelect tkTextNextPara tkTextNextPos tkTextNextWord tkTextPaste tkTextPrevPara tkTextPrevPos tkTextResetAnchor tkTextScrollPages tkTextSelectTo tkTextSetCursor tkTextTranspose tkTextUpDownLine tkTraverseToMenu tkTraverseWithinMenu tk_bisque tk_chooseColor tk_dialog tk_focusFollowsMouse tk_focusNext tk_focusPrev tk_getOpenFile tk_getSaveFile tk_messageBox tk_optionMenu tk_popup tk_setPalette tk_textCopy tk_textCut tk_textPaste"
+      }
+    },
+    "pascal": {
+      "displayName": "Pascal",
+      "extensions": ["pas", "pp", "p", "inc", "lpr"],
+      "multiLineComment": {
+        "start": "{",
+        "end": "}"
+      },
+      "keywords": {
+        "0": "and array asm begin case cdecl class const constructor default destructor div do downto else end end. except exit exports external far file finalization finally for function goto if implementation in index inherited initialization inline interface label library message mod near nil not object of on or out overload override packed pascal private procedure program property protected public published raise read record register repeat resourcestring safecall set shl shr stdcall stored string then threadvar to try type unit until uses var virtual while with write xor"
+      }
+    },
+    "powershell": {
+      "displayName": "PowerShell",
+      "extensions": ["ps1", "psm1", "psd1"],
+      "singleLineComment": "#",
+      "multiLineComment": {
+        "start": "<#",
+        "end": "#>"
+      },
+      "keywords": {
+        "0": "break continue do else elseif filter for foreach function if in return switch until where while using",
+        "1": "add-content add-history add-member add-pssnapin clear-content clear-item clear-itemproperty clear-variable compare-object convertfrom-securestring convert-path convertto-html convertto-securestring copy-item copy-itemproperty export-alias export-clixml export-console export-csv foreach-object format-custom format-list format-table format-wide get-acl get-alias get-authenticodesignature get-childitem get-command get-content get-credential get-culture get-date get-eventlog get-executionpolicy get-help get-history get-host get-item get-itemproperty get-location get-member get-pfxcertificate get-process get-psdrive get-psprovider get-pssnapin get-service get-tracesource get-uiculture get-unique get-variable get-wmiobject group-object import-alias import-clixml import-csv invoke-expression invoke-history invoke-item join-path measure-command measure-object move-item move-itemproperty new-alias new-item new-itemproperty new-object new-psdrive new-service new-timespan new-variable out-default out-file out-host out-null out-printer out-string pop-location push-location read-host remove-item remove-itemproperty remove-psdrive remove-pssnapin remove-variable rename-item rename-itemproperty resolve-path restart-service resume-service select-object select-string set-acl set-alias set-authenticodesignature set-content set-date set-executionpolicy set-item set-itemproperty set-location set-psdebug set-service set-tracesource set-variable sort-object split-path start-service start-sleep start-transcript stop-process stop-service stop-transcript suspend-service tee-object test-path trace-command update-formatdata update-typedata where-object write-debug write-error write-host write-output write-progress write-verbose write-warning",
+        "2": "ac asnp clc cli clp clv cpi cpp cvpa diff epal epcsv fc fl foreach ft fw gal gc gci gcm gdr ghy gi gl gm gp gps group gsv gsnp gu gv gwmi iex ihy ii ipal ipcsv mi mp nal ndr ni nv oh rdr ri rni rnp rp rsnp rv rvpa sal sasv sc select si sl sleep sort sp spps spsv sv tee where write cat cd clear cp h history kill lp ls mount mv popd ps pushd pwd r rm rmdir echo cls chdir copy del dir erase move rd ren set type",
+        "5": "component description example externalhelp forwardhelpcategory forwardhelptargetname functionality inputs link notes outputs parameter remotehelprunspace role synopsis"
+      }
+    },
+    "asm": {
+      "extensions": ["asm", "s", "S"],
+      "keywords": {
+        "0": "aaa aad aam aas adc add and call cbw cdqe clc cld cli cmc cmp cmps cmpsb cmpsw cwd daa das dec div esc hlt idiv imul in inc int into iret ja jae jb jbe jc jcxz je jg jge jl jle jmp jna jnae jnb jnbe jnc jne jng jnge jnl jnle jno jnp jns jnz jo jp jpe jpo js jz lahf lds lea les lods lodsb lodsw loop loope loopew loopne loopnew loopnz loopnzw loopw loopz loopzw mov movabs movs movsb movsw mul neg nop not or out pop popf push pushf rcl rcr ret retf retn rol ror sahf sal sar sbb scas scasb scasw shl shr stc std sti stos stosb stosw sub test wait xchg xlat xlatb xor",
+        "2": "ah al ax bh bl bp bx ch cl cr0 cr2 cr3 cr4 cs cx dh di dl dr0 dr1 dr2 dr3 dr6 dr7 ds dx eax ebp ebx ecx edi edx es esi esp fs gs rax rbx rcx rdx rdi rsi rbp rsp r8 r9 r10 r11 r12 r13 r14 r15"
+      }
+    },
+    "fortran": {
+      "displayName": "Fortran",
+      "extensions": ["f", "for", "f90", "f95", "f2k", "f23"],
+      "multiLineComment": {
+        "start": "/*",
+        "end": "*/"
+      },
+      "keywords": {
+        "0": "access action advance allocatable allocate apostrophe assign assignment associate asynchronous backspace bind blank blockdata call case character class close common complex contains continue critical cycle data deallocate decimal delim default dimension direct do dowhile double doubleprecision else elseif elsewhere encoding end endassociate endblockdata endcritical enddo endenum endfile endforall endfunction endif endinterface endmodule endprocedure endprogram endselect endsubroutine endtype endwhere entry enum eor equivalence err errmsg exist exit external file flush fmt forall form format formatted function go goto id if implicit in include inout integer inquire intent interface intrinsic iomsg iolength iostat kind len logical module name named namelist nextrec nml none nullify number only open opened operator optional out pad parameter pass pause pending pointer pos position precision print private procedure program protected public quote read readwrite real rec recl recursive result return rewind save select selectcase selecttype sequential sign size stat status stop stream submodule subroutine target then to type unformatted unit use value volatile wait where while write",
+        "1": "abs achar acos acosd adjustl adjustr aimag aimax0 aimin0 aint ajmax0 ajmin0 akmax0 akmin0 all allocated alog alog10 amax0 amax1 amin0 amin1 amod anint any asin asind associated atan atan2 atan2d atand bit_size btest cabs ccos ceiling cexp char clog cmplx conjg cos cosd cosh count cpu_time cshift csin csqrt dabs dble dcmplx dconjg dcos dcosd dcosh dexp digits dim dot_product dprod dreal dsign dsin dsind dsinh dsqrt dtan dtand dtanh eoshift epsilon exp exponent floor fraction huge iabs iachar iand ibclr ibits ibset ichar ieor ifix index int ior ishft ishftc isign kind lbound leadz len len_trim log log10 lshift matmul max maxexponent maxloc maxval merge min minexponent minloc minval mod modulo mvbits nearest nint not pack popcnt precision present product radix random_number random_seed range real repeat reshape rrspacing rshift scale scan selected_int_kind selected_real_kind set_exponent shape sign sin sind sinh size spacing spread sqrt sum system_clock tan tand tanh tiny transfer transpose trim ubound unpack verify"
+      }
+    },
+    "ocaml": {
+      "displayName": "OCaml",
+      "lexer": "caml",
+      "extensions": ["ml", "mli", "sml", "thy"],
+      "multiLineComment": {
+        "start": "(*",
+        "end": "*)"
+      },
+      "keywords": {
+        "0": "and as assert asr begin class constraint do done downto else end exception external false for fun function functor if in include inherit initializer land lazy let lor lsl lsr lxor match method mod module mutable new object of open or private rec sig struct then to true try type val virtual when while with",
+        "1": "option Some None ignore ref lnot succ pred",
+        "2": "array bool char float int list string unit"
+      }
+    },
+    "haskell": {
+      "displayName": "Haskell",
+      "extensions": ["hs", "lhs", "las"],
+      "multiLineComment": {
+        "start": "{-",
+        "end": "-}"
+      },
+      "keywords": {
+        "0": "as case class data default deriving do else hiding if import in infix infixl infixr instance let module newtype of proc qualified rec then type where _"
+      }
+    },
+    "asciidoc": {
+      "displayName": "AsciiDoc",
+      "extensions": ["adoc", "asciidoc"],
+      "singleLineComment": "//"
+    },
+    "dart": {
+      "displayName": "Dart",
+      "extensions": ["dart"],
+      "singleLineComment": "//",
+      "multiLineComment": {
+        "start": "/*",
+        "end": "*/"
+      },
+      "keywords": {
+        "0": "abstract as assert async await break case catch class const continue covariant default deferred do dynamic else enum export extends extension external factory false final finally for get hide if implements import in interface is late library mixin new null on operator part required rethrow return set show static super switch sync this throw true try typedef var void while with yield",
+        "1": "bool double int num Object String",
+        "2": "false null true",
+        "3": "Future Iterable List Map Never Set Stream"
+      }
+    },
+    "julia": {
+      "displayName": "Julia",
+      "extensions": ["jl"],
+      "singleLineComment": "#",
+      "keywords": {
+        "0": "abstract baremodule begin break catch const continue do else elseif end export false finally for function global if import let local macro module mutable primitive quote return struct true try using while where",
+        "1": "Any Bool Char Float16 Float32 Float64 Int Int8 Int16 Int32 Int64 UInt UInt8 UInt16 UInt32 UInt64 Nothing Missing String Symbol",
+        "2": "Inf NaN missing nothing",
+        "3": "convert deepcopy delete! empty! error fieldnames first get get! haskey isempty keys length map merge pop! print println push! setindex! show size sort split sum typeof values"
+      },
+      "properties": {
+        "fold": "1",
+        "fold.comment": "1",
+        "fold.compact": "0",
+        "fold.julia.docstring": "1",
+        "fold.julia.syntax.based": "1"
+      }
+    },
+    "lisp": {
+      "displayName": "Lisp",
+      "extensions": ["lsp", "lisp", "cl"],
+      "singleLineComment": ";",
+      "keywords": {
+        "0": "not defun + - * / = < > <= >= princ eval apply funcall quote identity function complement backquote lambda set setq setf defmacro gensym make symbol intern name value plist get getf putprop remprop hash array aref car cdr caar cadr cdar cddr caaar caadr cadar caddr cdaar cdadr cddar cdddr caaaar caaadr caadar caaddr cadaar cadadr caddar cadddr cdaaar cdaadr cdadar cdaddr cddaar cddadr cdddar cddddr cons list append reverse last nth nthcdr member assoc subst sublis nsubst nsublis remove length mapc mapcar mapl maplist mapcan mapcon rplaca rplacd nconc delete atom symbolp numberp boundp null listp consp minusp zerop plusp evenp oddp eq eql equal cond case and or let l if prog prog1 prog2 progn go return do dolist dotimes catch throw error cerror break continue errset baktrace evalhook truncate float rem min max abs sin cos tan expt exp sqrt random logand logior logxor lognot bignums logeqv lognand lognor logorc2 logtest logbitp logcount integer nil"
+      }
+    },
+    "latex": {
+      "displayName": "LaTeX",
+      "extensions": ["tex", "sty"]
+    },
+    "vb": {
+      "extensions": ["vb", "vbs"],
+      "keywords": {
+        "0": "addhandler addressof alias and andalso as boolean by byref byte byval call case catch cbool cbyte cchar cdate cdbl cdec char cint class clng cobj const continue csbyte cshort csng cstr ctype cuint culng cushort date decimal declare default delegate dim directcast do double each else elseif end endif enum erase error event exit false finally for friend function get gettype global gosub goto handles if implements imports in inherits integer interface is isnot let lib like long loop me mod module mustinherit mustoverride mybase myclass namespace narrowing new next not nothing notinheritable notoverridable object of on operator option optional or orelse out overloads overridable overrides paramarray partial private property protected public raiseevent readonly redim rem removehandler resume return sbyte select set shadows shared short single static step stop strict string structure sub synclock then throw to true try trycast typeof uinteger ulong ushort using variant wend when while widening with withevents writeonly xor"
+      }
+    },
+    "perl": {
+      "displayName": "Perl",
+      "extensions": ["pl", "pm", "plx"],
+      "singleLineComment": "#",
+      "keywords": {
+        "0": "ARGV AUTOLOAD Accept BEGIN Balloon Button CHECK CORE DATA DESTROY END Entry Frame INIT Label MainLoop Radiobutton STDERR STDIN STDOUT SUPER Tr UNITCHECK UNIVERSAL __DATA__ __END__ __FILE__ __LINE__ __PACKAGE__ __SUB__ abs accept address alarm and atan2 attach auth_type autoEscape bind binmode bless br break button caller caption chdir checkbox checkbox_group chmod chomp chop chown chr chroot close closedir cmp compile configure connect constant continue cookie cos crypt dbmclose dbmopen default defaults defined deiconify delete delete_all die div do dump each else elsif em end end_h1 end_html end_table end_ul endform endgrent endhostent endif endnetent endprotoent endpwent endservent eof eq escape escape_HTML eval evalbytes exec exists exit exp fc fcntl filefield fileno flock font for foreach fork format formline ge geometry getc getgrent getgrgid getgrnam getgrname gethostbyaddr gethostbyname gethostent getlogin getnetbyaddr getnetbyname getnetent getpeername getpgrp getppid getpriority getprotobyname getprotobynumber getprotoent getpwent getpwnam getpwuid getservbyname getservbyport getservent getsockname getsockopt given glob gmtime goto grep groove gt h1 h2 h3 h4 h5 header hex hidden hr http https if image_button img import index insert int ioctl isindex join keys kill last lc lcfirst le length li link listen local localtime lock log lstat map maxsize minsize mkdir msgctl msgget msgrcv msgsnd multipart_end multipart_init multipart_start my ne next no not oct ol open opendir or ord our pack package param param_fetch password_field path_info pipe pop popup_menu pos pre print printf prototype push qq query_string quotemeta qw qx radio_group raise rand raw_cookie read readdir readline readlink readpipe recv redirect redo ref referer remote_addr remote_host remote_indent remote_user rename request_method require reset resizable return reverse rewinddir rindex rmdir say scalar script_name scrolling_list seek seekdir select self_url semctl semget semop send set setsockopt shift shmctl shmget shmread shmwrite shutdown sin sleep socket socketpair sort splice split sprintf sqrt srand stat state study substr symlink syscall sysread sysseek system syswrite tell telldir tie tied time times truncate uc ucfirst umask undef unless unlink unpack unshift untie use utime values vec wait waitpid wantarray warn write"
+      }
+    },
+    "sql": {
+      "displayName": "SQL",
+      "extensions": ["sql"],
+      "multiLineComment": {
+        "start": "/*",
+        "end": "*/"
+      },
+      "keywords": {
+        "0": "abs absolute access acos action add add_months adddate admin after aggregate all allocate alter and any app_name applock_mode applock_test are array as asc ascii asin assemblyproperty assertion asymkey_id at atan atn2 audit authid authorization autonomous_transaction avg backup before begin benchmark between bfilename bin binary_checksum bit_and bit_count bit_or body both breadth break browse bulk by call cascade cascaded case cast catalog catch ceil ceiling cert_id certproperty charindex chartorowid check checkpoint checksum checksum_agg chr class clause close cluster clustered coalesce col_length col_name collate collation collect column columnproperty columns_updated comment commit completion compress compute concat concat_ws connect connection connectionconstant constraint constraints constructorcreate contains containsable containstable context_info continue conv convert corr corresponding cos cot count count_big covar_pop covar_samp create cross cube cume_dist current current_date current_path current_request_id current_role current_time current_timestamp current_user cursor_status cycle data database database_principal_id databasepropertyex datalength date_add date_format date_sub dateadd datediff datefirst dateformat datename datepart db_id db_name dbcc deallocate declare decode default degrees delete dense_rank deny depth desc describe deterministic diagnostics dictionary difference disconnect disk distinct distributed do domain drop dump dynamic each else elsif encode end equals errlvl error_line error_message error_number error_procedure error_severity error_state escape eventdata every except exception exclusive exec execute exists exit exp export_set extends external extract false fetch file file_id first floor for foreign format found found_rows from full function general generated get global grant group hash having heap help high_priority holdlock hour identified identity identity_insert identitycol if ilike immediate in index indexkey indexproperty index_col initcap inner insensitive insert intersect into is isdate isnull isnumeric isolation join key kill language last last_day last_value last_insert_id left len level like limit lineno ln local lock loop lower ltrim max md5 median merge metadata_index microssecond mid middle min minute mod module money month months_between name nchar new newid no nocheck nolock none not now nullif nvarchar offset open opendatasource openquery openrowset openxml option or order outer output over overlaps owner partition password patindex percent percent_rank percentile_cont percentile_disc perms permissions pi pipe pivot plan position power primary print proc procedure public publish quotient radians raiserror rand readtext read_only rebuild reconfigure references replication restore restrict return returns revoke right role rollback rollup round row row_number rowcount rowguidproperty rtrim rule save schema scope identity second section select sequence serverproperty session session_user set setuser sha sha1 sha2 sign size smalldatetimeoffset smallint some sound space sql sqlexception sqlstate sqlwarning sqrt square start stop str str_to_date string stuff substring subdate sum switchoffset sysdatetime sysdatetimeoffset sysname system_user sysutcdatetime table tablesample tan temp temporary textsize then throw time time_zone timeformat timestamp to top translate trigger trim truncate try_convert try_parse type typeproperty unbounded unicode union unique unpivot update upper use user_name using utc_date utc_timestamp uuid varbinary varchar variables view waitfor warning week weekday when where while window with within work write writetext year"
+      }
+    },
+    "nix": {
+      "extensions": ["nix"],
+      "singleLineComment": "#",
+      "multiLineComment": {
+        "start": "/*",
+        "end": "*/"
+      },
+      "keywords": {
+        "0": "assert else if in inherit let or rec then with",
+        "1": "abort add addDrvOutputDependencies all any attrNames attrValues baseNameOf bitAnd bitOr bitXor break builtins catAttrs ceil compareVersions concatLists concatMap concatStringsSep convertHash currentSystem currentTime deepSeq derivation dirOf div elem elemAt fetchClosure fetchGit fetchTarball fetchTree fetchurl filter filterSource findFile flakeRefToString floor foldl' fromJSON fromTOML functionArgs genList genericClosure getAttr getContext getEnv getFlake groupBy hasAttr hasContext hashFile hashString head import intersectAttrs isAttrs isBool isFloat isFunction isInt isList isNull isPath isString langVersion length lessThan listToAttrs map mapAttrs match mul nixPath nixVersion outputOf parseDrvName parseFlakeRef partition pathExists placeholder readDir readFile readFileType removeAttrs replaceStrings seq sort split splitVersion storeDir storePath stringLength sub substring throw toFile toJSON toPath toString toXML trace traceVerbose tryEval typeOf unsafeDiscardOutputDependency unsafeDiscardStringContext warn zipAttrsWith",
+        "3": "runCommand"
+      }
+    },
+    "nimrod": {
+      "extensions": ["nim"],
+      "multiLineComment": {
+        "start": "#[",
+        "end": "]#"
+      },
+      "keywords": {
+        "0": "addr and as asm block break case cast const continue converter discard div elif else end enum except exception finally for from generic if implies import in include is isnot iterator lambda macro method mod nil not notin object of or out proc ptr raise ref return shl shr template try tuple type var when where while without xor yield"
+      }
+    },
+    "coffeescript": {
+      "displayName": "CoffeeScript",
+      "extensions": ["coffee", "litcoffee"],
+      "multiLineComment": {
+        "start": "###",
+        "end": "###"
+      },
+      "keywords": {
+        "0": "new instanceof do return break continue throw for while until loop if else unless switch when then in of by typeof delete where try catch finally prototype jQuery case default function var void with const let enum export import native __hasProp __extends __slice __bind __indexOf",
+        "1": "Object Number Boolean Array String RegExp Function Date Math eval setInterval clearInterval setTimeout clearTimeout isFinite isNaN parseFloat parseInt escape unescape console encodeURI encodeURIComponent decodeURI decodeURIComponent window document navigator location history screen alert prompt process GLOBAL require exports",
+        "3": "false true yes no on off undefined null NaN Infinity"
+      }
+    },
+    "d": {
+      "displayName": "D",
+      "extensions": ["d"],
+      "singleLineComment": "//",
+      "keywords": {
+        "0": "abstract alias align asm assert auto body bool break byte case cast catch cdouble cent cfloat char class const continue creal dchar debug default delegate delete deprecated do double else enum export extern false final finally float for foreach foreach_reverse function goto idouble if ifloat immutable import in inout int interface invariant ireal is lazy long mixin module new nothrow null out override package pragma private protected public pure real ref return scope shared short static struct super switch synchronized template this throw true try typedef typeid typeof ubyte ucent uint ulong union unittest ushort version void volatile wchar while with"
+      }
+    },
+    "erlang": {
+      "displayName": "Erlang",
+      "extensions": ["erl", "hrl"],
+      "keywords": {
+        "0": "after and andalso band begin bnot bor bsl bsr bxor case catch cond div end fun if let not of or orelse query receive rem try when xor",
+        "2": "-define -else -endif -ifdef -ifndef -include -include_lib -undef",
+        "3": "-behavior -behaviour -compile -created -created_by -export -file -import -module -modified -modified_by -record -revision -spec -type -vsn",
+        "4": "@author @clear @copyright @deprecated @doc @docfile @end @equiv @headerfile @hidden @private @reference @see @since @spec @throws @title @todo @TODO @type @version",
+        "5": "@date @docRoot @link @module @package @section @time @type @version"
+      }
+    },
+    "nsis": {
+      "displayName": "NSIS",
+      "extensions": ["nsi", "nsh"],
+      "keywords": {
+        "0": "Abort AddBrandingImage AddSize AllowRootDirInstall AllowSkipFiles AutoCloseWindow BGFont BGGradient BrandingText BringToFront Call CallInstDLL Caption ChangeUI CheckBitmap ClearErrors CompletedText ComponentText CopyFiles CRCCheck CreateDirectory CreateFont CreateShortCut Delete DeleteINISec DeleteINIStr DeleteRegKey DeleteRegValue DetailPrint DetailsButtonText DirText DirVar DirVerify EnableWindow EnumRegKey EnumRegValue Exch Exec ExecShell ExecWait ExpandEnvStrings File FileBufSize FileClose FileErrorText FileOpen FileRead FileReadByte FileReadUTF16LE FileSeek FileWrite FileWriteByte FileWriteUTF16LE FindClose FindFirst FindNext FindWindow FlushINI Function FunctionEnd GetCurInstType GetCurrentAddress GetDlgItem GetDLLVersion GetDLLVersionLocal GetErrorLevel GetExeName GetExePath GetFileTime GetFileTimeLocal GetFullPathName GetFunctionAddress GetInstDirError GetLabelAddress GetTempFileName Goto HideWindow Icon IfAbort IfErrors IfFileExists IfRebootFlag IfSilent InitPluginsDir InstallButtonText InstallColors InstallDir InstallDirRegKey InstProgressFlags InstType InstTypeGetText InstTypeSetText IntCmp IntCmpU IntFmt IntOp IsWindow LangString LangStringUP LicenseBkColor LicenseData LicenseForceSelection LicenseLangString LicenseText LoadLanguageFile LockWindow LogSet LogText ManifestDPIAware ManifestSupportedOS MessageBox MiscButtonText Nop Name OutFile Page PageEx PageExEnd PluginDir Pop Push Quit ReadEnvStr ReadINIStr ReadRegDWORD ReadRegStr Reboot RegDLL Rename RequestExecutionLevel ReserveFile Return RMDir SearchPath Section SectionEnd SectionGetFlags SectionGetInstTypes SectionGetSize SectionGetText SectionGroup SectionGroupEnd SectionIn SectionSetFlags SectionSetInstTypes SectionSetSize SectionSetText SendMessage SetAutoClose SetBrandingImage SetCompress SetCompressionLevel SetCompressor SetCompressorDictSize SetCtlColors SetCurInstType SetDatablockOptimize SetDateSave SetDetailsPrint SetDetailsView SetErrorLevel SetErrors SetFileAttributes SetFont SetOutPath SetOverwrite SetPluginUnload SetRebootFlag SetShellVarContext SetSilent ShowInstDetails ShowUnInstDetails SilentInstall SilentUnInstall Sleep SpaceTexts StrCmp StrCmpS StrCpy StrLen SubCaption SubSection SubSectionEnd UninstallButtonText UninstallCaption UninstallIcon UninstallSubCaption UninstallText WindowIcon WriteINIStr WriteRegBin WriteRegDWORD WriteRegExpandStr WriteRegStr WriteUninstaller XPStyle",
+        "1": "$0 $1 $2 $3 $4 $5 $6 $7 $8 $9 $R0 $R1 $R2 $R3 $R4 $R5 $R6 $R7 $R8 $R9 $ADMINTOOLS $APPDATA $CDBURN_AREA $CMDLINE $COMMONFILES $COMMONFILES32 $COMMONFILES64 $COOKIES $DESKTOP $DOCUMENTS $EXEDIR $EXEFILE $EXEPATH $FAVORITES $FONTS $HISTORY $HWNDPARENT $INTERNET_CACHE $INSTDIR $LANGUAGE $LOCALAPPDATA $MUSIC $NETHOOD ${NSISDIR} $OUTDIR $PICTURES $PLUGINSDIR $PRINTHOOD $PROFILE $PROGRAMFILES $PROGRAMFILES32 $PROGRAMFILES64 $QUICKLAUNCH $RECENT $RESOURCES $RESOURCES_LOCALIZED $SENDTO $SMPROGRAMS $SMSTARTUP $STARTMENU $SYSDIR $TEMP $TEMPLATES $VIDEOS $WINDIR $$ $\\n $\\r $\\t",
+        "2": "ARCHIVE CUR END FILE_ATTRIBUTE_ARCHIVE FILE_ATTRIBUTE_HIDDEN FILE_ATTRIBUTE_NORMAL FILE_ATTRIBUTE_OFFLINE FILE_ATTRIBUTE_READONLY FILE_ATTRIBUTE_SYSTEM FILE_ATTRIBUTE_TEMPORARY HIDDEN HKCC HKCR HKCU HKDD HKEY_CLASSES_ROOT HKEY_CURRENT_CONFIG HKEY_CURRENT_USER HKEY_DYN_DATA HKEY_LOCAL_MACHINE HKEY_PERFORMANCE_DATA HKEY_USERS HKLM HKPD HKU IDABORT IDCANCEL IDIGNORE IDNO IDOK IDRETRY IDYES MB_ABORTRETRYIGNORE MB_DEFBUTTON1 MB_DEFBUTTON2 MB_DEFBUTTON3 MB_DEFBUTTON4 MB_ICONEXCLAMATION MB_ICONINFORMATION MB_ICONQUESTION MB_ICONSTOP MB_OK MB_OKCANCEL MB_RETRYCANCEL MB_RIGHT MB_SETFOREGROUND MB_TOPMOST MB_USERICON MB_YESNO MB_YESNOCANCEL NORMAL OFFLINE READONLY SET SHCTX SW_HIDE SW_SHOWMAXIMIZED SW_SHOWMINIMIZED SW_SHOWNORMAL SYSTEM TEMPORARY all auto both bottom bzip2 checkbox colored current false force hide ifdiff ifnewer lastused leave left listonly lzma nevershow none normal off on pop push radiobuttons right show silent silentlog smooth textonly top true try zlib"
+      }
+    },
+    "objc": {
+      "displayName": "Objective-C",
+      "extensions": ["m", "mm"],
+      "keywords": {
+        "0": "if else switch case default break goto return for while do continue typedef sizeof NULL self super nil NIL",
+        "1": "interface implementation protocol end private protected public class selector encode defs",
+        "2": "void struct union enum char short int long double float signed unsigned const static extern auto register volatile id Class SEL IMP BOOL",
+        "3": "oneway in out inout bycopy byref"
+      }
+    },
+    "r": {
+      "displayName": "R",
+      "extensions": ["r", "s", "splus"],
+      "keywords": {
+        "0": "if else repeat while function for in next break TRUE FALSE NULL NA Inf NaN",
+        "1": "abbreviate abline abs acf acos acosh addmargins aggregate agrep alarm alias alist all anova any aov aperm append apply approx approxfun apropos ar args arima array arrows asin asinh assign assocplot atan atanh attach attr attributes autoload autoloader ave axis backsolve barplot basename beta bindtextdomain binomial biplot bitmap bmp body box boxplot bquote break browser builtins bxp by bzfile c call cancor capabilities casefold cat category cbind ccf ceiling character charmatch chartr chol choose chull citation class close cm cmdscale codes coef coefficients col colnames colors colorspaces colours comment complex confint conflicts contour contrasts contributors convolve cophenetic coplot cor cos cosh cov covratio cpgram crossprod cummax cummin cumprod cumsum curve cut cutree cycle data dataentry date dbeta dbinom dcauchy dchisq de debug debugger decompose delay deltat demo dendrapply density deparse deriv det detach determinant deviance dexp df dfbeta dfbetas dffits dgamma dgeom dget dhyper diag diff diffinv difftime digamma dim dimnames dir dirname dist dlnorm dlogis dmultinom dnbinom dnorm dotchart double dpois dput drop dsignrank dt dump dunif duplicated dweibull dwilcox eapply ecdf edit effects eigen emacs embed end environment eval evalq example exists exp expression factanal factor factorial family fft fifo file filter find fitted fivenum fix floor flush for force formals format formula forwardsolve fourfoldplot frame frequency ftable function gamma gaussian gc gcinfo gctorture get getenv geterrmessage gettext gettextf getwd gl glm globalenv gray grep grey grid gsub gzcon gzfile hat hatvalues hcl hclust head heatmap help hist history hsv httpclient iconv iconvlist identical identify if ifelse image influence inherits integer integrate interaction interactive intersect invisible isoregitter jpeg julian kappa kernapply kernel kmeans knots kronecker ksmooth labels lag lapply layout lbeta lchoose lcm legend length letters levels lfactorial lgamma library lines list lm load locator log log10 log2 logical lowess ls lsfit machine mad margin max mean median merge message methods min missing mod monthplot mtext mvfft names nchar ncol next nlevels noquote nrow null numeric objects offset onefile op optimize options outer p.adjust pairlist par paste pbinom pchisq pentstemon pexp pf pgamma pgeom phyper pi pico plnorm plogis plot pmatch pmax pmin pnorm points poisson poly polygon postscript power ppoints ppois ppr prcomp predict pretty princomp print prod profile proj prompt ps pt punif pweibull q qbeta qbinom qcauchy qchisq qexp qf qgamma qgeom qhyper qlnorm qlogis qnorm qq qqline qqnorm qt quantile quasi quasibinomial quasipoisson qunif qweibull rbeta rbinom rcauchy rchisq readline real recover regexpr relevel remove rep repeat replace replicate reshape rev rexp rf rgamma rgb rgeom rhyper rlnorm rlogis rm rnbinom rnorm round row rowMeans rowSums rpois rsignrank rt runif rweibull sample sapply save save.image scale scan scan sd search searchpaths seq sequence set setdiff setequal setwd shell sign signif sin sinh sink solve sort source split sprintf sqrt stack start stem step stop str strsplit structure sub subset substring sum summary svd sweep switch symbols system t table tan tanh tapply terms time title toeplitz tolower toupper trace backup transform trig trunc ts ts.intersect ts.plot ts.union tsp typeof unclass unlist unname unstack update url var var.test variable vector which while window windows with within write x11 xedit xfig xgobi xor xyplot ymd"
+      }
+    },
+    "rebol": {
+      "displayName": "REBOL",
+      "extensions": ["r2", "r3", "reb"],
+      "keywords": {
+        "0": "about abs absolute add alert alias all alter and any any-block? any-function? any-string? any-type? any-word? append arccosine arcsine arctangent array as-pair ask at attempt back binary? bind bitset? block? break brightness? browse build-tag caret-to-offset catch center-face change change-dir char? charset checksum choose clean-path clear clear-fields close comment complement component? compose compress confirm connected? construct context copy cosine datatype? date? debase decimal? decode-cgi decompress dehex delete detab difference dir? dirize disarm dispatch divide do do-events does dump-face dump-obj echo either else email? empty? enbase entab equal? error? even? event? exclude exists? exit exp extract fifth file? find first flash focus for forall foreach forever form forskip found? fourth free func function function? get get-modes get-word? greater-or-equal? greater? halt has hash? head head? help hide hide-popup if image? import-email in in-window? index? info? inform input? insert integer? intersect issue? join last launch layout length? lesser-or-equal? lesser? library? license link? list-dir list? lit-path? lit-word? load load-image log-10 log-2 log-e logic? loop lowercase make make-dir make-face max maximum maximum-of min minimum minimum-of modified? mold money? multiply native? negate negative? next none? not not-equal? now number? object? odd? offset-to-caret offset? op? open or pair? paren? path? pick poke port? positive? power prin print probe protect protect-system query quit random read read-io recycle reduce refinement? reform rejoin remainder remold remove remove-each rename repeat repend replace request request-color request-date request-download request-file request-list request-pass request-text resend return reverse routine? same? save script? second secure select send series? set set-modes set-net set-path? set-word? show show-popup sign? sine size-text size? skip sort source span? split-path square-root stats strict-not-equal? string? style switch system tag? tail? take tan tangent third throw to trim triple? try tuple? type? unset? unsplit until update upgrade upper url? usage value? values view? wait what while write"
+      }
+    },
+    "registry": {
+      "displayName": "Registry",
+      "extensions": ["reg"]
+    },
+    "scheme": {
+      "displayName": "Scheme",
+      "extensions": ["scm", "smd", "ss"],
+      "keywords": {
+        "0": "+ - * / = < > <= >= => abs acos and angle append apply asin assoc assq assv atan begin boolean? caar cadr call-with-current-continuation call/cc call-with-input-file call-with-output-file call-with-values car cdr cdar cddr caaar caadr cadar caddr cdaar cdadr cddar cdddr caaaar caaadr caadar caaddr cadaar cadadr caddar cadddr cdaaar cdaadr cdadar cdaddr cddaar cddadr cdddar cddddr case ceiling char->integer char-alphabetic? char-ci<=? char-ci<? char-ci=? char-ci>=? char-ci>? char-downcase char-lower-case? char-numeric? char-ready? char-upcase char-upper-case? char-whitespace? char<=? char<? char=? char>=? char>? char? close-input-port close-output-port complex? cond cons cos current-input-port current-output-port define define-syntax delay denominator display do dynamic-wind else eof-object? eq? equal? eqv? eval even? exact->inexact exact? exp expt floor for-each force gcd if imag-part inexact->exact inexact? input-port? integer->char integer? interaction-environment lambda lcm length let let* let-syntax letrec letrec-syntax list list->string list->vector list-ref list-tail list? load log magnitude make-polar make-rectangular make-string make-vector map max member memq memv min modulo negative? newline not null-environment null? number->string number? numerator odd? open-input-file open-output-file or output-port? pair? peek-char positive? procedure? quasiquote quote quotient rational? rationalize read read-char real-part real? remainder reverse round scheme-report-environment set! set-car! set-cdr! sin sqrt string string->list string->number string->symbol string-append string-ci<=? string-ci<? string-ci=? string-ci>=? string-ci>? string-copy string-fill! string-length string-ref string-set! string<=? string<? string=? string>=? string>? string? substring symbol->string symbol? syntax-rules transcript-off transcript-on truncate unquote unquote-splicing values vector vector->list vector-fill! vector-length vector-ref vector-set! vector? with-input-from-file with-output-to-file write write-char"
+      }
+    },
+    "vhdl": {
+      "displayName": "VHDL",
+      "extensions": ["vhd", "vhdl"],
+      "keywords": {
+        "0": "access after alias all architecture array assert attribute begin block body buffer bus case case? converse component configuration constant designated_subtype disconnect downto else elsif end entity exit file for force function generate generic group guarded if impure in index inertial inout is label library linkage literal loop map new next null of on open others out package port postponed procedure process pure range record register reject report return select severity shared signal subtype then to transport type unaffected units until use variable wait when while with assume assume_guarantee context cover default fairness force parameter privat property protect protected record reflect release restrict restrict_guarantee sequence strong value view vmode vprop vunit",
+        "1": "abs and mod nand nor not or rem rol ror sla sll sra srl xnor xor",
+        "2": "left right low high ascending image value pos val succ pred leftof rightof base range reverse_range length delayed stable quiet transaction event active last_event last_active last_value driving driving_value simple_name path_name instance_name minimum maximum",
+        "3": "now readline read writeline write endfile resolved to_bit to_bitvector to_stdulogic to_stdlogicvector to_stdulogicvector to_x01 to_x01z to_UX01 rising_edge falling_edge is_x shift_left shift_right rotate_left rotate_right resize to_integer to_unsigned to_signed to_string to_bstring to_binarystring to_ostring to_octalstring to_hstring to_hexstring std_match to_01",
+        "4": "std ieee work standard textio std_logic_1164 std_logic_arith std_logic_misc std_logic_signed std_logic_textio std_logic_unsigned numeric_bit numeric_std math_complex math_real vital_primitives vital_timing",
+        "5": "boolean boolean_vector bit character severity_level integer integer_vector real real_vector time time_vector delay_length natural positive string bit_vector file_open_kind file_open_status line text side width std_ulogic std_ulogic_vector std_logic std_logic_vector X01 X01Z UX01 UX01Z unsigned signed"
+      }
+    },
+    "zig": {
+      "displayName": "Zig",
+      "extensions": ["zig"],
+      "keywords": {
+        "0": "addrspace align allowzero and anyframe anytype asm async await break callconv catch comptime const continue defer else enum errdefer error export extern false for if inline linksection noalias noinline nosuspend null orelse packed pub resume return struct suspend switch test threadlocal true try union unreachable usingnamespace var volatile while",
+        "1": "anyopaque anyerror bool f16 f32 f64 f80 f128 i0 i1 i2 i3 i4 i5 i6 i7 i8 i9 i10 i11 i12 i13 i14 i15 i16 i17 i18 i19 i20 i21 i22 i23 i24 i25 i26 i27 i28 i29 i30 i31 i32 i33 i34 i35 i36 i37 i38 i39 i40 i41 i42 i43 i44 i45 i46 i47 i48 i49 i50 i51 i52 i53 i54 i55 i56 i57 i58 i59 i60 i61 i62 i63 i64 i128 isize noreturn type u0 u1 u2 u3 u4 u5 u6 u7 u8 u9 u10 u11 u12 u13 u14 u15 u16 u17 u18 u19 u20 u21 u22 u23 u24 u25 u26 u27 u28 u29 u30 u31 u32 u33 u34 u35 u36 u37 u38 u39 u40 u41 u42 u43 u44 u45 u46 u47 u48 u49 u50 u51 u52 u53 u54 u55 u56 u57 u58 u59 u60 u61 u62 u63 u64 u128 usize comptime_int comptime_float",
+        "2": "",
+        "3": ""
+      },
+      "properties": {
+        "fold": "1"
+      }
+    },
+    "go": {
+      "displayName": "Go",
+      "lexer": "cpp",
+      "extensions": ["go", "mod", "sum", "work"],
+      "singleLineComment": "//",
+      "multiLineComment": {
+        "start": "/*",
+        "end": "*/"
+      },
+      "keywords": {
+        "0": "break default func interface select case defer go map struct chan else goto package switch const fallthrough if range type continue for import return var",
+        "1": "any bool byte comparable complex64 complex128 error float32 float64 int int8 int16 int32 int64 rune string uint uint8 uint16 uint32 uint64 uintptr",
+        "2": "nil true false iota"
+      }
+    },
+    "javascript": {
+      "displayName": "JavaScript",
+      "lexer": "cpp",
+      "extensions": ["js", "mjs", "cjs", "jsx"],
+      "singleLineComment": "//",
+      "multiLineComment": {
+        "start": "/*",
+        "end": "*/"
+      },
+      "keywords": {
+        "0": "async await break case catch class const continue debugger default delete do else enum export extends finally for function if import in instanceof let new return super switch this throw try typeof var void while with yield",
+        "1": "Array ArrayBuffer BigInt BigInt64Array BigUint64Array Boolean DataView Date Error EvalError FinalizationRegistry Float32Array Float64Array Function Infinity Intl JSON Map Math NaN Number Object Promise Proxy RangeError ReferenceError Reflect RegExp Set SharedArrayBuffer String Symbol SyntaxError TypeError URIError Uint8Array Uint8ClampedArray Uint16Array Uint32Array WeakMap WeakRef WeakSet decodeURI decodeURIComponent encodeURI encodeURIComponent escape eval globalThis isFinite isNaN parseFloat parseInt undefined unescape",
+        "2": "false null true"
+      },
+      "properties": {
+        "lexer.cpp.allow.dollars": "1",
+        "lexer.cpp.backquoted.strings": "1",
+        "lexer.cpp.enable.preprocessor": "0",
+        "lexer.cpp.allow.hashes": "1"
+      }
+    },
+    "typescript": {
+      "displayName": "TypeScript",
+      "lexer": "cpp",
+      "extensions": ["ts", "tsx", "mts", "cts"],
+      "singleLineComment": "//",
+      "multiLineComment": {
+        "start": "/*",
+        "end": "*/"
+      },
+      "keywords": {
+        "0": "abstract any as asserts async await boolean break case catch class const continue debugger declare default delete do else enum export extends false finally for from function get if implements import in infer instanceof interface is keyof let module namespace never new null number object of override package private protected public readonly require return satisfies set static string super switch symbol this throw true try type typeof undefined unique unknown var void while with yield",
+        "1": "Array ArrayBuffer BigInt BigInt64Array BigUint64Array Boolean DataView Date Error EvalError FinalizationRegistry Float32Array Float64Array Function Infinity Intl JSON Map Math NaN Number Object Promise Proxy RangeError ReferenceError Reflect RegExp Set SharedArrayBuffer String Symbol SyntaxError TypeError URIError Uint8Array Uint8ClampedArray Uint16Array Uint32Array WeakMap WeakRef WeakSet",
+        "2": "false null true"
+      },
+      "properties": {
+        "lexer.cpp.allow.dollars": "1",
+        "lexer.cpp.backquoted.strings": "1"
+      }
+    },
+    "java": {
+      "displayName": "Java",
+      "lexer": "cpp",
+      "extensions": ["java"],
+      "singleLineComment": "//",
+      "multiLineComment": {
+        "start": "/*",
+        "end": "*/"
+      },
+      "keywords": {
+        "0": "abstract assert boolean break byte case catch char class const continue default do double else enum extends final finally float for goto if implements import instanceof int interface long native new package private protected public return short static strictfp super switch synchronized this throw throws transient try void volatile while yield record sealed permits non-sealed var",
+        "1": "Boolean Byte Character CharSequence Class Double Enum Exception Float Integer Iterable Long Math Number Object Package Record Runtime String StringBuilder System Thread Throwable Void",
+        "2": "false null true"
+      },
+      "properties": {
+        "lexer.cpp.allow.dollars": "1"
+      }
+    },
+    "toml": {
+      "displayName": "TOML",
+      "extensions": ["toml"],
+      "singleLineComment": "#",
+      "keywords": {
+        "0": "false inf nan true"
+      },
+      "properties": {
+        "fold": "1"
+      }
+    },
+    "gdscript": {
+      "displayName": "GDScript",
+      "extensions": ["gd", "gdscript"],
+      "singleLineComment": "#",
+      "keywords": {
+        "0": "and as assert await break breakpoint case class class_name const continue elif else enum extends for func if in is match not null or pass return self signal static super true false var void while yield onready export setget preload",
+        "1": ""
+      },
+      "properties": {
+        "fold": "1"
+      }
+    },
+    "php": {
+      "displayName": "PHP",
+      "lexer": "hypertext",
+      "extensions": ["php", "phtml", "php3", "php4", "php5", "phps"],
+      "singleLineComment": "//",
+      "multiLineComment": {
+        "start": "/*",
+        "end": "*/"
+      },
+      "styles": {
+        "118": { "textStyle": "Normal" },
+        "119": { "textStyle": "String" },
+        "120": { "textStyle": "String" },
+        "121": { "textStyle": "Keyword", "bold": true },
+        "122": { "textStyle": "DecVal" },
+        "123": { "textStyle": "Variable" },
+        "124": { "textStyle": "Comment" },
+        "125": { "textStyle": "Comment" },
+        "126": { "textStyle": "Variable" },
+        "127": { "textStyle": "Operator" }
+      },
+      "keywords": {
+        "4": "abstract and array as break callable case catch class clone const continue declare default die do echo else elseif empty enddeclare endfor endforeach endif endswitch endwhile eval exit extends final finally fn for foreach function global goto if implements include include_once instanceof insteadof interface isset list match namespace new or print private protected public readonly require require_once return static switch throw trait try unset use var while xor yield from true false null"
+      },
+      "properties": {
+        "fold": "1",
+        "fold.html": "1",
+        "fold.html.preprocessor": "1",
+        "fold.hypertext.comment": "1",
+        "lexer.html.allow.php": "1"
+      }
+    },
+    "po": {
+      "displayName": "PO/POT",
+      "extensions": ["po", "pot"],
+      "singleLineComment": "#"
+    },
+    "meson": {
+      "displayName": "Meson",
+      "lexer": "python",
+      "filenames": ["meson.build", "meson_options.txt"],
+      "extensions": ["meson"],
+      "singleLineComment": "#",
+      "keywords": {
+        "0": "and break continue elif else endforeach endif false foreach if in not or true",
+        "1": "add_global_arguments add_global_link_arguments add_languages add_project_arguments add_project_link_arguments add_test_setup alias_target assert benchmark both_libraries build_target configuration_data configure_file custom_target declare_dependency dependency disabler environment error executable files find_library find_program generator get_option get_variable import include_directories install_data install_headers install_man install_subdir is_disabler is_variable jar join_paths library message option project run_command run_target set_variable shared_library shared_module static_library subdir subdir_done subproject summary test vcs_tag warning"
+      }
+    },
+    "rc": {
+      "displayName": "Resource (RC)",
+      "lexer": "cpp",
+      "extensions": ["rc", "rc2"],
+      "singleLineComment": "//",
+      "keywords": {
+        "0": "APPCOMMAND BEGIN BLOCK BITMAP BLOCKTEXTMENU CHECKBOX COMBOBOX CONTROL CONTROLUSECURSOR CURSOR CURSORONOFF DIALOG DIALOGEX DISCARDABLE EDITTEXT FILEFONT FONT ICON LANGUAGE LISTBOX LTEXT MENU MENUITEM MESSAGETABLE POPUP PUSHBUTTON RCDATA RSTRING SEPARATOR STRINGTABLE STYLE TEXTINCLUDE VALUE VERSIONINFO VIRTKEY",
+        "1": "ACCELERATORS ALT AUTOCHECKBOX AUTORADIOBUTTON BEGIN BITMAP BMP CAPTUREMIDI CAPTUREWAVE CHARACTER COUNT DEFAULT DEFPUSHBUTTON DISCARDABLE DROPFILES EXSTYLE ICON INCLUDE INCLUDE_MANIFEST KEYBOARD LANGUAGE LISTBOX LTEXT MENUEX MFT_SEPARATOR NOT RCDATA RSTRING SHARED STYLE TABSTOP TEXTINCLUDE TOOLBAR VERSIONINFO VIRTKEY"
+      }
+    },
+    "dockerfile": {
+      "displayName": "Dockerfile",
+      "lexer": "bash",
+      "filenames": ["Dockerfile"],
+      "extensions": ["dockerfile", "docker"],
+      "singleLineComment": "#",
+      "keywords": {
+        "0": "ADD ARG CMD COPY ENTRYPOINT ENV EXPOSE FROM HEALTHCHECK LABEL MAINTAINER ONBUILD RUN SHELL STOPSIGNAL USER VOLUME WORKDIR"
+      }
+    },
+    "inno": {
+      "displayName": "Inno Setup",
+      "lexer": "inno",
+      "extensions": ["iss"],
+      "singleLineComment": ";",
+      "keywords": {
+        "0": "code components custommessages dirs files icons ini installdelete langoptions languages messages registry run setup types tasks uninstalldelete uninstallrun _istool",
+        "1": "allowcancelduringinstall allownoicons allowrootdirectory allowuncpath alwaysrestart alwaysshowcomponentslist alwaysshowdironreadypage alwaysshowgrouponreadypage alwaysusepersonalgroup appcomments appcontact appcopyright appenddefaultdirname appenddefaultgroupname appid appmodifypath appmutex appname apppublisher apppublisherurl appreadmefile appsupporturl appupdatesurl appvername appversion architecturesallowed architecturesinstallin64bitmode backcolor backcolor2 backcolordirection backsolid changesassociations changesenvironment compression copyrightfontname copyrightfontsize createappdir createuninstallregkey defaultdirname defaultgroupname defaultuserinfoname defaultuserinfoorg defaultuserinfoserial dialogfontname dialogfontsize direxistswarning disabledirpage disablefinishedpage disableprogramgrouppage disablereadymemo disablereadypage disablestartupprompt diskclustersize diskslicesize diskspanning enablesdirdoesntexistwarning encryption extradiskspacerequired flatcomponentslist infoafterfile infobeforefile internalcompresslevel languagedetectionmethod languagecodepage languageid languagename licensefile lzmanumfastbytes mergeduplicatefiles minversion onlybelowversion outputbasefilename outputdir outputmanifestfile password privilegesrequired reservebytes restartifneededbyrun setupiconfile showcomponentsizes showlanguagedialog showtaskstreelines slicesperdisk solidcompression sourcedir timestamprounding timestampsinutc titlefontname titlefontsize touchdate touchtime uninstallable uninstalldisplayicon uninstalldisplayname uninstallfilesdir uninstalllogmode uninstallrestartcomputer updateuninstalllogappname usepreviousappdir usepreviousgroup useprevioussetuptype useprevioustasks useprevioususerinfo userinfopage usesetupldr versioninfocompany versioninfocopyright versioninfodescription versioninfotextversion versioninfoversion welcomefontname welcomefontsize windowshowcaption windowstartmaximized windowresizable windowvisible wizardimagebackcolor wizardimagefile wizardimagesizex wizardimagesizey wizardsmallimagebackcolor wizardsmallimagefile wizardsmallimagesizex wizardsmallimagesizey",
+        "2": "afterinstall attribs beforeinstall check components copymode description destdir destname excludes extradiskspacerequired filename flags fontinstall groupdescription hotkey infoafterfile infobeforefile iconfilename iconindex key languages licensefile messagesfile minversion name onlybelowversion parameters permissions root runonceid section source statusmsg string subkey tasks type types valuedata valuename valuetype workingdir",
+        "3": "append define dim elif else emit endif endsub error expr file for if ifdef ifexist ifndef ifnexist include insert pragma sub undef",
+        "4": "begin break case const continue do downto else end except finally for function if of procedure repeat then to try until uses var while with",
+        "5": "None"
+      }
+    },
+    "avs": {
+      "displayName": "AviSynth",
+      "extensions": ["avs", "avsi"],
+      "singleLineComment": "#",
+      "multiLineComment": {
+        "start": "/*",
+        "end": "*/"
+      },
+      "keywords": {
+        "0": "true false return global",
+        "1": "addborders avisource blur converttoyuy2 crop fadein fadeout fliphorizontal letterbox loop overlay resize scriptclip showalpha tone trim wavsource",
+        "2": "addgrain convolution3d decomb decimate eedi3 ffmpegsource fft3dfilter kerneldeint nnedi3 qtgmc tcanny tdeint tfm tivtc warpsharp yadif",
+        "3": "abs apply assert bool ceil chr clip cos default defined eval exist exp float floor hexvalue import int isbool isclip loadplugin log midstr nop opt_ pi pow rand round scriptdir select setmemorymax setworkingdir sign sin spline sqrt string strlen time ucase undefined value versionnumber versionstring",
+        "4": "audiobits audiochannels audiorate framecount framerate getleftchannel hasvideo height isrgb isyuy2 width",
+        "5": ""
+      },
+      "properties": {
+        "fold": "1",
+        "fold.comment": "1",
+        "fold.compact": "1"
+      }
+    },
+    "verilog": {
+      "displayName": "Verilog",
+      "extensions": ["v", "sv", "vh", "svh"],
+      "singleLineComment": "//",
+      "multiLineComment": {
+        "start": "/*",
+        "end": "*/"
+      },
+      "keywords": {
+        "0": "accept_on alias always always_comb always_ff always_latch and assert assign assume attribute automatic before begin bind bins binsof bit break buf bufif0 bufif1 byte case casex casez cell chandle checker class clocking cmos config const constraint context continue cover covergroup coverpoint cross deassign default defparam design disable dist do edge else end endattribute endcase endchecker endclass endclocking endconfig endfunction endgenerate endgroup endinterface endmodule endpackage endprimitive endprogram endproperty endsequence endspecify endtable endtask enum event eventually expect export extends extern final first_match for force foreach forever fork forkjoin function generate genvar global highz0 highz1 if iff ifnone ignore_bins illegal_bins implements implies import incdir include initial inout input inside instance int integer interconnect interface intersect join join_any join_none large let liblist library local localparam logic longint macromodule matches medium modport module nand negedge nettype new nexttime nmos nor noshowcancelled not notif0 notif1 null or output package packed parameter pmos posedge primitive priority program property protected pull0 pull1 pulldown pullup pulsestyle_ondetect pulsestyle_onevent pure rand randc randcase randsequence rcmos real realtime ref reg reject_on release repeat restrict return rnmos rpmos rtran rtranif0 rtranif1 scalared sequence shortint shortreal showcancelled signed small soft solve specify specparam static string strong strong0 strong1 struct super supply0 supply1 sync_accept_on sync_reject_on s_always s_eventually s_nexttime s_until s_until_with table tagged task this throughout time timeprecision timeunit tran tranif0 tranif1 tri tri0 tri1 triand trior trireg type typedef union unique unique0 unsigned until until_with untyped use var vectored virtual void wait wait_order wand weak weak0 weak1 while wildcard wire with within wor xnor xor",
+        "1": "$acos $acosh $asin $asinh $assertcontrol $assertkill $assertoff $asserton $assertpasson $assertpassoff $assertfailon $assertfailoff $assertnonvacuouson $assertvacuousoff $async$and$array $async$and$plane $async$nand$array $async$nand$plane $async$nor$array $async$nor$plane $async$or$array $async$or$plane $atan $atan2 $atanh $bits $bitstoreal $bitstoshortreal $cast $ceil $changed_gclk $changing_gclk $clog2 $comment $cos $cosh $countdrivers $countones $coverage_control $coverage_get $coverage_get_max $coverage_merge $coverage_save $date $dimensions $display $displayb $displayh $displayo $dist_chi_square $dist_erlang $dist_exponential $dist_normal $dist_poisson $dist_t $dist_uniform $dumpall $dumpfile $dumpflush $dumplimit $dumpoff $dumpon $dumpportsall $dumpportsflush $dumpportslimit $dumpportsoff $dumpportson $dumpvars $end $enddefinitions $error $exit $exp $falling_gclk $fatal $fclose $fdisplay $fdisplayb $fdisplayh $fdisplayo $fell $fell_gclk $feof $ferror $fflush $fgetc $fgets $finish $floor $fmonitor $fmonitorb $fmonitorh $fmonitoro $fopen $fread $fscanf $fseek $fstrobe $ftell $fullskew $future_gclk $fwrite $fwriteb $fwriteh $fwriteo $getpattern $get_coverage $high $history $hold $hypot $increment $incsave $info $input $isunbounded $isunknown $itor $key $left $list $ln $load_coverage_db $log $log10 $low $monitor $monitorb $monitorh $monitoro $monitoroff $monitoron $nochange $nokey $nolog $onehot $onehot0 $past $past_gclk $period $pow $printtimescale $q_add $q_exam $q_full $q_initialize $q_remove $random $readmemb $readmemh $realtime $realtobits $recovery $recrem $removal $reset $reset_count $reset_value $restart $rewind $right $rising_gclk $root $rose $rose_gclk $rtoi $sampled $save $scale $scope $setup $setuphold $set_coverage_db_name $sformat $sformatf $shortrealtobits $showscopes $showvariables $showvars $signed $sin $sinh $size $skew $sqrt $sreadmemb $sreadmemh $sscanf $stable $stable_gclk $steady_gclk $stime $stop $strobe $strobeb $strobeh $stroben $strobero $strobeh $strobeo $swrite $swriteb $swriteh $swriteo $system $tan $tanh $test $time $timeformat $timescale $type $typename $ungetc $urandom $urandom_range $value$plusargs $var $vcdclose $vcdplusfile $vcdplusmemon $vcdplusoff $vcdpluson $vcdplustrace $vcdplustraceoff $vcdplustraceon $width $write $writeb $writeh $writeo"
+      }
+    }
+  }
+}
+

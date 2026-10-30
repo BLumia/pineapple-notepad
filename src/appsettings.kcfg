@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<kcfg xmlns="http://www.kde.org/standards/kcfg/1.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.kde.org/standards/kcfg/1.0
+                        http://www.kde.org/standards/kcfg/1.0/kcfg.xsd" >
+  <kcfgfile name="pineapple-notepadrc" />
+  <include>QFontDatabase</include>
+  <group name="App">
+    <entry name="saveSessionOnClose" type="Bool" key="save-session-on-close">
+      <default>true</default>
+    </entry>
+    <entry name="backupEnabled" type="Bool" key="backup-enabled">
+      <default>true</default>
+    </entry>
+    <entry name="backupIntervalSeconds" type="Int" key="backup-interval-seconds">
+      <default>15</default>
+      <min>3</min>
+      <max>3600</max>
+    </entry>
+    <entry name="saveSessionOnBackup" type="Bool" key="save-session-on-backup">
+      <default>true</default>
+    </entry>
+    <entry name="overrideAppFont" type="Bool" key="override-app-font">
+      <default>false</default>
+    </entry>
+    <entry name="appFont" type="Font" key="app-font">
+      <default code="true">QFont()</default>
+    </entry>
+    <entry name="recentFilesMaxItems" type="Int" key="recent-files-max-items">
+      <default>10</default>
+      <min>0</min>
+      <max>99</max>
+    </entry>
+    <entry name="newTabPlacement" type="Enum" key="new-tab-placement">
+      <default>0</default>
+      <value name="AppendToEnd" value="0"/>
+      <value name="AfterCurrent" value="1"/>
+    </entry>
+    <entry name="languageMenuEntries" type="StringList" key="language-menu-entries">
+      <default></default>
+    </entry>
+    <entry name="fileStatusAutoDetection" type="Enum" key="file-status-auto-detection">
+      <default>2</default>
+      <value name="Disabled" value="0"/>
+      <value name="CurrentFile" value="1"/>
+      <value name="AllOpenedFiles" value="2"/>
+    </entry>
+    <entry name="fileChangeDetectionBackend" type="Enum" key="file-change-detection-backend">
+      <default>0</default>
+      <value name="FileSystemWatcher" value="0"/>
+      <value name="TimestampPolling" value="1"/>
+    </entry>
+    <entry name="fileUpdateSilently" type="Bool" key="file-update-silently">
+      <default>false</default>
+    </entry>
+    <entry name="fileUpdateScrollToEnd" type="Bool" key="file-update-scroll-to-end">
+      <default>false</default>
+    </entry>
+  </group>
+  <group name="Editor">
+    <entry name="tabWidth" type="int">
+      <default>4</default>
+    </entry>
+    <entry name="editorFont" type="Font" key="editor-font">
+      <default code="true">QFontDatabase::systemFont(QFontDatabase::FixedFont)</default>
+    </entry>
+    <entry name="editorTheme" type="String" key="editor-theme-name">
+      <default>auto</default>
+    </entry>
+    <entry name="verticalEdgeEnabled" type="Bool" key="vertical-edge-enabled">
+      <default>false</default>
+    </entry>
+    <entry name="verticalEdgeColumn" type="int" key="vertical-edge-column">
+      <default>80</default>
+    </entry>
+    <entry name="wordWrapEnabled" type="Bool" key="word-wrap-enabled">
+      <default>false</default>
+    </entry>
+    <entry name="wrapMode" type="Enum" key="wrap-mode">
+      <default>1</default>
+      <value name="Disabled" value="1"/>
+      <value name="Word" value="1"/>
+      <value name="Character" value="2"/>
+      <value name="Whitespace" value="3"/>
+    </entry>
+    <entry name="wrapIndentMode" type="Enum" key="wrap-indent-mode">
+      <default>0</default>
+      <value name="Fixed" value="0"/>
+      <value name="Same" value="1"/>
+      <value name="Indent" value="2"/>
+      <value name="DeepIndent" value="3"/>
+    </entry>
+    <entry name="wrapSymbolEnabled" type="Bool" key="wrap-symbol-enabled">
+      <default>false</default>
+    </entry>
+    <entry name="whitespaceVisible" type="Bool" key="whitespace-visible">
+      <default>false</default>
+    </entry>
+    <entry name="showSpaceAndTab" type="Bool" key="show-space-and-tab">
+      <default>false</default>
+    </entry>
+    <entry name="showEndOfLine" type="Bool" key="show-end-of-line">
+      <default>false</default>
+    </entry>
+    <entry name="showNonPrintingCharacters" type="Bool" key="show-non-printing-characters">
+      <default>false</default>
+    </entry>
+    <entry name="indentGuidesEnabled" type="Bool" key="indent-guides-enabled">
+      <default>true</default>
+    </entry>
+    <entry name="changeHistoryEnabled" type="Bool" key="change-history-enabled">
+      <default>true</default>
+    </entry>
+    <entry name="showLineNumbers" type="Bool" key="show-line-numbers">
+      <default>true</default>
+    </entry>
+    <entry name="useNativeFileDialog" type="Bool" key="use-native-file-dialog">
+      <default>true</default>
+    </entry>
+    <entry name="autoIndentMode" type="Enum" key="auto-indent-mode">
+      <default>2</default>
+      <value name="None" value="0"/>
+      <value name="Basic" value="1"/>
+      <value name="Advanced" value="2"/>
+    </entry>
+    <entry name="indentUseTabs" type="Bool" key="indent-use-tabs">
+      <default>false</default>
+    </entry>
+    <entry name="backspaceUnindent" type="Bool" key="backspace-unindent">
+      <default>true</default>
+    </entry>
+    <entry name="multiSelection" type="Bool" key="multi-selection">
+      <default>true</default>
+    </entry>
+    <entry name="columnSel2MultiEdit" type="Bool" key="column-sel-2-multi-edit">
+      <default>true</default>
+    </entry>
+    <entry name="smartHighlightEnabled" type="Bool" key="smart-highlight-enabled">
+      <default>true</default>
+    </entry>
+    <entry name="smartHighlightMatchCase" type="Bool" key="smart-highlight-match-case">
+      <default>true</default>
+    </entry>
+    <entry name="smartHighlightWholeWord" type="Bool" key="smart-highlight-whole-word">
+      <default>true</default>
+    </entry>
+    <entry name="findResultHighlightEnabled" type="Bool" key="find-result-highlight-enabled">
+      <default>true</default>
+    </entry>
+    <entry name="tagMatchHighlightEnabled" type="Bool" key="tag-match-highlight-enabled">
+      <default>true</default>
+    </entry>
+    <entry name="tagMatchHighlightAttributes" type="Bool" key="tag-match-highlight-attributes">
+      <default>true</default>
+    </entry>
+    <entry name="newDocumentEolMode" type="Enum" key="new-document-eol-mode">
+      <default>2</default>
+      <value name="CRLF" value="0"/>
+      <value name="CR" value="1"/>
+      <value name="LF" value="2"/>
+    </entry>
+    <entry name="autoCompletionEnabled" type="Bool" key="auto-completion-enabled">
+      <default>true</default>
+    </entry>
+    <entry name="autoCompletionTriggerLength" type="Int" key="auto-completion-trigger-length">
+      <default>1</default>
+      <min>1</min>
+      <max>9</max>
+    </entry>
+    <entry name="autoCompletionIgnoreNumbers" type="Bool" key="auto-completion-ignore-numbers">
+      <default>true</default>
+    </entry>
+    <entry name="autoCompletionBrief" type="Bool" key="auto-completion-brief">
+      <default>true</default>
+    </entry>
+    <entry name="monitorAlwaysScrollToEnd" type="Bool" key="monitor-always-scroll-to-end">
+      <default>false</default>
+    </entry>
+    <entry name="scrollBeyondLastLine" type="Bool" key="scroll-beyond-last-line">
+      <default>true</default>
+    </entry>
+    <entry name="urlScanEnabled" type="Bool" key="url-scan-enabled">
+      <default>true</default>
+    </entry>
+  </group>
+  <group name="Search">
+    <entry name="searchResultMaxLineLength" type="Int" key="search-result-max-line-length">
+      <default>250</default>
+      <min>50</min>
+      <max>10000</max>
+    </entry>
+    <entry name="searchResultOneEntryPerLine" type="Bool" key="search-result-one-entry-per-line">
+      <default>true</default>
+    </entry>
+    <entry name="searchResultWordWrap" type="Bool" key="search-result-word-wrap">
+      <default>false</default>
+    </entry>
+    <entry name="fillFindFieldWithSelection" type="Bool" key="fill-find-field-with-selection">
+      <default>true</default>
+    </entry>
+    <entry name="fillFindFieldMaxChars" type="Int" key="fill-find-field-max-chars">
+      <default>1024</default>
+      <min>0</min>
+      <max>1000000</max>
+    </entry>
+    <entry name="fillFindFieldWithWordAtCaret" type="Bool" key="fill-find-field-with-word-at-caret">
+      <default>true</default>
+    </entry>
+    <entry name="fillDirFieldFromDocument" type="Bool" key="fill-dir-field-from-document">
+      <default>false</default>
+    </entry>
+    <entry name="markAllCaseSensitive" type="Bool" key="mark-all-case-sensitive">
+      <default>false</default>
+    </entry>
+    <entry name="markAllWordOnly" type="Bool" key="mark-all-word-only">
+      <default>true</default>
+    </entry>
+  </group>
+  <group name="License">
+    <entry name="isActivated" type="Bool" key="is-activated">
+      <default>false</default>
+    </entry>
+    <entry name="licenseContent" type="String" key="license-content">
+      <default></default>
+    </entry>
+  </group>
+</kcfg>

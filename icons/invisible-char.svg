@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg width="100%" height="100%" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" xmlns:serif="http://www.serif.com/" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:2;">
+  <defs id="defs3051">
+    <style type="text/css" id="current-color-scheme">
+      .ColorScheme-Text {
+        color:#232629;
+      }
+      </style>
+  </defs>
+    <g transform="matrix(1.16667,0,0,1,-2,0)">
+        <path
+			style="fill:currentColor;fill-opacity:1;stroke:none" 
+			d="M9.429,11C7.773,11 6,9.432 6,7.5C6,5.568 7.344,4 9,4L15.429,4L15.429,20L12.857,20L12.857,5L12,5L12,20L9.429,20L9.429,11Z"
+			class="ColorScheme-Text"
+		/>
+    </g>
+</svg>

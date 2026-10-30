@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>FindInFinderDialog</class>
+ <widget class="QDialog" name="FindInFinderDialog">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>360</width>
+    <height>240</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Find in These Search Results</string>
+  </property>
+  <layout class="QVBoxLayout" name="verticalLayout">
+   <item>
+    <layout class="QFormLayout" name="findWhatForm">
+     <item row="0" column="0">
+      <widget class="QLabel" name="findWhatLabel">
+       <property name="text">
+        <string>Find what:</string>
+       </property>
+      </widget>
+     </item>
+     <item row="0" column="1">
+      <widget class="QComboBox" name="findWhatCombo">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="editable">
+        <bool>true</bool>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+   <item>
+    <widget class="QGroupBox" name="optionsGroup">
+     <property name="title">
+      <string>Options</string>
+     </property>
+     <layout class="QVBoxLayout" name="optionsLayout">
+      <item>
+       <widget class="QCheckBox" name="matchCaseCheck">
+        <property name="text">
+         <string>Match case</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QCheckBox" name="wholeWordCheck">
+        <property name="text">
+         <string>Match whole word only</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QCheckBox" name="matchLineNumberCheck">
+        <property name="checked">
+         <bool>true</bool>
+        </property>
+        <property name="toolTip">
+         <string>Only keep matches located on lines that already appear in the current search results, so the new term is combined with the previous one line by line. Uncheck to re-run the search on the whole files.</string>
+        </property>
+        <property name="text">
+         <string>Search only in found lines</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </item>
+   <item>
+    <widget class="QGroupBox" name="modeGroup">
+     <property name="title">
+      <string>Search Mode</string>
+     </property>
+     <layout class="QVBoxLayout" name="modeLayout">
+      <item>
+       <widget class="QRadioButton" name="modeNormalRadio">
+        <property name="text">
+         <string>Normal</string>
+        </property>
+        <property name="checked">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QRadioButton" name="modeExtendedRadio">
+        <property name="text">
+         <string>Extended (\n, \r, \t, \0, \x...)</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QRadioButton" name="modeRegexRadio">
+        <property name="text">
+         <string>Regular expression</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </item>
+   <item>
+    <widget class="QDialogButtonBox" name="buttonBox">
+     <property name="orientation">
+      <enum>Qt::Horizontal</enum>
+     </property>
+     <property name="standardButtons">
+      <set>QDialogButtonBox::Cancel|QDialogButtonBox::Ok</set>
+     </property>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <resources/>
+ <connections>
+  <connection>
+   <sender>buttonBox</sender>
+   <signal>accepted()</signal>
+   <receiver>FindInFinderDialog</receiver>
+   <slot>accept()</slot>
+  </connection>
+  <connection>
+   <sender>buttonBox</sender>
+   <signal>rejected()</signal>
+   <receiver>FindInFinderDialog</receiver>
+   <slot>reject()</slot>
+  </connection>
+ </connections>
+</ui>

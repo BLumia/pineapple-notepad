@@ -1,0 +1,98 @@
+version: "1"
+
+package:
+  id: net.blumia.pineapple-notepad
+  name: Pineapple Notepad
+  version: 1.5.0.0
+  kind: app
+  description: |
+    A Scintilla-based, cross-platform text editor.
+
+base: org.deepin.base/25.2.2
+runtime: org.deepin.runtime.dtk/25.2.2
+
+command:
+  - /opt/apps/net.blumia.pineapple-notepad/files/bin/pnotepad
+
+build: |
+  set -e
+
+  # Workaround: deepin base image has stale statoverride entries referencing
+  # removed groups (ssl-cert, messagebus, ...), which makes dpkg fail.
+  # Clear them all since they're irrelevant in a build container.
+  if [ -f /var/lib/dpkg/statoverride ]; then
+    cp /var/lib/dpkg/statoverride /var/lib/dpkg/statoverride.bak
+    : > /var/lib/dpkg/statoverride
+  fi
+
+  # Install build and runtime dependencies from deepin 25 repos
+  apt-get update
+  DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends \
+    build-essential cmake ninja-build pkg-config git python3 \
+    extra-cmake-modules \
+    qt6-base-dev qt6-base-dev-tools qt6-tools-dev qt6-l10n-tools qt6-5compat-dev \
+    libkf6coreaddons-dev libkf6i18n-dev libkf6xmlgui-dev \
+    libkf6configwidgets-dev libkf6iconthemes-dev libkf6codecs-dev \
+    libkf6widgetsaddons-dev libkf6syntaxhighlighting-dev \
+    libkf6sonnet-dev \
+    libkf6coreaddons6 libkf6i18n6 libkf6xmlgui6 \
+    libkf6configwidgets6 libkf6iconthemes6 libkf6iconthemes-bin libkf6codecs6 \
+    libkf6widgetsaddons6 libkf6syntaxhighlighting6 libkf6sonnetcore6 libkf6sonnetui6 \
+    kde-style-breeze breeze-icon-theme sonnet6-plugins \
+    hunspell-en-us
+
+  cd /project
+  # Offline archives under offline/ are consumed automatically by CMake
+  # (cmake/PnDependencies.cmake) when present.
+  cmake -B ll-build -G Ninja \
+    -DCMAKE_BUILD_TYPE=Release \
+    -DCMAKE_INSTALL_PREFIX=$PREFIX \
+    -DCMAKE_INSTALL_LIBDIR=lib
+  cmake --build ll-build -j$(nproc)
+  cmake --install ll-build
+
+  # Bundle all KF6 runtime libraries into $PREFIX (not available in deepin runtime)
+  # Copy both real files and symlinks, preserving the symlink structure.
+  # Also copy Kirigami and other libs needed by breeze style plugin.
+  cd /usr/lib/x86_64-linux-gnu
+  cp -a libKF6*.so.* libKirigami*.so.* $PREFIX/lib/
+  # Backend libraries the Sonnet plugins (sonnet_hunspell.so & friends in
+  # kf6/sonnet) link against. libKF6* glob does not cover these, and the
+  # deepin runtime has no KF6/hunspell stack at all.
+  cp -a libhunspell*.so.* libaspell*.so.* libvoikko*.so.* libhfstospell*.so.* $PREFIX/lib/ 2>/dev/null || true
+  cd /project
+
+  # Bundle KF6 Qt plugins into $PREFIX (icon engine, breeze style, etc.)
+  # The deepin runtime has NO KF6 plugins at all - without these, KIconLoader
+  # cannot render icons and the breeze widget style is unavailable.
+  QT6_PLUGINS=/usr/lib/x86_64-linux-gnu/qt6/plugins
+  mkdir -p $PREFIX/lib/qt6/plugins
+  for dir in iconengines styles platformthemes imageformats kiconthemes6 kf6/sonnet; do
+    if [ -d "$QT6_PLUGINS/$dir" ]; then
+      mkdir -p "$PREFIX/lib/qt6/plugins/$dir"
+      cp -a "$QT6_PLUGINS/$dir/"* "$PREFIX/lib/qt6/plugins/$dir/" 2>/dev/null || true
+    fi
+  done
+
+  # Hunspell dictionaries for the Sonnet spell checker; discovered at runtime
+  # through XDG_DATA_DIRS pointing at $PREFIX/share (see the launcher wrapper).
+  mkdir -p $PREFIX/share
+  cp -a /usr/share/hunspell $PREFIX/share/ 2>/dev/null || true
+  cp -a /usr/share/myspell $PREFIX/share/ 2>/dev/null || true
+
+  # KF6 runtime data (syntax definitions, config schemas, translations)
+  cp -a /usr/share/KF6 $PREFIX/share/ 2>/dev/null || true
+  mkdir -p $PREFIX/share/locale/zh_CN/LC_MESSAGES
+  cp -a /usr/share/locale/zh_CN/LC_MESSAGES/*.mo $PREFIX/share/locale/zh_CN/LC_MESSAGES/ 2>/dev/null || true
+
+  # Bundle breeze icon theme into $PREFIX for runtime use
+  mkdir -p $PREFIX/share/icons
+  cp -a /usr/share/icons/breeze* $PREFIX/share/icons/ 2>/dev/null || true
+
+  # Create a launcher wrapper that prepends our plugin dir to QT_PLUGIN_PATH.
+  # The linglong runtime only sets QT_PLUGIN_PATH to the runtime's Qt6 plugins
+  # (/runtime/lib/.../qt6/plugins); our KF6 plugins in $PREFIX won't be found
+  # unless we explicitly add them here.
+  mv $PREFIX/bin/pnotepad $PREFIX/bin/pnotepad-bin
+  printf '#!/bin/bash\nAPP_DIR="/opt/apps/${LINGLONG_APPID}/files"\nexport QT_PLUGIN_PATH="${APP_DIR}/lib/qt6/plugins:${QT_PLUGIN_PATH}"\nexport XDG_DATA_DIRS="${APP_DIR}/share:${XDG_DATA_DIRS}"\nexec "${APP_DIR}/bin/pnotepad-bin" "$@"\n' > $PREFIX/bin/pnotepad
+  chmod +x $PREFIX/bin/pnotepad

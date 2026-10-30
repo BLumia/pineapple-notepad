@@ -1,0 +1,140 @@
+# zh_CN translations for pineapple-notepad package.
+# This file is distributed under the same license as the pineapple-notepad package.
+#
+
+msgid ""
+msgstr ""
+"Project-Id-Version: pineapple-notepad\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-09-13 19:02+0800\n"
+"PO-Revision-Date: 2026-09-13 19:02+0800\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: src/pineapple-notepadui.rc
+msgid "Favo&rites"
+msgstr "收藏夹(&R)"
+
+#: src/pineapple-notepadui.rc
+msgid "Export"
+msgstr "导出"
+
+#: src/pineapple-notepadui.rc
+msgid "Copy to Clipboard"
+msgstr "复制到剪贴板"
+
+#: src/pineapple-notepadui.rc
+msgid "Indent"
+msgstr "缩进"
+
+#: src/pineapple-notepadui.rc
+msgid "Convert Case to"
+msgstr "转换大小写"
+
+#: src/pineapple-notepadui.rc
+msgid "Line Operations"
+msgstr "行操作"
+
+#: src/pineapple-notepadui.rc
+msgid "Comment/Uncomment"
+msgstr "注释/取消注释"
+
+#: src/pineapple-notepadui.rc
+msgid "EOL Conversion"
+msgstr "文档格式转换"
+
+#: src/pineapple-notepadui.rc
+msgid "Blank Operations"
+msgstr "空白字符操作"
+
+#: src/pineapple-notepadui.rc
+msgid "&Search"
+msgstr "搜索(&S)"
+
+#: src/pineapple-notepadui.rc
+msgid "Change &History"
+msgstr "变更记录(&H)"
+
+#: src/pineapple-notepadui.rc
+msgid "Style &All Occurrences of Token"
+msgstr "用样式标记全部(&A)"
+
+#: src/pineapple-notepadui.rc
+msgid "Style &One Token"
+msgstr "用样式标记选定的文本(&O)"
+
+#: src/pineapple-notepadui.rc
+msgid "Clear St&yle"
+msgstr "清除样式标记(&Y)"
+
+#: src/pineapple-notepadui.rc
+msgid "Jump &Up"
+msgstr "到上一个样式标记(&U)"
+
+#: src/pineapple-notepadui.rc
+msgid "Jump &Down"
+msgstr "到下一个样式标记(&D)"
+
+#: src/pineapple-notepadui.rc
+msgid "&Copy Styled Text"
+msgstr "复制样式标记文本(&C)"
+
+#: src/pineapple-notepadui.rc
+msgid "&Bookmark"
+msgstr "书签(&B)"
+
+#: src/pineapple-notepadui.rc
+msgid "Show Symbol"
+msgstr "显示符号"
+
+#: src/pineapple-notepadui.rc
+msgid "&Zoom"
+msgstr "缩放(&Z)"
+
+#: src/pineapple-notepadui.rc
+msgid "&Tab"
+msgstr "标签页(&T)"
+
+#: src/pineapple-notepadui.rc
+msgid "E&ncoding"
+msgstr "编码(&N)"
+
+#: src/pineapple-notepadui.rc
+msgid "&Language"
+msgstr "语言(&L)"
+
+#: src/pineapple-notepadui.rc
+msgid "User Defined Language"
+msgstr "用户自定义语言"
+
+#: src/pineapple-notepadui.rc
+msgid "T&ools"
+msgstr "工具(&O)"
+
+#: src/pineapple-notepadui.rc
+msgid "Base64"
+msgstr "Base64 编解码"
+
+#: src/pineapple-notepadui.rc
+msgid "URL Encode/Decode"
+msgstr "URL 编解码"
+
+#: src/pineapple-notepadui.rc
+msgid "HEX Converter"
+msgstr "十六进制转换"
+
+#: src/pineapple-notepadui.rc
+msgid "M&acro"
+msgstr "宏(&M)"
+
+#: src/pineapple-notepadui.rc
+msgid "&Run"
+msgstr "运行(&R)"
+
+#: src/pineapple-notepadui.rc
+msgid "Main Toolbar"
+msgstr "主工具栏"

@@ -1,0 +1,383 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+DTD: https://github.com/KDE/kxmlgui/blob/master/src/kpartgui.dtd
+Template: https://github.com/KDE/kxmlgui/blob/master/src/ui_standards.rc
+-->
+<gui name="pineapple-notepad"
+     version="15"
+     xmlns="http://www.kde.org/standards/kxmlgui/1.0"
+     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+     xsi:schemaLocation="http://www.kde.org/standards/kxmlgui/1.0
+                         http://www.kde.org/standards/kxmlgui/1.0/kxmlgui.xsd">
+  <MenuBar>
+    <Menu name="file">
+      <Action name="file_restore_recently_closed" append="open_merge"/>
+      <Action name="file_open_folder_workspace" append="open_merge"/>
+      <Menu name="favorites" icon="favorite" append="open_merge"><text>Favo&amp;rites</text>
+        <Action name="file_toggle_favorite"/>
+        <Separator/>
+        <ActionList name="favorites_list"/>
+        <Action name="favorites_manage"/>
+      </Menu>
+      <Menu name="export" icon="document-export" append="save_merge"><text>Export</text>
+        <Action name="file_export_rtf"/>
+        <Action name="file_export_html"/>
+      </Menu>
+    </Menu>
+    <Menu name="edit" noMerge="1">
+      <text translationDomain="kxmlgui6">&amp;Edit</text>
+      <Action name="edit_undo"/>
+      <Action name="edit_redo"/>
+      <MergeLocal name="edit_undo_merge"/>
+      <Separator/>
+      <Action name="edit_cut"/>
+      <Action name="edit_copy"/>
+      <Action name="edit_paste"/>
+      <MergeLocal name="edit_paste_merge"/>
+      <Action name="edit_delete"/>
+      <Action name="edit_clear"/>
+      <Action name="edit_select_all"/>
+      <Action name="edit_deselect"/>
+      <Action name="edit_begin_end_select"/>
+      <Action name="edit_begin_end_select_column_mode"/>
+      <Action name="edit_column_select_mode"/>
+      <Separator/>
+      <Menu name="copy_to_clipboard"><text>Copy to Clipboard</text>
+        <Action name="copy_current_file_path" />
+        <Action name="copy_current_file_name" />
+        <Action name="copy_current_dir_path" />
+        <Separator/>
+        <Action name="copy_all_file_names" />
+        <Action name="copy_all_file_paths" />
+        <Separator/>
+        <Action name="copy_as_html" />
+        <Action name="copy_as_rtf" />
+        <Action name="copy_all_formats" />
+      </Menu>
+      <Menu name="indent">
+        <text>Indent</text>
+        <Action name="increase_indent"/>
+        <Action name="decrease_indent"/>
+      </Menu>
+      <Menu name="convert_case"><text>Convert Case to</text>
+        <Action name="convert_to_upper_case" />
+        <Action name="convert_to_lower_case" />
+        <Action name="convert_to_proper_case" />
+        <Action name="convert_to_proper_case_blend" />
+        <Action name="convert_to_sentence_case" />
+        <Action name="convert_to_sentence_case_blend" />
+        <Action name="convert_to_invert_case" />
+        <Action name="convert_to_random_case" />
+      </Menu>
+      <Menu name="line_operations">
+        <text>Line Operations</text>
+        <Action name="duplicate_current_line"/>
+        <Action name="remove_any_dup_lines"/>
+        <Action name="remove_consecutive_dup_lines"/>
+        <Action name="split_lines"/>
+        <Action name="join_lines"/>
+        <Action name="move_line_up"/>
+        <Action name="move_line_down"/>
+        <Action name="remove_empty_lines"/>
+        <Action name="remove_empty_lines_with_blank"/>
+        <Action name="insert_empty_line_above"/>
+        <Action name="insert_empty_line_below"/>
+        <Action name="reverse_lines"/>
+        <Action name="randomize_lines"/>
+        <Separator/>
+        <Action name="sort_lines_asc"/>
+        <Action name="sort_lines_desc"/>
+      </Menu>
+      <Menu name="comment">
+        <text>Comment/Uncomment</text>
+        <Action name="toggle_comment" />
+        <Action name="toggle_line_comment" />
+        <Action name="toggle_stream_comment" />
+      </Menu>
+      <Menu name="eol_conversion">
+        <text>EOL Conversion</text>
+        <Action name="eol_convert_to_crlf"/>
+        <Action name="eol_convert_to_lf"/>
+        <Action name="eol_convert_to_cr"/>
+      </Menu>
+      <Menu name="blank_operations">
+        <text>Blank Operations</text>
+        <Action name="trim_trailing_space"/>
+        <Action name="trim_leading_space"/>
+        <Action name="trim_trailing_leading_space"/>
+        <Action name="eol_to_space"/>
+        <Separator/>
+        <Action name="tab_to_space_all"/>
+        <Action name="tab_to_space_leading"/>
+        <Action name="space_to_tab_all"/>
+        <Action name="space_to_tab_leading"/>
+      </Menu>
+      <Separator/>
+      <Action name="column_mode_hint" />
+      <Action name="character_selector" />
+      <Separator/>
+      <Action name="toggle_read_only" />
+    </Menu>
+    <Menu name="search"><text>&amp;Search</text>
+      <Action name="edit_find" />
+      <Action name="edit_find_next" />
+      <Action name="edit_find_prev" />
+      <Action name="quick_find_next" />
+      <Action name="quick_find_previous" />
+      <Action name="edit_replace" />
+      <Action name="find_in_files" />
+      <Action name="go_to" />
+      <Action name="search_mark" />
+      <Separator/>
+      <Action name="toggle_search_results" />
+      <Separator/>
+      <Menu name="change_history"><text>Change &amp;History</text>
+        <Action name="change_next" />
+        <Action name="change_previous" />
+        <Separator/>
+        <Action name="change_clear" />
+      </Menu>
+      <Separator/>
+      <Menu name="mark_style_all"><text>Style &amp;All Occurrences of Token</text>
+        <Action name="mark_style_all_1" />
+        <Action name="mark_style_all_2" />
+        <Action name="mark_style_all_3" />
+        <Action name="mark_style_all_4" />
+        <Action name="mark_style_all_5" />
+      </Menu>
+      <Menu name="mark_style_one"><text>Style &amp;One Token</text>
+        <Action name="mark_style_one_1" />
+        <Action name="mark_style_one_2" />
+        <Action name="mark_style_one_3" />
+        <Action name="mark_style_one_4" />
+        <Action name="mark_style_one_5" />
+      </Menu>
+      <Menu name="mark_clear_style"><text>Clear St&amp;yle</text>
+        <Action name="mark_clear_style_1" />
+        <Action name="mark_clear_style_2" />
+        <Action name="mark_clear_style_3" />
+        <Action name="mark_clear_style_4" />
+        <Action name="mark_clear_style_5" />
+        <Separator/>
+        <Action name="mark_clear_all_styles" />
+      </Menu>
+      <Menu name="mark_jump_up"><text>Jump &amp;Up</text>
+        <Action name="mark_jump_up_1" />
+        <Action name="mark_jump_up_2" />
+        <Action name="mark_jump_up_3" />
+        <Action name="mark_jump_up_4" />
+        <Action name="mark_jump_up_5" />
+      </Menu>
+      <Menu name="mark_jump_down"><text>Jump &amp;Down</text>
+        <Action name="mark_jump_down_1" />
+        <Action name="mark_jump_down_2" />
+        <Action name="mark_jump_down_3" />
+        <Action name="mark_jump_down_4" />
+        <Action name="mark_jump_down_5" />
+      </Menu>
+      <Menu name="mark_copy_styled"><text>&amp;Copy Styled Text</text>
+        <Action name="mark_copy_styled_1" />
+        <Action name="mark_copy_styled_2" />
+        <Action name="mark_copy_styled_3" />
+        <Action name="mark_copy_styled_4" />
+        <Action name="mark_copy_styled_5" />
+        <Separator/>
+        <Action name="mark_copy_all_styled" />
+      </Menu>
+      <Separator/>
+      <Menu name="bookmark" icon="bookmark-toolbar"><text>&amp;Bookmark</text>
+        <Action name="bookmark_toggle" />
+        <Action name="bookmark_next" />
+        <Action name="bookmark_previous" />
+        <Action name="bookmark_clear_all" />
+        <Separator/>
+        <Action name="bookmark_cut_lines" />
+        <Action name="bookmark_copy_lines" />
+        <Action name="bookmark_paste_to_lines" />
+        <Action name="bookmark_remove_lines" />
+        <Action name="bookmark_remove_unmarked_lines" />
+        <Action name="bookmark_inverse" />
+      </Menu>
+    </Menu>
+    <Menu name="view" noMerge="1">
+      <text translationDomain="kxmlgui6">&amp;View</text>
+      <Action name="toggle_always_on_top" />
+      <Separator/>
+      <Action name="toggle_vertical_edge" />
+      <Action name="toggle_spell_check" />
+      <Menu><text>Show Symbol</text>
+        <Action name="toggle_show_space_and_tab" />
+        <Action name="toggle_show_end_of_line" />
+        <Action name="toggle_show_non_printing_characters" />
+        <Action name="toggle_show_all_characters" />
+        <Separator/>
+        <Action name="toggle_indent_guide" />
+        <Action name="toggle_wrap_symbol" />
+      </Menu>
+      <Menu><text>&amp;Zoom</text>
+        <Action name="view_zoom_in"/>
+        <Action name="view_zoom_out"/>
+        <Action name="zoom_reset"/>
+      </Menu>
+      <Menu><text>&amp;Tab</text>
+        <Action name="tab_goto_1" />
+        <Action name="tab_goto_2" />
+        <Action name="tab_goto_3" />
+        <Action name="tab_goto_4" />
+        <Action name="tab_goto_5" />
+        <Action name="tab_goto_6" />
+        <Action name="tab_goto_7" />
+        <Action name="tab_goto_8" />
+        <Action name="tab_goto_9" />
+        <Separator/>
+        <Action name="tab_next" />
+        <Action name="tab_prev" />
+        <Separator/>
+        <Action name="view_lru_document_next" />
+      </Menu>
+      <Action name="toggle_wrap_mode" />
+      <Action name="hide_lines" />
+      <Separator/>
+      <Action name="fold_all" />
+      <Action name="unfold_all" />
+      <Action name="fold_current_level" />
+      <Action name="unfold_current_level" />
+      <Separator/>
+      <Action name="summary" />
+      <Separator/>
+      <Action name="toggle_folder_workspace" />
+      <Action name="toggle_document_map" />
+      <Action name="toggle_document_list" />
+      <Separator/>
+      <Action name="toggle_monitoring" />
+    </Menu>
+    <Menu name="encoding"><text>E&amp;ncoding</text>
+      <ActionList name="open_with_encoding_list" />
+      <Separator/>
+      <ActionList name="convert_to_encoding_list" />
+    </Menu>
+    <Menu name="language"><text>&amp;Language</text>
+      <Action name="lexer_none" />
+      <Separator/>
+      <ActionList name="lexer_group_list" />
+      <Separator/>
+      <Action name="language_select" />
+      <Menu><text>User Defined Language</text>
+        <Action name="user_language_new"/>
+        <Action name="manage_languages"/>
+        <Action name="open_ksh_user_definition_folder"/>
+      </Menu>
+    </Menu>
+    <Menu name="settings">
+      <Action name="style_menu" />
+      <Action name="colorscheme_menu" />
+      <Action name="settings_configure_editor_popup" append="configure_merge" />
+    </Menu>
+    <menu name="tools"><text>T&amp;ools</text>
+      <Menu name="base64_tools"><text>Base64</text>
+        <Action name="tools_base64_encode" />
+        <Action name="tools_base64_encode_pad" />
+        <Action name="tools_base64_encode_eol" />
+        <Action name="tools_base64_encode_byline" />
+        <Separator/>
+        <Action name="tools_base64_decode" />
+        <Action name="tools_base64_decode_strict" />
+        <Action name="tools_base64_decode_byline" />
+      </Menu>
+      <Menu name="url_tools"><text>URL Encode/Decode</text>
+        <Action name="tools_url_encode_rfc1738" />
+        <Action name="tools_url_encode_rfc1738_byline" />
+        <Action name="tools_url_encode_extended" />
+        <Action name="tools_url_encode_extended_byline" />
+        <Action name="tools_url_encode_full" />
+        <Action name="tools_url_encode_full_byline" />
+        <Separator/>
+        <Action name="tools_url_decode" />
+      </Menu>
+      <Menu name="hex_tools"><text>HEX Converter</text>
+        <Action name="tools_hex_encode" />
+        <Action name="tools_hex_encode_space" />
+        <Separator/>
+        <Action name="tools_hex_decode" />
+      </Menu>
+    </menu>
+    <menu name="macro"><text>M&amp;acro</text>
+      <Action name="macro_record_start" />
+      <Action name="macro_record_stop" />
+      <Action name="macro_play" />
+      <Action name="macro_repeat" />
+      <Action name="macro_save" />
+      <Action name="macro_manage" />
+      <Separator/>
+      <ActionList name="saved_macro_list" />
+    </menu>
+    <Menu name="run"><text>&amp;Run</text>
+      <Action name="run_dialog" />
+    </Menu>
+    <Menu name="help" noMerge="1"><text translationDomain="kxmlgui6">&amp;Help</text>
+      <Action name="help_whats_this"/>
+      <Action name="open_kcommand_bar"/>
+      <Separator/>
+      <MergeLocal/>
+      <Action name="help_report_bug"/>
+      <Separator/>
+      <Action name="help_sponsor"/>
+      <Separator/>
+      <Action name="help_about_app"/>
+    </Menu>
+  </MenuBar>
+  <Menu name="editor_popup" noMerge="1">
+    <Action name="edit_undo"/>
+    <Action name="edit_redo"/>
+    <Separator/>
+    <Action name="edit_cut"/>
+    <Action name="edit_copy"/>
+    <Action name="edit_paste"/>
+    <Action name="edit_delete"/>
+    <Separator/>
+    <Action name="edit_select_all"/>
+    <Action name="edit_column_select_mode"/>
+  </Menu>
+  <ToolBar name="mainToolBar" iconText="icononly" noMerge="1">
+    <text>Main Toolbar</text>
+    <Action name="file_new"/>
+    <Action name="file_open"/>
+    <Action name="file_save"/>
+    <Action name="file_save_all"/>
+    <Action name="file_close"/>
+    <Action name="file_close_all"/>
+    <Action name="file_print"/>
+    <Separator/>
+    <Action name="edit_cut"/>
+    <Action name="edit_copy"/>
+    <Action name="edit_paste"/>
+    <Separator/>
+    <Action name="edit_undo"/>
+    <Action name="edit_redo"/>
+    <Separator/>
+    <Action name="edit_find"/>
+    <Action name="edit_replace"/>
+    <Separator/>
+    <Action name="view_zoom_in"/>
+    <Action name="view_zoom_out"/>
+    <Separator/>
+    <Action name="toggle_wrap_mode" />
+    <Action name="toggle_show_all_characters" />
+    <Action name="toggle_indent_guide" />
+    <Action name="toggle_spell_check" />
+    <Separator/>
+    <Action name="toggle_document_map" />
+    <Action name="toggle_document_list" />
+    <Action name="toggle_folder_workspace" />
+    <Separator/>
+    <Action name="toggle_monitoring" />
+    <Separator/>
+    <Action name="macro_record_start" />
+    <Action name="macro_record_stop" />
+    <Action name="macro_play" />
+    <Action name="macro_repeat" />
+    <Action name="macro_save" />
+    <Spacer/>
+    <Action name="hamburger_menu" />
+  </ToolBar>
+</gui>

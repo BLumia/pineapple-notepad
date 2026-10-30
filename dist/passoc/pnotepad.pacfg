@@ -1,0 +1,67 @@
+targetApp=pnotepad.exe
+friendlyAppName=Pineapple Notepad
+friendlyAppName[zh_CN]=菠萝记事本
+openCommand="\"{targetAppFullPath}\" \"%1\""
+
+[ProgId/txt]
+name=Text File
+name[zh_CN]=文本文档
+extensions=txt
+
+[ProgId/markdown]
+name=Markdown
+extensions=md,markdown
+icon=icons/md.ico
+
+[ProgId/cpp]
+name=C/C++ Source File
+name[zh_CN]=C/C++ 源文件
+extensions=c,cpp,cxx,h,hpp,hxx
+
+[ProgId/shell]
+name=Shell Script
+name=Shell 脚本
+extensions=sh,bash,zsh
+icon=icons/generic-script.ico
+
+[ProgId/js]
+name=JavaScript
+extensions=js,mjs
+icon=icons/generic-src.ico
+
+[ProgId/html]
+name=Hyper Text Markup Language
+name[zh_CN]=超文本标记语言
+extensions=htm,html,xhtml
+icon=icons/generic-xml.ico
+
+[ProgId/json]
+name=JavaScript Object Notation
+name[zh_CN]=JavaScript 对象表示法
+extensions=json,jsonc,jsonl,resjson
+
+[ProgId/yaml]
+name=YAML Ain't Markup Language
+extensions=yml,yaml
+
+[ProgId/toml]
+name=Tom's Obvious Minimal Language
+extensions=toml
+
+[ProgId/ini]
+name=INI File
+name[zh_CN]=INI 文件
+extensions=ini
+icon=icons/generic-text.ico
+
+[ProgId/cfg]
+name=Config File
+name[zh_CN]=配置文件
+extensions=cfg
+icon=icons/generic-text.ico
+
+[ContextMenu/editWithPineappleNotepad]
+name=Edit with Pineapple Notepad
+name[zh_CN]=使用 Pineapple Notepad 编辑
+target=*
+command="\"{targetAppFullPath}\" \"%1\""

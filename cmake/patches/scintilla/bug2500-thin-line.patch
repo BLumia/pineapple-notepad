@@ -1,0 +1,27 @@
+--- a/src/EditView.cxx
++++ b/src/EditView.cxx
+@@ -2505,6 +2505,7 @@ void EditView::PaintText(Surface *surfaceWindow, const EditModel &model, const V
+ 			rcClipText.left -= leftTextOverlap;
+ 			surfaceWindow->SetClip(rcClipText);
+ 		}
++		surface->FillRectangle(rcTextArea, Fill(vsDraw.styles[StyleDefault].back));
+ 
+ 		// Loop on visible lines
+ #if defined(TIME_PAINTING)
+--- a/qt/ScintillaEditBase/PlatQt.cpp
++++ b/qt/ScintillaEditBase/PlatQt.cpp
+@@ -147,7 +147,13 @@ public:
+ 	explicit FontAndCharacterSet(const FontParameters &fp) : characterSet(fp.characterSet) {
+ 		pfont = std::make_unique<QFont>();
+ 		pfont->setStyleStrategy(ChooseStrategy(fp.extraFontFlag));
+-		pfont->setFamily(QString::fromUtf8(fp.faceName));
++		QString faceName = QString::fromUtf8(fp.faceName);
++		if (faceName.contains('/')) {
++			pfont->setFamily(faceName.section('/', 0, 0));
++			pfont->setStyleName(faceName.section('/', 1, -1));
++		} else {
++			pfont->setFamily(faceName);
++		}
+ 		pfont->setPointSizeF(fp.size);
+ 		pfont->setBold(static_cast<int>(fp.weight) > 500);
+ 		pfont->setStretch(QStretchFromFontStretch(fp.stretch));

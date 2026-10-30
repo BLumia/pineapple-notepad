@@ -1,0 +1,42 @@
+[
+  {
+    "x-pn-name": "scintilla",
+    "x-pn-version": "5.6.7",
+    "x-pn-patches": ["scintilla/bug2500-thin-line.patch"],
+    "type": "file",
+    "url": "https://www.scintilla.org/scintilla567.zip",
+    "sha256": "2309181e59e7da4659f890dbc128db7451ccd094748770e7be674b830494587c",
+    "dest": "offline"
+  },
+  {
+    "x-pn-name": "lexilla",
+    "x-pn-version": "5.5.4",
+    "type": "file",
+    "url": "https://www.scintilla.org/lexilla554.zip",
+    "sha256": "5e0a21356e4e2f19d6a38ecd1c8172d5a2b7b4542940568b023386080db90fe0",
+    "dest": "offline"
+  },
+  {
+    "x-pn-name": "monocypher",
+    "x-pn-version": "4.0.3",
+    "type": "file",
+    "url": "https://monocypher.org/download/monocypher-4.0.3.tar.gz",
+    "sha256": "8cc9bc341a66249016db9bd70e9142d8d0aef9945973744b1ac05dbc55d8ee66",
+    "dest": "offline"
+  },
+  {
+    "x-pn-name": "qtads",
+    "x-pn-version": "5.0.0",
+    "x-pn-find-package-names": ["qtadvanceddocking-qt6"],
+    "x-pn-exclude-from-all": true,
+    "x-pn-git": {
+      "repository": "https://github.com/githubuser0xFFFF/Qt-Advanced-Docking-System.git",
+      "shallow": true
+    },
+    "type": "file",
+    "url": "https://github.com/githubuser0xFFFF/Qt-Advanced-Docking-System/archive/refs/tags/5.0.0.zip",
+    "sha256": "b251569e4bf91f1773c0c395af5eb5ae906f556f9927aa39853449d92dfda935",
+    "dest-filename": "Qt-Advanced-Docking-System-5.0.0.zip",
+    "dest": "offline"
+  }
+]

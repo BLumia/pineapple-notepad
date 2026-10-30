@@ -1,0 +1,42 @@
+id: net.blumia.pineapple-notepad
+runtime: org.kde.Platform
+runtime-version: '6.11'
+sdk: org.kde.Sdk
+command: pnotepad
+
+finish-args:
+  - --share=ipc
+  - --share=network
+  - --socket=fallback-x11
+  - --socket=wayland
+  - --device=dri
+  - --filesystem=host
+
+modules:
+  - name: pineapple-notepad
+    buildsystem: simple
+    build-commands:
+      # Offline archives are consumed automatically by CMake
+      # (cmake/PnDependencies.cmake) from the offline/ directory.
+      - cmake -B _build -G Ninja
+          -DCMAKE_BUILD_TYPE=RelWithDebInfo
+          -DCMAKE_INSTALL_PREFIX=/app
+          -DCMAKE_INSTALL_LIBDIR=lib
+          -DSPONSOR_EDITION=OFF
+      - cmake --build _build --parallel
+      - cmake --install _build
+    cleanup:
+      - /bin/lexer_info
+      - /bin/lexer_info_gui
+      - /include
+      - /lib/cmake
+      - '*.a'
+    sources:
+      - type: dir
+        path: .
+      # Pre-populate the offline/ directory so CMake uses local archives
+      # instead of downloading at configure time (reproducible offline
+      # builds). dependencies.json is a flatpak-builder source array that
+      # also serves as the single source of truth for CMake and the
+      # PowerShell tooling; flatpak-builder ignores the x-pn-* keys.
+      - dependencies.json

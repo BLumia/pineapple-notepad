@@ -1,0 +1,222 @@
+#!/usr/bin/env python3
+"""Parse LexicalStyles.iface + SciLexer.h and generate fallback data.
+
+Usage: python3 gen_style_data.py <LexicalStyles.iface> <SciLexer.h> <output.cpp>
+"""
+
+import re
+import sys
+from collections import defaultdict
+
+# Property guaranteed by LexerSimple::Fold() for all old-style lexers
+COMMON_FOLD_PROPS = [
+    ("fold", "boolean", "Enable or disable folding."),
+]
+
+
+def parse_iface(iface_path):
+    """Parse lex lines: lex Name=SCLEX_XXX SCE_PREFIX_ [SCE_PREFIX2_ ...]"""
+    lexers = []  # [(display_name, sclex_name, [sce_prefix, ...]), ...]
+    sclex_ids = {}  # {sclex_name: id}
+
+    with open(iface_path) as f:
+        for line in f:
+            m = re.match(r'^\s*lex\s+(\w+)=\s*(SCLEX_\w+)\s+(.+)', line)
+            if m:
+                name = m.group(1)
+                sclex = m.group(2)
+                prefixes = re.findall(r'(SCE_\w+)_', m.group(3))
+                lexers.append((name, sclex, prefixes))
+
+            m2 = re.match(r'^\s*val\s+(SCLEX_\w+)=(\d+)', line)
+            if m2:
+                sclex_ids[m2.group(1)] = int(m2.group(2))
+
+    return lexers, sclex_ids
+
+
+def parse_scilexer(sci_path):
+    """Parse SCE_* style definitions."""
+    styles = defaultdict(list)  # {prefix: [(id, full_name), ...]}
+
+    with open(sci_path) as f:
+        for line in f:
+            m = re.match(r'#define\s+(SCE_(\w+?)_\w+)\s+(\d+)', line)
+            if m:
+                full_name = m.group(1)
+                prefix = m.group(2)
+                val = int(m.group(3))
+                styles[prefix].append((val, full_name))
+
+    # Sort by ID
+    for prefix in styles:
+        styles[prefix].sort()
+
+    return styles
+
+
+# Map from Lexilla registered name (lowercase) to LexicalStyles.iface display name
+# Most are just lowercase versions, but some differ
+LEXILLA_TO_IFACE = {
+    'as': 'As',
+    'COBOL': 'COBOL',
+    'DMAP': 'DMAP',
+    'DMIS': 'DMIS',
+    'TACL': 'TACL',
+    'TAL': 'TAL',
+    'PL/M': 'PLM',
+    'SML': 'SML',
+    'fcST': 'STTXT',
+    'abl': 'Progress',
+    'nimrod': 'Nimrod',
+    'clarionnocase': 'Clarion',
+    'eiffelkw': 'EiffelKW',
+    'cppnocase': 'Cpp',
+    'literatehaskell': 'Haskell',
+    'f77': 'F77',
+    'powerbasic': 'PowerBasic',
+    'blitzbasic': 'BlitzBasic',
+    'purebasic': 'PureBasic',
+    'freebasic': 'FreeBasic',
+    'hypertext': 'HTML',
+    'phpscript': 'PHP',
+    'props': 'Properties',
+    'registry': 'Registry',
+    'makefile': 'MakeFile',
+    'errorlist': 'ErrorList',
+    'escseq': 'EscSeq',
+    'ihex': 'IHex',
+    'srec': 'Srec',
+    'tehex': 'TEHex',
+    'tcmd': 'TCMD',
+    'raku': 'Raku',
+    'nix': 'Nix',
+    'nim': 'Nim',
+    'zig': 'Zig',
+    'dart': 'Dart',
+    'cil': 'CIL',
+    'hollywood': 'Hollywood',
+    'visualprolog': 'VisualProlog',
+    'x12': 'X12',
+    'edifact': 'EDIFACT',
+    'gdscript': 'GDScript',
+    'fsharp': 'FSharp',
+    'kvirc': 'KVIrc',
+    'd': 'D',
+    'ada': 'Ada',
+    'cmake': 'CMAKE',
+    'asciidoc': 'AsciiDoc',
+    'dataflex': 'Dataflex',
+    'stata': 'Stata',
+    'sorcins': 'Sorcus',
+    'oscript': 'OScript',
+    'maxima': 'Maxima',
+    'asy': 'Asymptote',
+    'ave': 'Avenue',
+    'bib': 'BibTeX',
+    'indent': 'Indent',
+    'null': 'Null',
+    'scriptol': 'Sol',
+    'registry': 'REG',
+    'fcST': 'StructuredText',
+    'sorcins': 'SORCUS',
+}
+
+
+def main():
+    if len(sys.argv) != 4:
+        print(f"Usage: {sys.argv[0]} <LexicalStyles.iface> <SciLexer.h> <output.cpp>",
+              file=sys.stderr)
+        sys.exit(1)
+
+    iface_path, sci_path, out_path = sys.argv[1:4]
+
+    lexers, sclex_ids = parse_iface(iface_path)
+    style_defs = parse_scilexer(sci_path)
+
+    # Build a lookup from iface name -> (sclex_id, [(id, name), ...])
+    iface_lookup = {}
+    for display_name, sclex_name, prefixes in lexers:
+        sclex_id = sclex_ids.get(sclex_name)
+        if sclex_id is None:
+            continue
+        all_styles = []
+        for prefix in prefixes:
+            # prefix is like "SCE_P" from iface, style_defs key is like "P"
+            key = prefix[4:] if prefix.startswith('SCE_') else prefix
+            if key in style_defs:
+                all_styles.extend(style_defs[key])
+        if all_styles:
+            all_styles.sort()
+        iface_lookup[display_name] = (sclex_id, all_styles)
+
+    # Build result: lexilla_name -> (sclex_id, styles)
+    result = {}
+    for iface_name, (sclex_id, styles) in iface_lookup.items():
+        result[iface_name.lower()] = (sclex_id, styles)
+
+    # Then apply manual overrides for mismatches (also store with original case)
+    for lexilla_name, iface_name in LEXILLA_TO_IFACE.items():
+        if iface_name in iface_lookup:
+            sclex_id, styles = iface_lookup[iface_name]
+            result[lexilla_name] = (sclex_id, styles)
+            result[lexilla_name.lower()] = (sclex_id, styles)
+
+    # Generate output
+    lines = []
+    lines.append("// Auto-generated by gen_style_data.py -- DO NOT EDIT")
+    lines.append("// Fallback data for old-style Lexilla lexers")
+    lines.append("// Source: LexicalStyles.iface + SciLexer.h")
+    lines.append("")
+    lines.append("#include <map>")
+    lines.append("#include <string>")
+    lines.append("#include <vector>")
+    lines.append("")
+    lines.append("struct FallbackStyle {")
+    lines.append("    int id;")
+    lines.append("    std::string name;")
+    lines.append("};")
+    lines.append("")
+    lines.append("struct FallbackProperty {")
+    lines.append("    std::string name;")
+    lines.append("    std::string typeName;")
+    lines.append("    std::string description;")
+    lines.append("};")
+    lines.append("")
+    lines.append("struct FallbackLexerData {")
+    lines.append("    int sclexId;")
+    lines.append("    std::vector<FallbackStyle> styles;")
+    lines.append("    std::vector<FallbackProperty> properties;")
+    lines.append("};")
+    lines.append("")
+    lines.append("static const std::vector<FallbackProperty> g_commonFoldProps = {")
+    for pname, ptype, pdesc in COMMON_FOLD_PROPS:
+        lines.append(f'    {{"{pname}", "{ptype}", "{pdesc}"}},')
+    lines.append("};")
+    lines.append("")
+    lines.append("static const std::map<std::string, FallbackLexerData>")
+    lines.append("    g_fallbackData = {")
+
+    for lexer_name in sorted(result.keys()):
+        sclex_id, styles = result[lexer_name]
+        lines.append(f'        {{"{lexer_name}", {{{sclex_id},')
+        # Styles
+        lines.append('            {  // styles')
+        for val, name in styles:
+            lines.append(f'                {{{val}, "{name}"}},')
+        lines.append('            },')
+        lines.append('        }},')
+
+    lines.append("    };")
+
+    with open(out_path, 'w') as f:
+        f.write('\n'.join(lines) + '\n')
+
+    n_lexers = len(result)
+    n_styles = sum(len(s) for _, s in result.values())
+    print(f"Generated {n_lexers} lexer mappings: "
+          f"{n_styles} styles, {len(COMMON_FOLD_PROPS)} common properties")
+
+
+if __name__ == '__main__':
+    main()

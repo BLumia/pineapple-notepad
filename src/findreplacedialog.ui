@@ -1,0 +1,781 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>FindReplaceDialog</class>
+ <widget class="QDialog" name="FindReplaceDialog">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>501</width>
+    <height>434</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Find / Replace</string>
+  </property>
+  <layout class="QVBoxLayout" name="verticalLayout">
+   <item>
+    <widget class="QTabWidget" name="tabWidget">
+     <property name="currentIndex">
+      <number>0</number>
+     </property>
+     <widget class="QWidget" name="findTab">
+      <attribute name="title">
+       <string>Find</string>
+      </attribute>
+      <layout class="QHBoxLayout" name="findTabLayout">
+       <item>
+        <layout class="QVBoxLayout" name="findLeftLayout">
+         <item>
+          <layout class="QFormLayout" name="findFormLayout">
+           <item row="0" column="0">
+            <widget class="QLabel" name="findWhatLabelFind">
+             <property name="text">
+              <string>Find what:</string>
+             </property>
+            </widget>
+           </item>
+           <item row="0" column="1">
+            <widget class="QComboBox" name="findWhatComboFind">
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
+             <property name="editable">
+              <bool>true</bool>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </item>
+         <item>
+          <spacer name="verticalSpacerFind">
+           <property name="orientation">
+            <enum>Qt::Orientation::Vertical</enum>
+           </property>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>20</width>
+             <height>40</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+         <item>
+          <widget class="QCheckBox" name="matchCaseCheckFind">
+           <property name="text">
+            <string>Match case</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QCheckBox" name="wholeWordCheckFind">
+           <property name="text">
+            <string>Match whole word only</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QCheckBox" name="wrapAroundCheckFind">
+           <property name="text">
+            <string>Wrap around</string>
+           </property>
+           <property name="checked">
+            <bool>true</bool>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QCheckBox" name="inSelectionCheckFind">
+           <property name="text">
+            <string>In selection</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QGroupBox" name="groupBox">
+           <property name="title">
+            <string>Search Mode</string>
+           </property>
+           <layout class="QVBoxLayout" name="verticalLayout_2">
+            <item>
+             <widget class="QRadioButton" name="modeNormalRadioFind">
+              <property name="text">
+               <string>Normal</string>
+              </property>
+              <property name="checked">
+               <bool>true</bool>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QRadioButton" name="modeExtendedRadioFind">
+              <property name="text">
+               <string>Extended (\n, \r, \t, \0, \xNN)</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QRadioButton" name="modeRegexRadioFind">
+              <property name="text">
+               <string>Regular expression</string>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </widget>
+         </item>
+        </layout>
+       </item>
+       <item>
+        <layout class="QVBoxLayout" name="findButtonsLayout">
+         <item>
+          <widget class="QPushButton" name="findNextBtnFind">
+            <property name="text">
+             <string>Find</string>
+            </property>
+           </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="findPrevBtnFind">
+            <property name="text">
+             <string>Count</string>
+            </property>
+           </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="findAllInCurrentBtn">
+           <property name="text">
+            <string>Find All in Current Document</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="findAllInDocsBtn">
+           <property name="text">
+            <string>Find All in All Opened Documents</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <spacer name="verticalSpacerFindButtons">
+           <property name="orientation">
+            <enum>Qt::Orientation::Vertical</enum>
+           </property>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>20</width>
+             <height>40</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+         <item>
+          <widget class="QPushButton" name="closeBtnFind">
+           <property name="text">
+            <string>Close</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QWidget" name="replaceTab">
+      <attribute name="title">
+       <string>Replace</string>
+      </attribute>
+      <layout class="QHBoxLayout" name="replaceTabLayout">
+       <item>
+        <layout class="QVBoxLayout" name="replaceLeftLayout">
+         <item>
+          <layout class="QFormLayout" name="replaceFormLayout">
+           <item row="0" column="0">
+            <widget class="QLabel" name="findWhatLabelReplace">
+             <property name="text">
+              <string>Find what:</string>
+             </property>
+            </widget>
+           </item>
+           <item row="0" column="1">
+            <widget class="QComboBox" name="findWhatComboReplace">
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
+             <property name="editable">
+              <bool>true</bool>
+             </property>
+            </widget>
+           </item>
+           <item row="1" column="0">
+            <widget class="QLabel" name="replaceWithLabelReplace">
+             <property name="text">
+              <string>Replace with:</string>
+             </property>
+            </widget>
+           </item>
+           <item row="1" column="1">
+            <widget class="QComboBox" name="replaceWithComboReplace">
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
+             <property name="editable">
+              <bool>true</bool>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </item>
+         <item>
+          <spacer name="verticalSpacer">
+           <property name="orientation">
+            <enum>Qt::Orientation::Vertical</enum>
+           </property>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>20</width>
+             <height>40</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+         <item>
+          <widget class="QCheckBox" name="matchCaseCheckReplace">
+           <property name="text">
+            <string>Match case</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QCheckBox" name="wholeWordCheckReplace">
+           <property name="text">
+            <string>Match whole word only</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QCheckBox" name="wrapAroundCheckReplace">
+           <property name="text">
+            <string>Wrap around</string>
+           </property>
+           <property name="checked">
+            <bool>true</bool>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QCheckBox" name="inSelectionCheckReplace">
+           <property name="text">
+            <string>In selection</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QGroupBox" name="groupBox_2">
+           <property name="title">
+            <string>Search Mode</string>
+           </property>
+           <layout class="QVBoxLayout" name="verticalLayout_3">
+            <item>
+             <widget class="QRadioButton" name="modeNormalRadioReplace">
+              <property name="text">
+               <string>Normal</string>
+              </property>
+              <property name="checked">
+               <bool>true</bool>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QRadioButton" name="modeExtendedRadioReplace">
+              <property name="text">
+               <string>Extended (\n, \r, \t, \0, \xNN)</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QRadioButton" name="modeRegexRadioReplace">
+              <property name="text">
+               <string>Regular expression</string>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </widget>
+         </item>
+        </layout>
+       </item>
+       <item>
+        <layout class="QVBoxLayout" name="replaceButtonsLayout">
+         <item>
+          <widget class="QPushButton" name="findNextBtnReplace">
+           <property name="text">
+            <string>Find</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="replaceBtn">
+           <property name="text">
+            <string>Replace</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="replaceAllBtn">
+           <property name="text">
+            <string>Replace All</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="replaceAllInDocsBtn">
+           <property name="text">
+            <string>Replace All in All Opened Documents</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <spacer name="verticalSpacerReplaceButtons">
+           <property name="orientation">
+            <enum>Qt::Orientation::Vertical</enum>
+           </property>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>20</width>
+             <height>40</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+         <item>
+          <widget class="QPushButton" name="closeBtnReplace">
+           <property name="text">
+            <string>Close</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QWidget" name="findInFilesTab">
+      <attribute name="title">
+       <string>Find in Files</string>
+      </attribute>
+      <layout class="QHBoxLayout" name="findInFilesTabLayout">
+       <item>
+        <layout class="QVBoxLayout" name="fifLeftLayout">
+         <item>
+          <layout class="QFormLayout" name="fifFormLayout">
+           <item row="0" column="0">
+            <widget class="QLabel" name="findWhatLabelFif">
+             <property name="text">
+              <string>Find what:</string>
+             </property>
+            </widget>
+           </item>
+           <item row="0" column="1">
+            <widget class="QComboBox" name="findWhatComboFif">
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
+             <property name="editable">
+              <bool>true</bool>
+             </property>
+            </widget>
+           </item>
+           <item row="1" column="0">
+            <widget class="QLabel" name="filtersLabelFif">
+             <property name="text">
+              <string>Filters:</string>
+             </property>
+            </widget>
+           </item>
+           <item row="1" column="1">
+            <widget class="QComboBox" name="filtersComboFif">
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
+             <property name="toolTip">
+              <string>Whitespace-separated patterns. Examples:
+*.cpp *.h       include files
+*.* !*.exe      all except .exe
+*.* !\tests     exclude top-level &quot;tests&quot; folder
+*.* !+\log*     exclude &quot;log*&quot; folders recursively</string>
+             </property>
+             <property name="editable">
+              <bool>true</bool>
+             </property>
+            </widget>
+           </item>
+           <item row="2" column="0">
+            <widget class="QLabel" name="directoryLabelFif">
+             <property name="text">
+              <string>Directory:</string>
+             </property>
+            </widget>
+           </item>
+           <item row="2" column="1">
+            <layout class="QHBoxLayout" name="dirRowLayout">
+             <item>
+              <widget class="QComboBox" name="directoryComboFif">
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
+               </property>
+               <property name="editable">
+                <bool>true</bool>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QToolButton" name="browseDirBtnFif">
+               <property name="toolTip">
+                <string>Browse for folder...</string>
+               </property>
+               <property name="text">
+                <string notr="true">...</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QToolButton" name="currentDocDirBtnFif">
+               <property name="toolTip">
+                <string>Use current document's directory</string>
+               </property>
+               <property name="text">
+                <string notr="true">&lt;&lt;</string>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </item>
+          </layout>
+         </item>
+         <item>
+          <widget class="QCheckBox" name="recursiveCheckFif">
+           <property name="text">
+            <string>In all sub-folders</string>
+           </property>
+           <property name="checked">
+            <bool>true</bool>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QCheckBox" name="hiddenCheckFif">
+           <property name="text">
+            <string>In hidden folders</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QCheckBox" name="matchCaseCheckFif">
+           <property name="text">
+            <string>Match case</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QCheckBox" name="wholeWordCheckFif">
+           <property name="text">
+            <string>Match whole word only</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QGroupBox" name="groupBoxFif">
+           <property name="title">
+            <string>Search Mode</string>
+           </property>
+           <layout class="QVBoxLayout" name="verticalLayoutFif">
+            <item>
+             <widget class="QRadioButton" name="modeNormalRadioFif">
+              <property name="text">
+               <string>Normal</string>
+              </property>
+              <property name="checked">
+               <bool>true</bool>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QRadioButton" name="modeExtendedRadioFif">
+              <property name="text">
+               <string>Extended (\n, \r, \t, \0, \xNN)</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QRadioButton" name="modeRegexRadioFif">
+              <property name="text">
+               <string>Regular expression</string>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </widget>
+         </item>
+        </layout>
+       </item>
+       <item>
+        <layout class="QVBoxLayout" name="fifButtonsLayout">
+         <item>
+          <widget class="QPushButton" name="findAllBtnFif">
+           <property name="text">
+            <string>Find All</string>
+           </property>
+           <property name="default">
+            <bool>true</bool>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <spacer name="verticalSpacerFifButtons">
+           <property name="orientation">
+            <enum>Qt::Orientation::Vertical</enum>
+           </property>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>20</width>
+             <height>40</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+         <item>
+          <widget class="QPushButton" name="closeBtnFif">
+           <property name="text">
+            <string>Close</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+      </layout>
+     </widget>
+      <widget class="QWidget" name="markTab">
+       <attribute name="title">
+        <string>Mark</string>
+       </attribute>
+       <layout class="QHBoxLayout" name="markTabLayout">
+        <item>
+         <layout class="QVBoxLayout" name="markLeftLayout">
+          <item>
+           <layout class="QFormLayout" name="markFormLayout">
+            <item row="0" column="0">
+             <widget class="QLabel" name="findWhatLabelMark">
+              <property name="text">
+               <string>Find what:</string>
+              </property>
+             </widget>
+            </item>
+            <item row="0" column="1">
+             <widget class="QComboBox" name="findWhatComboMark">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
+              <property name="editable">
+               <bool>true</bool>
+              </property>
+             </widget>
+            </item>
+            <item row="1" column="0">
+             <widget class="QLabel" name="markStyleLabelMark">
+              <property name="text">
+               <string>Mark style:</string>
+              </property>
+             </widget>
+            </item>
+            <item row="1" column="1">
+             <widget class="QComboBox" name="markStyleComboMark">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+          <item>
+           <spacer name="verticalSpacerMark">
+            <property name="orientation">
+             <enum>Qt::Orientation::Vertical</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>20</width>
+              <height>20</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+          <item>
+           <widget class="QCheckBox" name="bookmarkLineCheckMark">
+            <property name="text">
+             <string>Bookmark line</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QCheckBox" name="purgeCheckMark">
+            <property name="text">
+             <string>Purge for each search</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QCheckBox" name="backwardCheckMark">
+            <property name="text">
+             <string>Backward direction</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QCheckBox" name="matchCaseCheckMark">
+            <property name="text">
+             <string>Match case</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QCheckBox" name="wholeWordCheckMark">
+            <property name="text">
+             <string>Match whole word only</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QCheckBox" name="wrapAroundCheckMark">
+            <property name="text">
+             <string>Wrap around</string>
+            </property>
+            <property name="checked">
+             <bool>true</bool>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QCheckBox" name="inSelectionCheckMark">
+            <property name="text">
+             <string>In selection</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QGroupBox" name="groupBoxMark">
+            <property name="title">
+             <string>Search Mode</string>
+            </property>
+            <layout class="QVBoxLayout" name="verticalLayoutMark">
+             <item>
+              <widget class="QRadioButton" name="modeNormalRadioMark">
+               <property name="text">
+                <string>Normal</string>
+               </property>
+               <property name="checked">
+                <bool>true</bool>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QRadioButton" name="modeExtendedRadioMark">
+               <property name="text">
+                <string>Extended (\n, \r, \t, \0, \xNN)</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QRadioButton" name="modeRegexRadioMark">
+               <property name="text">
+                <string>Regular expression</string>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </widget>
+          </item>
+         </layout>
+        </item>
+        <item>
+         <layout class="QVBoxLayout" name="markButtonsLayout">
+          <item>
+           <widget class="QPushButton" name="markAllBtnMark">
+            <property name="text">
+             <string>Mark All</string>
+            </property>
+            <property name="default">
+             <bool>true</bool>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="clearMarksBtnMark">
+            <property name="text">
+             <string>Clear</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="copyMarkedBtnMark">
+            <property name="text">
+             <string>Copy Marked Text</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <spacer name="verticalSpacerMarkButtons">
+            <property name="orientation">
+             <enum>Qt::Orientation::Vertical</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>20</width>
+              <height>40</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+          <item>
+           <widget class="QPushButton" name="closeBtnMark">
+            <property name="text">
+             <string>Close</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+       </layout>
+      </widget>
+     </widget>
+    </item>
+    <item>
+     <widget class="QStatusBar" name="statusBar"/>
+    </item>
+  </layout>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
