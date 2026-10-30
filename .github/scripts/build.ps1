@@ -71,13 +71,13 @@ if ($IsMacOS) {
 #region Deploy
 if ($Deploy) {
     if ($IsWindows) {
-        $binaryPath = Join-Path $PSScriptRoot "install-msvc\bin\pnotepad.exe"
-        $buildDir = Join-Path $PSScriptRoot "build-msvc"
+        $binaryPath = Join-Path $PWD.Path "install-msvc\bin\pnotepad.exe"
+        $buildDir = Join-Path $PWD.Path "build-msvc"
         $kf6InstallDir = $env:KF6REDIST_DIR
 
         Deploy-WindowsApp -BinaryPath $binaryPath `
             -Kf6InstallDir $kf6InstallDir -BuildDir $buildDir `
-            -QtDir $env:QT_DIR `
+            -QtDir $env:QT_ROOT_DIR `
             -Locales @("zh_CN") `
             -ProjectMoPathPattern "po/locale/{locale}/LC_MESSAGES/pineapple-notepad.mo" `
             -KfPlugins @("kiconthemes", "breeze", "sonnet") `
@@ -107,7 +107,8 @@ if ($Deploy) {
 
 if ($IsWindows) {
     Build-CMakeProject -SourcePath "." -RepoName "pineapple-notepad" -ForceRebuild `
-        -BuildBaseDir "build-msvc" -InstallPrefix "install-msvc" -NoSourceIdentifierFolder -AvoidReconfig
+        -BuildBaseDir "build-msvc" -InstallPrefix "install-msvc" -NoSourceIdentifierFolder -AvoidReconfig `
+        -CMakeArgs @("-DSPONSOR_EDITION=OFF")
 } elseif ($IsLinux) {
     # FHS: /opt is where self-contained third-party applications belong. The .deb
     # installs the app (plus the bundled Qt6/KF6 runtime) there, and only the

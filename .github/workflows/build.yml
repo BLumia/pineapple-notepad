@@ -1,0 +1,53 @@
+name: Windows CI
+
+on: [push, pull_request, workflow_dispatch]
+
+jobs:
+  msvc-cmake-build:
+  
+    strategy:
+      matrix:
+        include:
+          - qt_ver: '6.12.0'
+            vs: '2022'
+            aqt_arch: 'win64_msvc2022_64'
+            msvc_arch: 'x64'
+
+    runs-on: windows-2022
+
+    steps:
+    - uses: actions/checkout@v6
+    - name: Install Qt
+      uses: jurplel/install-qt-action@v4
+      with:
+        arch: ${{ matrix.aqt_arch }}
+        version: ${{ matrix.qt_ver }}
+        modules: 'qt5compat'
+        cache: true
+        aqtsource: 'aqtinstall @ git+https://github.com/miurahr/aqtinstall@16db45a70b5905ad596941b223469bc86a56901e'
+    - name: Install Gettext and Ninja (Windows)
+      if: runner.os == 'Windows'
+      uses: MinoruSekine/setup-scoop@v4.0.2
+      with:
+        buckets: extras
+        apps: gettext ninja
+    - name: Download kf6redist
+      shell: pwsh
+      run: |
+        $ProgressPreference = 'SilentlyContinue'
+        $deps = Join-Path $PWD "build_dependencies"
+        New-Item -ItemType Directory -Force -Path $deps | Out-Null
+
+        Invoke-WebRequest -Uri "https://github.com/BLumia/kf6redist/releases/download/kf6.31.0/win-x64-vs2022-qt6.12.0-kfv6.31.0.zip" -OutFile "kf6redist.zip"
+        7z x kf6redist.zip -y "-o$deps\kf6redist"
+        if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+        Add-Content $env:GITHUB_ENV "KF6REDIST_DIR=$deps\kf6redist"
+    - name: Build
+      shell: pwsh
+      run: |
+        ./.github/scripts/build.ps1
+        ./.github/scripts/build.ps1 -Deploy
+    - uses: actions/upload-artifact@v6
+      with:
+        name: "${{ matrix.aqt_arch }}-qt${{ matrix.qt_ver }}-pnotepad-cmake-pkg"
+        path: install-msvc/bin/*
