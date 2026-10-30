@@ -105,6 +105,7 @@ int main(int argc, char *argv[])
     aboutData.addCredit("doyaGu", QCoreApplication::translate("main", "Sponsor"));
     aboutData.addCredit("Greg Dunn", QCoreApplication::translate("main", "Sponsor"));
     aboutData.addCredit("1i9h7_b1u3", QCoreApplication::translate("main", "Sponsor"));
+    aboutData.addCredit("justforlxz", QCoreApplication::translate("main", "Sponsor"));
     aboutData.addCredit("Lttqzz2", QCoreApplication::translate("main", "Sponsor"));
     aboutData.addCredit("panpanpdj", QCoreApplication::translate("main", "Sponsor"));
     aboutData.addCredit("pzm9012", QCoreApplication::translate("main", "Sponsor"));
