@@ -15,7 +15,7 @@ Note that it's *currently* closed source. See the "Open Source Goal" section if 
 
 | Feature | `Pineapple Notepad` | `Notepad++` | `Notepad Next` | `Notepad--` | `Kate` |
 | ------- | ------------------- | ----------- | -------------- | ----------- | ------ |
-| Open Source |         ❔[^1] |      ✅     |      ✅        |    ❌      | ✅     |
+| Open Source |         ✅[^1] |      ✅     |      ✅        |    ❌      | ✅     |
 | Cross Platform |      ✅     | ❌ (Win-only) |    ✅        |    ✅      | ✅     |
 | Text Encoding |       ✅     |      ✅     |      ❌        |    ✅      | ✅     |
 | Show All Characters | ✅     |      ✅     |      ⚠️[^2]    |    ⚠️[^2]  | ⚠️[^4] |
@@ -42,7 +42,7 @@ Note that it's *currently* closed source. See the "Open Source Goal" section if 
 | Editor Engine |    Scintilla  |   Scintilla |   Scintilla     | QScintilla | KTextEdit |
 | Regex Engine | QRegularExpression | Boost.Regex | QRegularExpression | Boost.Regex [^10] | QRegularExpression |
 
-[^1]: Currently not open-sourced. Planned to be Open Source once Open Source Sponsor Goal is reached (please consider donate!). Tier 2 sponsors can also get the full source code for building and auditing‌ purpose before the goal is reached.
+[^1]: Open Source Sponsor Goal is now reached, source code will be available at master branch shortly, please switch to the master branch for source code.
 [^2]: Some non-printable characters are not able to be shown.
 [^3]: Some components have known issues with Hi-DPI support.
 [^4]: I created an add-on for this feature, but currently showing line ending is not possible to implement.
