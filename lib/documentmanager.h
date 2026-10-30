@@ -107,7 +107,6 @@ private:
     QList<int> m_docIdOrder;
     int m_nextDocumentId;
     int m_currentDocId = -1;
-    static int s_untitledCounter;
     static quint64 s_recentTagCounter;
 
     QString generateUntitledName();

@@ -13,6 +13,7 @@
 #include <QFont>
 #include <QIcon>
 #include <QLoggingCategory>
+#include <QSet>
 
 Q_LOGGING_CATEGORY(lcDocumentManager, "pnotepad.documentmanager")
 
@@ -87,7 +88,6 @@ void DocumentManager::applyLexerToEditor(SciEdit *editor, const QString &languag
     editor->setLexer(lexer, languageIdOverride, colouriseNow);
 }
 
-int DocumentManager::s_untitledCounter = 1;
 quint64 DocumentManager::s_recentTagCounter = 0;
 
 DocumentManager::DocumentManager(QObject *parent)
@@ -606,7 +606,21 @@ void DocumentManager::emitDataChangedForRoles(int docId, const QVector<int> &rol
 
 QString DocumentManager::generateUntitledName()
 {
-    return tr("Untitled-%1").arg(s_untitledCounter++);
+    // Reuse the lowest number not shown by any open document (e.g. after
+    // "Untitled-2" is closed, the next new document becomes "Untitled-2"
+    // again instead of growing the counter forever). Titles of saved
+    // documents are checked as well so tab titles stay unique, since
+    // untitled documents are looked up by title.
+    const QString format = tr("Untitled-%1");
+    QSet<QString> usedTitles;
+    for (auto it = m_documents.constBegin(); it != m_documents.constEnd(); ++it) {
+        usedTitles.insert(it.value().title);
+    }
+    int counter = 1;
+    while (usedTitles.contains(format.arg(counter))) {
+        ++counter;
+    }
+    return format.arg(counter);
 }
 
 QString DocumentManager::detectLanguageFromExtension(const QString &filePath)
