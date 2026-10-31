@@ -1,19 +1,26 @@
-name: Windows CI
+name: Kf6redist CI
 
 on: [push, pull_request, workflow_dispatch]
 
 jobs:
-  msvc-cmake-build:
-  
+  build:
+    runs-on: ${{ matrix.os }}
+    defaults:
+      run:
+        shell: pwsh
     strategy:
+      fail-fast: false
       matrix:
+        os: [windows-2025, macos-26]
         include:
-          - qt_ver: '6.12.0'
-            vs: '2022'
-            aqt_arch: 'win64_msvc2022_64'
-            msvc_arch: 'x64'
-
-    runs-on: windows-2022
+          - os: windows-2025
+            qt_ver: '6.12.0'
+            aqt_arch: win64_msvc2022_64
+            os_label: win
+          - os: macos-26
+            qt_ver: '6.12.0'
+            aqt_arch: clang_64
+            os_label: mac
 
     steps:
     - uses: actions/checkout@v6
@@ -31,6 +38,10 @@ jobs:
       with:
         buckets: extras
         apps: gettext ninja
+    - name: Install Gettext and Ninja (macOS)
+      if: runner.os == 'macOS'
+      run: |
+        brew install gettext ninja
     - name: Download kf6redist
       shell: pwsh
       run: |
@@ -38,10 +49,16 @@ jobs:
         $deps = Join-Path $PWD "build_dependencies"
         New-Item -ItemType Directory -Force -Path $deps | Out-Null
 
-        Invoke-WebRequest -Uri "https://github.com/BLumia/kf6redist/releases/download/kf6.31.0/win-x64-vs2022-qt6.12.0-kfv6.31.0.zip" -OutFile "kf6redist.zip"
-        7z x kf6redist.zip -y "-o$deps\kf6redist"
+        if ($IsWindows) {
+          Invoke-WebRequest -Uri "https://github.com/BLumia/kf6redist/releases/download/kf6.31.0/win-x64-vs2022-qt6.12.0-kfv6.31.0.zip" -OutFile "kf6redist.zip"
+        } elseif ($IsMacOS) {
+          Invoke-WebRequest -Uri "https://github.com/BLumia/kf6redist/releases/download/kf6.31.0/mac-arm64-vs0-qt6.12.0-kfv6.31.0.zip" -OutFile "kf6redist.zip"
+        }
+
+        $kf6Dir = Join-Path $deps "kf6redist"
+        7z x kf6redist.zip -y "-o$kf6Dir"
         if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
-        Add-Content $env:GITHUB_ENV "KF6REDIST_DIR=$deps\kf6redist"
+        Add-Content $env:GITHUB_ENV "KF6REDIST_DIR=$kf6Dir"
     - name: Build
       shell: pwsh
       run: |
@@ -49,5 +66,7 @@ jobs:
         ./.github/scripts/build.ps1 -Deploy
     - uses: actions/upload-artifact@v6
       with:
-        name: "${{ matrix.aqt_arch }}-qt${{ matrix.qt_ver }}-pnotepad-cmake-pkg"
-        path: install-msvc/bin/*
+        name: "${{ matrix.os_label }}-${{ matrix.aqt_arch }}-qt${{ matrix.qt_ver }}-pnotepad"
+        path: |
+          install-msvc/bin/*
+          build/*.dmg

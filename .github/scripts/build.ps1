@@ -77,19 +77,17 @@ if ($Deploy) {
 
         Deploy-WindowsApp -BinaryPath $binaryPath `
             -Kf6InstallDir $kf6InstallDir -BuildDir $buildDir `
-            -QtDir $env:QT_ROOT_DIR `
             -Locales @("zh_CN") `
             -ProjectMoPathPattern "po/locale/{locale}/LC_MESSAGES/pineapple-notepad.mo" `
             -KfPlugins @("kiconthemes", "breeze", "sonnet") `
             -CopyVCRuntime
     } elseif ($IsMacOS) {
-        $buildDir = Join-Path $PSScriptRoot "build"
+        $buildDir = Join-Path $PWD.Path "build"
         $appBundle = Join-Path $buildDir "pnotepad.app"
         $kf6InstallDir = $env:KF6REDIST_DIR
 
         Deploy-MacOSAppBundle -AppBundle $appBundle -BinaryName "pnotepad" `
             -BuildDir $buildDir -Kf6InstallDir $kf6InstallDir `
-            -QtDir $env:QT_DIR `
             -Locales @("zh_CN") `
             -ProjectMoPathPattern "po/locale/{locale}/LC_MESSAGES/pineapple-notepad.mo" `
             -DmgName "pineapple-notepad" `
@@ -126,5 +124,6 @@ if ($IsWindows) {
         )
 } else {
     Build-CMakeProject -SourcePath "." -RepoName "pineapple-notepad" -ForceRebuild `
-        -BuildBaseDir "build" -SkipInstall -NoSourceIdentifierFolder -AvoidReconfig
+        -BuildBaseDir "build" -SkipInstall -NoSourceIdentifierFolder -AvoidReconfig `
+        -CMakeArgs @("-DSPONSOR_EDITION=OFF")
 }
