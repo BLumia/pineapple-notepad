@@ -776,6 +776,10 @@ void FindReplaceController::findAllInCurrentDocument()
 
     m_searchResultsDock->completeSearch();
 
+    if (matchCount > 0) {
+        m_dialog->hide();
+    }
+
     if (matchCount == 0) {
         if (m_dialog->searchMode() == SearchMode::Regex && checkAndClearRegexError(editor)) {
             m_dialog->showStatusMessage(tr("Invalid regular expression."));
@@ -833,6 +837,10 @@ void FindReplaceController::findAllInAllDocuments()
     }
 
     m_searchResultsDock->completeSearch();
+
+    if (totalMatchCount > 0) {
+        m_dialog->hide();
+    }
 
     if (totalMatchCount == 0) {
         if (regexError) {
@@ -964,6 +972,10 @@ void FindReplaceController::findInFiles()
 
     m_searchResultsDock->setSearchInfo(stats.filesSearched, stats.filesWithHits);
     m_searchResultsDock->completeSearch();
+
+    if (stats.totalHits > 0) {
+        m_dialog->hide();
+    }
 
     if (stats.cancelled) {
         m_dialog->showStatusMessage(tr("Search cancelled. %1 occurrence(s) found in %2 file(s).")
