@@ -207,6 +207,9 @@
     <entry name="fillFindFieldWithWordAtCaret" type="Bool" key="fill-find-field-with-word-at-caret">
       <default>true</default>
     </entry>
+    <entry name="findDialogAlwaysVisible" type="Bool" key="find-dialog-always-visible">
+      <default>false</default>
+    </entry>
     <entry name="fillDirFieldFromDocument" type="Bool" key="fill-dir-field-from-document">
       <default>false</default>
     </entry>

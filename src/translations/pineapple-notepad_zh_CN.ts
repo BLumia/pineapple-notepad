@@ -2794,6 +2794,14 @@ Do you want to save before reloading with a different encoding?</source>
         <source>Fill directory field with current document&apos;s directory</source>
         <translation>用当前文档所在目录填充目录字段</translation>
     </message>
+    <message>
+        <source>Keep the find dialog open after a search that outputs to the results window.</source>
+        <translation>即便有搜索结果输出到搜索结果面板，也仍保持查找对话框开启</translation>
+    </message>
+    <message>
+        <source>Find dialog remains open after search that outputs to results window</source>
+        <translation>搜索输出到结果窗口后，保持查找对话框开启</translation>
+    </message>
 </context>
 <context>
     <name>SessionManager</name>

@@ -776,7 +776,7 @@ void FindReplaceController::findAllInCurrentDocument()
 
     m_searchResultsDock->completeSearch();
 
-    if (matchCount > 0) {
+    if (matchCount > 0 && !AppSettings::findDialogAlwaysVisible()) {
         m_dialog->hide();
     }
 
@@ -838,7 +838,7 @@ void FindReplaceController::findAllInAllDocuments()
 
     m_searchResultsDock->completeSearch();
 
-    if (totalMatchCount > 0) {
+    if (totalMatchCount > 0 && !AppSettings::findDialogAlwaysVisible()) {
         m_dialog->hide();
     }
 
@@ -973,7 +973,7 @@ void FindReplaceController::findInFiles()
     m_searchResultsDock->setSearchInfo(stats.filesSearched, stats.filesWithHits);
     m_searchResultsDock->completeSearch();
 
-    if (stats.totalHits > 0) {
+    if (stats.totalHits > 0 && !AppSettings::findDialogAlwaysVisible()) {
         m_dialog->hide();
     }
 

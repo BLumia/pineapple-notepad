@@ -73,6 +73,16 @@
         </property>
        </widget>
       </item>
+      <item row="3" column="0" colspan="2">
+       <widget class="QCheckBox" name="kcfg_findDialogAlwaysVisible">
+        <property name="toolTip">
+         <string>Keep the find dialog open after a search that outputs to the results window.</string>
+        </property>
+        <property name="text">
+         <string>Find dialog remains open after search that outputs to results window</string>
+        </property>
+       </widget>
+      </item>
      </layout>
     </widget>
    </item>

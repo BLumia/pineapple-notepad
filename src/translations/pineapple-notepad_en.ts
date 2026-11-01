@@ -2712,6 +2712,14 @@ Do you want to save before reloading with a different encoding?</source>
         <source>Fill directory field with current document&apos;s directory</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Keep the find dialog open after a search that outputs to the results window.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Find dialog remains open after search that outputs to results window</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>SessionManager</name>
