@@ -142,8 +142,8 @@
         <translation>重置为默认(&amp;D)</translation>
     </message>
     <message>
-        <source>This feature is currently only available to sponsors. Please consider becoming a sponsor.</source>
-        <translation>此特性目前仅供赞助者使用。请考虑成为赞助者。</translation>
+        <source>This nice-to-have feature is only available to sponsors. Please consider becoming a sponsor!</source>
+        <translation>此锦上添花的功能仅对赞助者开放，请考虑成为赞助者！</translation>
     </message>
     <message>
         <source>I&apos;m a Sponsor</source>
@@ -179,8 +179,8 @@ This will remove all custom colors saved for this theme.</source>
 这将移除所有为此主题所自定义的颜色。</translation>
     </message>
     <message>
-        <source>This feature is currently only available to sponsors. Please consider becoming a sponsor.</source>
-        <translation>此特性目前仅供赞助者使用。请考虑成为赞助者。</translation>
+        <source>This nice-to-have feature is only available to sponsors. Please consider becoming a sponsor!</source>
+        <translation>此锦上添花的功能仅对赞助者开放，请考虑成为赞助者！</translation>
     </message>
     <message>
         <source>I&apos;m a Sponsor</source>
@@ -2880,9 +2880,15 @@ Do you want to reload it from disk? Your unsaved changes from the previous sessi
         <translation>替换许可证文件...</translation>
     </message>
     <message>
-        <source>You are using the Sponsor Edition of Pineapple Notepad, which means all features are available without requiring a sponsor license.
+        <source>This build of Pineapple Notepad already includes all features, no sponsor license is required.
 </source>
-        <translation>您正在使用赞助者特别版的《菠萝记事本》，这意味着你不需要任何赞助者许可证即可使用此软件的完整功能。
+        <translation>当前构建版本的菠萝记事本已包含全部功能，无需赞助者许可证。
+</translation>
+    </message>
+    <message>
+        <source>Importing your sponsor license is optional: it hides the sponsor acknowledgment dialog shown when a new version starts, and keeps the license ready in case you switch to a build that requires one (the Effort Edition).
+</source>
+        <translation>导入赞助者许可证是可选的：它可以避免新版本启动时显示赞助者致谢对话框；如果你切换到需要许可证的构建版本（Effort 版），也无需重新导入许可证。
 </translation>
     </message>
     <message>
@@ -2909,9 +2915,9 @@ You can view the list of sponsors in the About dialog too. If you like this appl
 You can learn more about sponsor benefits at [GitHub](https://github.com/BLumia/pineapple-notepad)
 or [Gitee](https://gitee.com/BLumia/pineapple-notepad) from project README, and donate to us via
 [Ko-fi](https://ko-fi.com/blumia), [Afdian](https://afdian.com/a/BLumia) or
-[Itch.io](https://blumia.itch.io/pineapple-notepad). We also have an Open Source Sponsor Goal as well,
-if we reach the sponsor goal, this application will be release as an Open-Source Software. So please
-consider becoming a sponsor!
+[Itch.io](https://blumia.itch.io/pineapple-notepad). Thanks to our sponsors, we've reached our
+open source goal. Pineapple Notepad is now open source software! If you like this application,
+please consider becoming a sponsor to support its continued development.
 
 %2 Please switch to the next tab for details.</source>
         <translation>%1
@@ -2921,23 +2927,25 @@ consider becoming a sponsor!
 你可以在 [GitHub](https://github.com/BLumia/pineapple-notepad)
 或 [Gitee](https://gitee.com/BLumia/pineapple-notepad) 的项目自述文件了解成为赞助者的福利，并在
 [Ko-fi](https://ko-fi.com/blumia)、[爱发电](https://afdian.com/a/BLumia) 或
-[Itch.io](https://blumia.itch.io/pineapple-notepad) 平台进行赞助。另外，我们也有一个开源赞助计划，
-当赞助目标达成时，此应用程序将作为开源软件发布。所以请考虑成为赞助者！
+[Itch.io](https://blumia.itch.io/pineapple-notepad) 平台进行赞助。感谢我们的赞助者，我们已达成开源目标。
+菠萝记事本现已作为开源软件发布！如果你喜欢这款应用，请考虑成为赞助者，支持它的持续开发。
 
 %2请切换到下个标签页以了解详情。</translation>
     </message>
     <message>
-        <source>The following license management functions are there just in case if you want to switch between different version so license information will be preserved. Feel free to &quot;activate&quot; your sponsor license whenever you want.
+        <source>As a special thanks to our supporters, sponsors receive a license file. It is optional in this build — it hides the acknowledgment dialog on version upgrades, and stays ready if you ever switch to a build that requires one.</source>
+        <translation>作为对我们支持者的特别感谢，赞助者会获得一个许可证文件。在当前构建版本中它是可选的——它可以免去版本升级时显示的致谢对话框，也为你日后切换到需要许可证的构建版本做好准备。</translation>
+    </message>
+    <message>
+        <source>Pineapple Notepad is free and open source, and stays fully usable without a license. Keeping it available on all supported platforms takes extra maintenance effort, and sponsorships help make that work sustainable. As a thank-you, a few nice-to-have features are offered as a sponsor perk.
 </source>
-        <translation>为了方面您能够在需要时在不同版本之间自如切换，下面仍然提供了许可证管理的相关功能。您可以在任何时候导入您的赞助者许可证。
+        <translation>菠萝记事本是自由开源软件，即使不导入许可证，核心功能也可以完整使用。让它在所有支持的平台（包括一些不太主流的平台）上保持可用需要投入额外的维护精力，而赞助正是让这份投入得以持续的方式。作为一份谢意，我们将少量锦上添花的功能设为赞助者的专属权益。
 </translation>
     </message>
     <message>
-        <source>
-Sponsor license could unlock the following features:
+        <source>A sponsor license unlocks the following features:
 </source>
-        <translation>
-赞助者许可证可以解锁下面的特性：
+        <translation>赞助者许可证可以解锁以下功能：
 </translation>
     </message>
     <message>
@@ -2987,8 +2995,12 @@ Sponsor license could unlock the following features:
         <translation>移除许可证</translation>
     </message>
     <message>
-        <source>Remove the current sponsor license? Sponsor-exclusive features will be locked until you import a valid license again.</source>
-        <translation>移除当前赞助者许可证吗？赞助者限定的特性将会被锁定，直至你重新导入一个有效的许可。</translation>
+        <source>Remove the current sponsor license? License-gated features will be locked until you import a valid license again.</source>
+        <translation>移除当前赞助者许可证吗？受许可证限制的功能将会被锁定，直至你重新导入一个有效的许可证。</translation>
+    </message>
+    <message>
+        <source>Remove the current sponsor license? The sponsor acknowledgment dialog will be shown again when a new version starts.</source>
+        <translation>移除当前赞助者许可证吗？新版本启动时将会重新显示赞助者致谢对话框。</translation>
     </message>
 </context>
 <context>

@@ -54,8 +54,8 @@ int main(int argc, char *argv[])
     // Set application name BEFORE KIconTheme::initTheme to ensure KColorSchemeManager
     // uses the correct application name when it gets initialized
     QApplication::setApplicationName(u"pineapple-notepad"_s);
-#ifdef SPONSOR_EDITION
-    QApplication::setApplicationVersion(QStringLiteral(PINEAPPLE_NOTEPAD_VERSION_STR) % u"-sponsor-edition"_s);
+#ifdef EFFORT_EDITION
+    QApplication::setApplicationVersion(QStringLiteral(PINEAPPLE_NOTEPAD_VERSION_STR) % u"-effort-edition"_s);
 #else
     QApplication::setApplicationVersion(QStringLiteral(PINEAPPLE_NOTEPAD_VERSION_STR));
 #endif

@@ -22,7 +22,6 @@ modules:
           -DCMAKE_BUILD_TYPE=RelWithDebInfo
           -DCMAKE_INSTALL_PREFIX=/app
           -DCMAKE_INSTALL_LIBDIR=lib
-          -DSPONSOR_EDITION=OFF
       - cmake --build _build --parallel
       - cmake --install _build
     cleanup:

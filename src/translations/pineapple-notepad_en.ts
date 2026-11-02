@@ -142,7 +142,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>This feature is currently only available to sponsors. Please consider becoming a sponsor.</source>
+        <source>This nice-to-have feature is only available to sponsors. Please consider becoming a sponsor!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -178,7 +178,7 @@ This will remove all custom colors saved for this theme.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>This feature is currently only available to sponsors. Please consider becoming a sponsor.</source>
+        <source>This nice-to-have feature is only available to sponsors. Please consider becoming a sponsor!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -2796,7 +2796,12 @@ Do you want to reload it from disk? Your unsaved changes from the previous sessi
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>You are using the Sponsor Edition of Pineapple Notepad, which means all features are available without requiring a sponsor license.
+        <source>This build of Pineapple Notepad already includes all features, no sponsor license is required.
+</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Importing your sponsor license is optional: it hides the sponsor acknowledgment dialog shown when a new version starts, and keeps the license ready in case you switch to a build that requires one (the Effort Edition).
 </source>
         <translation type="unfinished"></translation>
     </message>
@@ -2820,21 +2825,24 @@ You can view the list of sponsors in the About dialog too. If you like this appl
 You can learn more about sponsor benefits at [GitHub](https://github.com/BLumia/pineapple-notepad)
 or [Gitee](https://gitee.com/BLumia/pineapple-notepad) from project README, and donate to us via
 [Ko-fi](https://ko-fi.com/blumia), [Afdian](https://afdian.com/a/BLumia) or
-[Itch.io](https://blumia.itch.io/pineapple-notepad). We also have an Open Source Sponsor Goal as well,
-if we reach the sponsor goal, this application will be release as an Open-Source Software. So please
-consider becoming a sponsor!
+[Itch.io](https://blumia.itch.io/pineapple-notepad). Thanks to our sponsors, we've reached our
+open source goal. Pineapple Notepad is now open source software! If you like this application,
+please consider becoming a sponsor to support its continued development.
 
 %2 Please switch to the next tab for details.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>The following license management functions are there just in case if you want to switch between different version so license information will be preserved. Feel free to &quot;activate&quot; your sponsor license whenever you want.
+        <source>As a special thanks to our supporters, sponsors receive a license file. It is optional in this build — it hides the acknowledgment dialog on version upgrades, and stays ready if you ever switch to a build that requires one.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Pineapple Notepad is free and open source, and stays fully usable without a license. Keeping it available on all supported platforms takes extra maintenance effort, and sponsorships help make that work sustainable. As a thank-you, a few nice-to-have features are offered as a sponsor perk.
 </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>
-Sponsor license could unlock the following features:
+        <source>A sponsor license unlocks the following features:
 </source>
         <translation type="unfinished"></translation>
     </message>
@@ -2882,7 +2890,11 @@ Sponsor license could unlock the following features:
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Remove the current sponsor license? Sponsor-exclusive features will be locked until you import a valid license again.</source>
+        <source>Remove the current sponsor license? License-gated features will be locked until you import a valid license again.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Remove the current sponsor license? The sponsor acknowledgment dialog will be shown again when a new version starts.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

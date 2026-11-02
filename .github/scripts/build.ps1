@@ -105,8 +105,7 @@ if ($Deploy) {
 
 if ($IsWindows) {
     Build-CMakeProject -SourcePath "." -RepoName "pineapple-notepad" -ForceRebuild `
-        -BuildBaseDir "build-msvc" -InstallPrefix "install-msvc" -NoSourceIdentifierFolder -AvoidReconfig `
-        -CMakeArgs @("-DSPONSOR_EDITION=OFF")
+        -BuildBaseDir "build-msvc" -InstallPrefix "install-msvc" -NoSourceIdentifierFolder -AvoidReconfig
 } elseif ($IsLinux) {
     # FHS: /opt is where self-contained third-party applications belong. The .deb
     # installs the app (plus the bundled Qt6/KF6 runtime) there, and only the
@@ -124,6 +123,5 @@ if ($IsWindows) {
         )
 } else {
     Build-CMakeProject -SourcePath "." -RepoName "pineapple-notepad" -ForceRebuild `
-        -BuildBaseDir "build" -SkipInstall -NoSourceIdentifierFolder -AvoidReconfig `
-        -CMakeArgs @("-DSPONSOR_EDITION=OFF")
+        -BuildBaseDir "build" -SkipInstall -NoSourceIdentifierFolder -AvoidReconfig
 }

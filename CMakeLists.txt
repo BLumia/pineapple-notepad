@@ -52,11 +52,11 @@ include(KDEInstallDirs)
 include(ECMAddAppIcon)
 endif()
 
-option(SPONSOR_EDITION
-    "Build as Sponsor Edition - all sponsor-gated features are unlocked without requiring a license. Intended for builds distributed to specific sponsors; not for public releases."
-    ON)
-if(SPONSOR_EDITION)
-    add_compile_definitions(SPONSOR_EDITION)
+option(EFFORT_EDITION
+    "Effort Edition: nice-to-have features require a sponsor license"
+    OFF)
+if(EFFORT_EDITION)
+    add_compile_definitions(EFFORT_EDITION)
 endif()
 
 add_subdirectory(lib)

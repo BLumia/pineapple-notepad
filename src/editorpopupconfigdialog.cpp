@@ -151,17 +151,14 @@ QStringList EditorPopupConfigDialog::defaultItemsFromContainer(KXMLGUIFactory *f
 
 void EditorPopupConfigDialog::setupSponsorMessage()
 {
-#ifdef SPONSOR_EDITION
-    // Sponsor Edition: all features always unlocked, no gate UI needed.
-    // m_sponsorMessage stays nullptr; OK button keeps its default (enabled).
-#else
+#ifdef EFFORT_EDITION
     m_sponsorMessage = new KMessageWidget(this);
     m_sponsorMessage->setMessageType(KMessageWidget::Information);
     m_sponsorMessage->setWordWrap(true);
     m_sponsorMessage->setCloseButtonVisible(false);
-    m_sponsorMessage->setIcon(QIcon::fromTheme(QStringLiteral("love")));
-    m_sponsorMessage->setText(tr("This feature is currently only available to sponsors. "
-                                 "Please consider becoming a sponsor."));
+    m_sponsorMessage->setIcon(QIcon::fromTheme(u"love"_s));
+    m_sponsorMessage->setText(tr("This nice-to-have feature is only available to sponsors. "
+                                 "Please consider becoming a sponsor!"));
     auto *iAmSponsorAction = new QAction(tr("I'm a Sponsor"), m_sponsorMessage);
     m_sponsorMessage->addAction(iAmSponsorAction);
     connect(iAmSponsorAction, &QAction::triggered, this, [this]() {
@@ -174,14 +171,15 @@ void EditorPopupConfigDialog::setupSponsorMessage()
     connect(AppSettings::self(), &AppSettings::licenseContentChanged,
             this, &EditorPopupConfigDialog::updateSponsorRelatedUi);
     updateSponsorRelatedUi();
+#else
+    // Full-featured build: all features always unlocked, no gate UI needed.
+    // m_sponsorMessage stays nullptr; OK button keeps its default (enabled).
 #endif
 }
 
 void EditorPopupConfigDialog::updateSponsorRelatedUi()
 {
-#ifdef SPONSOR_EDITION
-    // No-op in Sponsor Edition.
-#else
+#ifdef EFFORT_EDITION
     if (!m_sponsorMessage)
         return;
 
@@ -191,6 +189,8 @@ void EditorPopupConfigDialog::updateSponsorRelatedUi()
     if (QPushButton *ok = ui->buttonBox->button(QDialogButtonBox::Ok)) {
         ok->setEnabled(isValid);
     }
+#else
+    // No-op in full-featured builds.
 #endif
 }
 

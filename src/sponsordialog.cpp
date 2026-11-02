@@ -134,13 +134,21 @@ void SponsorDialog::populateAboutText()
 You can learn more about sponsor benefits at [GitHub](https://github.com/BLumia/pineapple-notepad)
 or [Gitee](https://gitee.com/BLumia/pineapple-notepad) from project README, and donate to us via
 [Ko-fi](https://ko-fi.com/blumia), [Afdian](https://afdian.com/a/BLumia) or
-[Itch.io](https://blumia.itch.io/pineapple-notepad). We also have an Open Source Sponsor Goal as well,
-if we reach the sponsor goal, this application will be release as an Open-Source Software. So please
-consider becoming a sponsor!
+[Itch.io](https://blumia.itch.io/pineapple-notepad). Thanks to our sponsors, we've reached our
+open source goal. Pineapple Notepad is now open source software! If you like this application,
+please consider becoming a sponsor to support its continued development.
 
 %2 Please switch to the next tab for details.)");
-    ui->aboutBrowser->setMarkdown(msg.arg(sponsorListText())
-                                     .arg(tr("As a special thanks to our supporters, sponsors could unlock some nice-to-have features with a simple license file.")));
+#ifdef EFFORT_EDITION
+    const QString licenseNote = tr("As a special thanks to our supporters, sponsors could unlock "
+                                   "some nice-to-have features with a simple license file.");
+#else
+    const QString licenseNote = tr("As a special thanks to our supporters, sponsors receive a "
+                                   "license file. It is optional in this build — it hides the "
+                                   "acknowledgment dialog on version upgrades, and stays ready "
+                                   "if you ever switch to a build that requires one.");
+#endif
+    ui->aboutBrowser->setMarkdown(msg.arg(sponsorListText()).arg(licenseNote));
 }
 
 // ─── Tab 2: License / I'm a Sponsor ─────────────────────────────────
@@ -164,18 +172,22 @@ void SponsorDialog::refreshLicenseStatus()
         ui->removeButton->show();
     } else {
         const QStringList lines = {
-#ifdef SPONSOR_EDITION
-            tr("You are using the Sponsor Edition of Pineapple Notepad, "
-            "which means all features are available without requiring a sponsor license.\n"),
-            tr("The following license management functions are there just in case if you want "
-            "to switch between different version so license information will be preserved. "
-            "Feel free to \"activate\" your sponsor license whenever you want.\n"),
-#else
-            tr("As a special thanks to our supporters, sponsors could unlock some nice-to-have features with a simple license file."),
-            tr("\nSponsor license could unlock the following features:\n"),
+#ifdef EFFORT_EDITION
+            tr("Pineapple Notepad is free and open source, and stays fully usable without a license. "
+            "Keeping it available on all supported platforms takes extra maintenance effort, and "
+            "sponsorships help make that work sustainable. As a thank-you, a few nice-to-have "
+            "features are offered as a sponsor perk.\n"),
+            tr("A sponsor license unlocks the following features:\n"),
             tr("- Theme color editor for editing area\n"),
             tr("- Customizable editor context menu\n"),
-#endif // SPONSOR_EDITION
+#else
+            tr("This build of Pineapple Notepad already includes all features, "
+            "no sponsor license is required.\n"),
+            tr("Importing your sponsor license is optional: it hides the sponsor "
+            "acknowledgment dialog shown when a new version starts, and keeps the "
+            "license ready in case you switch to a build that requires one "
+            "(the Effort Edition).\n"),
+#endif // EFFORT_EDITION
             tr("No sponsor license is currently active, use the button below to import your .lic file."),
             tr("Not sure where to download the license file or need help? [Please click here](https://github.com/BLumia/pineapple-notepad/wiki/Sponsor-License).")
         };
@@ -227,11 +239,18 @@ void SponsorDialog::importLicense()
 
 void SponsorDialog::removeLicense()
 {
-    // Confirm before wiping - this deactivates all sponsor features.
+    // Confirm before wiping - in the Effort Edition this deactivates all
+    // sponsor-gated features; in full-featured builds it only brings back
+    // the startup acknowledgment dialog on the next version upgrade.
+#ifdef EFFORT_EDITION
+    const QString message = tr("Remove the current sponsor license? "
+                               "License-gated features will be locked until you import a valid license again.");
+#else
+    const QString message = tr("Remove the current sponsor license? "
+                               "The sponsor acknowledgment dialog will be shown again when a new version starts.");
+#endif
     const auto reply = QMessageBox::question(
-        this, tr("Remove License"),
-        tr("Remove the current sponsor license? "
-           "Sponsor-exclusive features will be locked until you import a valid license again."),
+        this, tr("Remove License"), message,
         QMessageBox::Yes | QMessageBox::No, QMessageBox::No);
     if (reply != QMessageBox::Yes)
         return;

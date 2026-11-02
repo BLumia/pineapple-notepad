@@ -18,6 +18,8 @@
 
 #include <Lexilla.h>
 
+using namespace Qt::StringLiterals;
+
 EditorThemePage::EditorThemePage(QWidget *parent)
     : QWidget(parent)
     , ui(new Ui::EditorThemeSettings)
@@ -233,17 +235,14 @@ void EditorThemePage::onResetClicked()
 
 void EditorThemePage::setupSponsorMessage()
 {
-#ifdef SPONSOR_EDITION
-    // Sponsor Edition: all features always unlocked, no gate UI needed.
-    // m_sponsorMessage stays nullptr; saveColorsButton keeps its .ui default (enabled).
-#else
+#ifdef EFFORT_EDITION
     m_sponsorMessage = new KMessageWidget(this);
     m_sponsorMessage->setMessageType(KMessageWidget::Information);
     m_sponsorMessage->setWordWrap(true);
     m_sponsorMessage->setCloseButtonVisible(false);
-    m_sponsorMessage->setIcon(QIcon::fromTheme("love"));
-    m_sponsorMessage->setText(tr("This feature is currently only available to sponsors. "
-                                 "Please consider becoming a sponsor."));
+    m_sponsorMessage->setIcon(QIcon::fromTheme(u"love"_s));
+    m_sponsorMessage->setText(tr("This nice-to-have feature is only available to sponsors. "
+                                 "Please consider becoming a sponsor!"));
     // Action button inside the message - opens SponsorDialog on the license tab
     // so the user can import their .lic file without hunting through the menu.
     auto *iAmSponsorAction = new QAction(tr("I'm a Sponsor"), m_sponsorMessage);
@@ -259,14 +258,15 @@ void EditorThemePage::setupSponsorMessage()
     connect(AppSettings::self(), &AppSettings::licenseContentChanged,
             this, &EditorThemePage::updateSponsorRelatedUi);
     updateSponsorRelatedUi();
+#else
+    // Full-featured build: all features always unlocked, no gate UI needed.
+    // m_sponsorMessage stays nullptr; saveColorsButton keeps its .ui default (enabled).
 #endif
 }
 
 void EditorThemePage::updateSponsorRelatedUi()
 {
-#ifdef SPONSOR_EDITION
-    // No-op in Sponsor Edition.
-#else
+#ifdef EFFORT_EDITION
     if (!m_sponsorMessage)
         return;
 
@@ -278,5 +278,7 @@ void EditorThemePage::updateSponsorRelatedUi()
     const bool isValid = !licText.isEmpty() && LicenseVerifier::verifyContent(licText);
     m_sponsorMessage->setVisible(!isValid);
     ui->saveColorsButton->setEnabled(isValid);
+#else
+    // No-op in full-featured builds.
 #endif
 }
