@@ -8,7 +8,7 @@
     "nimrod", "coffeescript", "d", "erlang", "nsis", "objc", "r", "rebol",
     "registry", "scheme", "vhdl", "zig", "go", "javascript", "typescript",
     "ksh:Groovy", "ksh:QML", "java", "toml", "gdscript", "php", "po", "meson", "rc",
-    "dockerfile", "ksh:reStructuredText", "inno", "avs", "verilog",
+    "dockerfile", "ksh:reStructuredText", "inno", "avs", "verilog", "smalltalk",
     "ksh:Markdown", "ksh:YAML", "ksh:SASS", "ksh:Org Mode"
   ],
   "languages": {
@@ -152,6 +152,17 @@
       }
     },
 
+    "smalltalk": {
+      "displayName": "Smalltalk",
+      "extensions": ["st"],
+      "multiLineComment": {
+        "start": "\"",
+        "end": "\""
+      },
+      "keywords": {
+        "0": "ifTrue: ifFalse: whileTrue: whileFalse: ifNil: ifNotNil: whileTrue whileFalse repeat isNil notNil"
+      }
+    },
     "lua": {
       "displayName": "Lua",
       "extensions": ["lua"],

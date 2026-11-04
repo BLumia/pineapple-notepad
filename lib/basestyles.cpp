@@ -1248,6 +1248,26 @@ static constexpr BaseStyleEntry csoundStyles[] = {
     { 15, Theme::Error },                                            // STRINGEOL
 };
 
+static constexpr BaseStyleEntry smalltalkStyles[] = {
+    { 0, Theme::Normal },                                            // DEFAULT
+    { 1, Theme::String },                                            // STRING ('...')
+    { 2, Theme::DecVal },                                            // NUMBER
+    { 3, Theme::Comment },                                           // COMMENT ("...")
+    { .styleId = 4, .textStyle = Theme::SpecialString, .bold = true }, // SYMBOL (#foo)
+    { 5, Theme::Operator },                                          // BINARY (+ - = etc.)
+    { 6, Theme::Keyword },                                           // BOOL (true/false)
+    { .styleId = 7, .textStyle = Theme::Keyword, .bold = true },     // SELF
+    { .styleId = 8, .textStyle = Theme::Keyword, .bold = true },     // SUPER
+    { 9, Theme::Keyword },                                           // NIL
+    { 10, Theme::BuiltIn },                                          // GLOBAL (class names)
+    { .styleId = 11, .textStyle = Theme::ControlFlow, .bold = true }, // RETURN (^)
+    { 12, Theme::Operator },                                         // SPECIAL (punctuation)
+    { 13, Theme::Function },                                         // KWSEND (at:put:)
+    { 14, Theme::Operator },                                         // ASSIGN (:=)
+    { 15, Theme::Char },                                             // CHARACTER ($c)
+    { 16, Theme::ControlFlow },                                      // SPEC_SEL (ifTrue: etc.)
+};
+
 struct LexerTable { std::u16string_view name; std::span<const BaseStyleEntry> entries; };
 
 static constexpr LexerTable kTables[] = {
@@ -1307,6 +1327,7 @@ static constexpr LexerTable kTables[] = {
     { u"kix", kixStyles },
     { u"gui4cli", gui4cliStyles },
     { u"csound", csoundStyles },
+    { u"smalltalk", smalltalkStyles },
 };
 
 } // namespace
