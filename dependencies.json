@@ -1,19 +1,19 @@
 [
   {
     "x-pn-name": "scintilla",
-    "x-pn-version": "5.6.7",
+    "x-pn-version": "5.6.9",
     "x-pn-patches": ["scintilla/bug2500-thin-line.patch"],
     "type": "file",
-    "url": "https://www.scintilla.org/scintilla567.zip",
-    "sha256": "2309181e59e7da4659f890dbc128db7451ccd094748770e7be674b830494587c",
+    "url": "https://www.scintilla.org/scintilla569.zip",
+    "sha256": "fddc637afa6e3a9205a5ad67c777d711a921ed2797d792f3034010c1be1539d6",
     "dest": "offline"
   },
   {
     "x-pn-name": "lexilla",
-    "x-pn-version": "5.5.4",
+    "x-pn-version": "5.5.5",
     "type": "file",
-    "url": "https://www.scintilla.org/lexilla554.zip",
-    "sha256": "5e0a21356e4e2f19d6a38ecd1c8172d5a2b7b4542940568b023386080db90fe0",
+    "url": "https://www.scintilla.org/lexilla555.zip",
+    "sha256": "713ada097b7da0594638e2c5723d8dea486653c23ec2e0c12631df7e5b7f0991",
     "dest": "offline"
   },
   {
