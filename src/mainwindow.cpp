@@ -2956,7 +2956,7 @@ bool MainWindow::saveDocumentAs(int docId)
     const QString fileName = QFileDialog::getSaveFileName(this,
         tr("Save File"),
         m_documentManager->getDocumentTitle(docId),
-        tr("All Files (*.*)"),
+        tr("All Files (*)"),
         nullptr,
         options);
 
@@ -3197,7 +3197,7 @@ void MainWindow::openFile()
     QString fileName = QFileDialog::getOpenFileName(this, 
         tr("Open File"), 
         defaultDir, 
-        tr("All Files (*.*)"),
+        tr("All Files (*)"),
         nullptr,
         options);
     

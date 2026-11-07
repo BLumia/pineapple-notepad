@@ -2290,8 +2290,8 @@ Do you want to save your changes?</source>
         <translation>现在就重新加载吗？</translation>
     </message>
     <message>
-        <source>All Files (*.*)</source>
-        <translation>所有文件 (*.*)</translation>
+        <source>All Files (*)</source>
+        <translation>所有文件 (*)</translation>
     </message>
     <message>
         <source>Save Macro</source>

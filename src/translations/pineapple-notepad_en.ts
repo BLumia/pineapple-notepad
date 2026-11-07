@@ -2216,8 +2216,8 @@ Do you want to save your changes?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>All Files (*.*)</source>
-        <translation>所有文件 (*.*)</translation>
+        <source>All Files (*)</source>
+        <translation>所有文件 (*)</translation>
     </message>
     <message>
         <source>Save Macro</source>
