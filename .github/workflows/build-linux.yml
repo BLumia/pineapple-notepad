@@ -20,5 +20,4 @@ jobs:
       with:
         bundle: net.blumia.pineapple-notepad.yml
         manifest-path: net.blumia.pineapple-notepad.yml
-        cache-key: flatpak-builder-${{ github.sha }}
         upload-artifact: true

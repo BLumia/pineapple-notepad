@@ -24,6 +24,14 @@ jobs:
 
     steps:
     - uses: actions/checkout@v6
+    - name: Cache offline dependency archives
+      uses: actions/cache@v6
+      with:
+        path: offline
+        key: offline-deps-${{ hashFiles('dependencies.json') }}
+    - name: Prepare offline dependency archives
+      shell: pwsh
+      run: ./.github/scripts/build.ps1 -PrepareOffline
     - name: Install Qt
       uses: jurplel/install-qt-action@v4
       with:

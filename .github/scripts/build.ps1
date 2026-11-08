@@ -11,7 +11,8 @@ $ProgressPreference = "SilentlyContinue"
 
 #region Prepare offline dependencies
 if ($PrepareOffline) {
-    $offlineDir = Join-Path $PSScriptRoot "offline"
+    $repoRoot = Split-Path (Split-Path $PSScriptRoot -Parent) -Parent
+    $offlineDir = Join-Path $repoRoot "offline"
     if (-not (Test-Path -Path $offlineDir)) {
         New-Item -ItemType Directory -Path $offlineDir -Force | Out-Null
         Write-Host "Created offline directory: $offlineDir" -ForegroundColor Green
@@ -19,7 +20,7 @@ if ($PrepareOffline) {
 
     # dependencies.json is the single source of truth (also consumed by
     # CMake and the flatpak manifest); never hardcode urls here.
-    $depsFile = Join-Path $PSScriptRoot "dependencies.json"
+    $depsFile = Join-Path $repoRoot "dependencies.json"
     $depsRaw = Get-Content $depsFile -Raw
     $dependencies = ConvertFrom-Json $depsRaw
     $hashesUpdated = $false
