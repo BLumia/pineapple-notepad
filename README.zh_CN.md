@@ -8,7 +8,7 @@
 <td><img src="https://pineapple-notepad.sourceforge.io/linux-find-dialog.png" height="260"></td>
 </tr></table>
 
-菠萝记事本旨在提供 Notepad++ 的跨平台替代。它基于 [Scintilla](https://www.scintilla.org/)、[Qt](https://www.qt.io/) 和 [KDE Framework](https://develop.kde.org/products/frameworks/)。
+菠萝记事本旨在提供 Notepad++ 的跨平台替代。此项目基于 [Scintilla](https://www.scintilla.org/)、[Qt](https://www.qt.io/) 和 [KDE Framework](https://develop.kde.org/products/frameworks/)。
 
 ## 赞助
 
@@ -23,7 +23,7 @@
 ## CLA
 
 ```
-当您通过 GitHub Pull Request、Issue、邮件 patch set 或其他任何形似
+当您通过 GitHub Pull Request、Issue、邮件 patch set 或其他任何形式
 向此项目发送补丁时，将视为您授予了《菠萝记事本》项目以及其作者（Gary
 Wang）无限制、非独家的权力来复用、修改您的补丁以及为您的补丁变更许可证。
 ```
