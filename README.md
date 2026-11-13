@@ -1,16 +1,24 @@
 # Pineapple Notepad
 
-Pineapple Notepad aims to be a simple, lightweight, and easy to use notepad application that can be a cross-platform alternative to Notepad++. It's based on [Scintilla](https://www.scintilla.org/), [Qt](https://www.qt.io/) and [KDE Framework](https://develop.kde.org/products/frameworks/), available on Windows, Linux and macOS.
+Pineapple Notepad is an advanced and easy-to-use multi-document text editor. It offers numerous features such as encoding detection and conversion, session recovery, macro recording and much more. It includes a rich set of plain text processing tools and syntax highlighting support for over 300 different file types. It also supports Windows, macOS, and Linux desktop platforms.
+
+<table><tr>
+<td><img src="https://pineapple-notepad.sourceforge.io/windows-panes.png" height="260"></td>
+<td><img src="https://pineapple-notepad.sourceforge.io/macos-language-selector-dlg.png" height="260"></td>
+<td><img src="https://pineapple-notepad.sourceforge.io/linux-find-dialog.png" height="260"></td>
+</tr></table>
+
+Pineapple Notepad aims to be a cross-platform alternative to Notepad++. It's based on [Scintilla](https://www.scintilla.org/), [Qt](https://www.qt.io/) and [KDE Framework](https://develop.kde.org/products/frameworks/).
 
 ## Sponsorship
 
-Thanks to our sponsors, Pineapple Notepad has reached its open source goal: the complete source code is now publicly available under an OSI approved license, and builds on GitHub come with every feature unlocked.
+With the support of our sponsors, Pineapple Notepad has now achieved its open-source goals: the complete code for this project has been released under an OSI-approved open-source license, and the version available on GitHub will directly include all features.
 
-Keeping Pineapple Notepad working on all supported platforms — including less common architectures — takes extra maintenance effort, and sponsorships help make that work sustainable. As a thank-you gesture, sponsors receive a license file which unlocks a handful of nice-to-have features (the theme color editor and the customizable editor context menu) in "Effort Edition" builds; the core application stays fully usable without one.
+Making Pineapple Notepad available and usable on more systems, platforms, architectures, and channels requires additional effort. Therefore, for platforms or channels that require extra time and effort to maintain, a version called Effort Edition will be provided. In this version, the core functions and tools of the editor will remain fully available, while certain additional features (theme editor and context menu editor) require importing a "Sponsor License" to unlock. You can obtain a license by sponsoring this project; a one-time sponsorship grants you a Sponsor License, which can be imported and used in all versions.
 
-Since GitHub builds unlock everything anyway, importing a license is completely optional: it only hides the acknowledgment dialog shown on version upgrades. The same license works in every build.
+The full-featured version does not require importing a license to use all features, but we have still retained the license import function. The advantage of importing a license in the full-featured version is that it avoids the Sponsor Acknowledgments dialog box popping up when running a new version for the first time after updating, and it also displays your acknowledgments in the Sponsor Acknowledgments dialog box.
 
-If you like this project, please consider [becoming a sponsor](https://pineapple-notepad.blumia.net/sponsor) — it helps keep Pineapple Notepad available on more platforms.
+If you like this project and would like it to continue to be maintained, please consider [becoming a sponsor](https://pineapple-notepad.blumia.net/sponsor)!
 
 ## CLA
 
