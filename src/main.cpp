@@ -111,7 +111,7 @@ int main(int argc, char *argv[])
     aboutData.addCredit("pzm9012", QCoreApplication::translate("main", "Sponsor"));
     aboutData.addCredit("田浪", QCoreApplication::translate("main", "Sponsor"));
     aboutData.addCredit("笑一个吧", QCoreApplication::translate("main", "Sponsor"));
-    aboutData.setLicenseTextFile(":/LICENSE");
+    aboutData.setLicense(KAboutLicense::LicenseKey::GPL_V3);
     KAboutData::setApplicationData(aboutData);
     a.setWindowIcon(QIcon(":/icons/icons/pineapple-notepad.svg"));
 

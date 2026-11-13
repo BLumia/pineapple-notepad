@@ -130,12 +130,6 @@ qt_add_resources(pineapple-notepad icons.qrc
         ../icons/macro-playback-repeat.svg
 )
 
-qt_add_resources(pineapple-notepad license.qrc
-    PREFIX "/"
-    FILES
-        ../LICENSE
-)
-
 kconfig_add_kcfg_files(pineapple-notepad GENERATE_MOC appsettings.kcfgc)
 
 target_link_libraries(pineapple-notepad
