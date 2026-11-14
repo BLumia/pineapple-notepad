@@ -194,3 +194,22 @@ add_test(NAME searchresultlexer_test COMMAND searchresultlexer_test)
 set_tests_properties(searchresultlexer_test PROPERTIES
     ENVIRONMENT "QT_FORCE_STDERR_LOGGING=1"
 )
+
+# EditorArea/TabWidget live in the application target, so their sources are
+# compiled into the test directly.
+add_executable(editorarea_test)
+target_sources(editorarea_test PRIVATE
+    editorarea_test.cpp
+    ../src/editorarea.cpp ../src/editorarea.h
+    ../src/tabwidget.cpp ../src/tabwidget.h
+)
+target_include_directories(editorarea_test PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/../src)
+target_link_libraries(editorarea_test PRIVATE
+    pineapple-notepad-lib
+    Qt6::Test
+    Qt6::Widgets
+)
+add_test(NAME editorarea_test COMMAND editorarea_test)
+set_tests_properties(editorarea_test PROPERTIES
+    ENVIRONMENT "QT_FORCE_STDERR_LOGGING=1"
+)

@@ -38,4 +38,13 @@ public:
     virtual void activateNextTab() = 0;
     virtual void activatePreviousTab() = 0;
     virtual void activateTabAtIndex(int index) = 0;
+
+    // Per tab-group addressing. Implementations hosting a single tab group
+    // (TabWidget) report exactly one group with index 0.
+    virtual int tabGroupCount() const = 0;
+    virtual QVector<int> documentIdsInGroup(int group) const = 0;
+    virtual int activeIndexInGroup(int group) const = 0;
+    virtual SciEdit *currentEditorInGroup(int group) const = 0;
+    virtual SciEdit *editorInGroup(int group, int docId) const = 0;
+    virtual int groupOfEditor(SciEdit *editor) const = 0;
 };

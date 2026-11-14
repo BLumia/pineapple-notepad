@@ -3,115 +3,355 @@
 #include "sciedit.h"
 #include "tabwidget.h"
 
+#include <QEvent>
+#include <QSplitter>
 #include <QVBoxLayout>
 
 EditorArea::EditorArea(DocumentManager *documentManager, QWidget *parent)
     : QWidget(parent)
-    , m_tabWidget(new TabWidget(documentManager, this))
+    , m_documentManager(documentManager)
 {
     auto *layout = new QVBoxLayout(this);
     layout->setContentsMargins(0, 0, 0, 0);
     layout->setSpacing(0);
-    layout->addWidget(m_tabWidget);
 
-    connect(m_tabWidget, &TabWidget::currentEditorChanged, this, &EditorArea::currentEditorChanged);
-    connect(m_tabWidget, &TabWidget::filesDropped, this, &EditorArea::filesDropped);
-    connect(m_tabWidget, &TabWidget::editorCloseRequested, this, &EditorArea::editorCloseRequested);
-    connect(m_tabWidget, &TabWidget::contextMenuRequested, this, &EditorArea::contextMenuRequested);
-    connect(m_tabWidget, &TabWidget::newDocumentRequested, this, &EditorArea::newDocumentRequested);
-    connect(m_tabWidget, &TabWidget::bookmarkMarginContextMenuRequested, this, &EditorArea::bookmarkMarginContextMenuRequested);
+    auto *primary = new TabWidget(m_documentManager, this);
+    layout->addWidget(primary);
+    m_tabGroups.append(primary);
+    connectTabWidget(primary);
 }
 
 EditorArea::~EditorArea() = default;
 
-// EditorViewManager interface (currently delegated to the single tab group)
+TabWidget *EditorArea::groupAt(int group) const
+{
+    return (group >= 0 && group < m_tabGroups.size()) ? m_tabGroups.at(group) : nullptr;
+}
+
+void EditorArea::connectTabWidget(TabWidget *tab)
+{
+    connect(tab, &TabWidget::currentEditorChanged, this, &EditorArea::currentEditorChanged);
+    connect(tab, &TabWidget::filesDropped, this, &EditorArea::filesDropped);
+    connect(tab, &TabWidget::editorCloseRequested, this, &EditorArea::editorCloseRequested);
+    connect(tab, &TabWidget::contextMenuRequested, this, &EditorArea::contextMenuRequested);
+    connect(tab, &TabWidget::newDocumentRequested, this, &EditorArea::newDocumentRequested);
+    connect(tab, &TabWidget::bookmarkMarginContextMenuRequested, this, &EditorArea::bookmarkMarginContextMenuRequested);
+    // Switching to a tab of a group also makes that group the active one.
+    connect(tab, &TabWidget::currentEditorChanged, this, [this, tab](SciEdit *) {
+        setActiveTabGroup(m_tabGroups.indexOf(tab));
+    });
+}
+
+int EditorArea::activeTabGroup() const
+{
+    return m_activeGroup;
+}
+
+void EditorArea::setActiveTabGroup(int group)
+{
+    if (group < 0 || group >= m_tabGroups.size() || group == m_activeGroup) {
+        return;
+    }
+    m_activeGroup = group;
+    emit activeTabGroupChanged(group);
+}
+
+bool EditorArea::subViewVisible() const
+{
+    return m_tabGroups.size() > 1;
+}
+
+void EditorArea::ensureSubView()
+{
+    if (m_tabGroups.size() > 1) {
+        return;
+    }
+
+    wrapInSplitter();
+
+    auto *subView = new TabWidget(m_documentManager, this);
+    m_splitter->addWidget(subView);
+    m_splitter->setStretchFactor(0, 1);
+    m_splitter->setStretchFactor(1, 1);
+    m_tabGroups.append(subView);
+    connectTabWidget(subView);
+}
+
+void EditorArea::removeSubViewIfEmpty()
+{
+    if (m_tabGroups.size() < 2) {
+        return;
+    }
+    TabWidget *subView = m_tabGroups.at(1);
+    if (subView->count() != 0) {
+        return;
+    }
+
+    m_tabGroups.removeAt(1);
+    subView->deleteLater();
+    setActiveTabGroup(0);
+    unwrapSplitter();
+}
+
+void EditorArea::wrapInSplitter()
+{
+    if (m_splitter) {
+        return;
+    }
+    m_splitter = new QSplitter(Qt::Horizontal, this);
+    m_splitter->setChildrenCollapsible(false);
+    m_splitter->addWidget(m_tabGroups.at(0));
+    layout()->addWidget(m_splitter);
+}
+
+void EditorArea::unwrapSplitter()
+{
+    if (!m_splitter) {
+        return;
+    }
+    QSplitter *splitter = m_splitter;
+    m_splitter = nullptr;
+    TabWidget *primary = m_tabGroups.value(0);
+    primary->setParent(this);
+    layout()->addWidget(primary);
+    splitter->deleteLater();
+}
+
+// EditorViewManager interface
 
 SciEdit *EditorArea::currentEditor() const
 {
-    return m_tabWidget->currentEditor();
+    if (TabWidget *group = groupAt(m_activeGroup)) {
+        return group->currentEditor();
+    }
+    return nullptr;
 }
 
 int EditorArea::currentDocumentId() const
 {
-    return m_tabWidget->currentDocumentId();
+    if (TabWidget *group = groupAt(m_activeGroup)) {
+        return group->currentDocumentId();
+    }
+    return -1;
 }
 
 int EditorArea::docIdForEditor(SciEdit *editor) const
 {
-    return m_tabWidget->docIdForEditor(editor);
+    if (TabWidget *group = groupAt(groupOfEditor(editor))) {
+        return group->docIdForEditor(editor);
+    }
+    return -1;
 }
 
 SciEdit *EditorArea::editorForDocId(int docId) const
 {
-    return m_tabWidget->editorForDocId(docId);
+    // Prefer an editor in the active group, fall back to any group.
+    if (TabWidget *group = groupAt(m_activeGroup)) {
+        if (SciEdit *editor = group->editorForDocId(docId)) {
+            return editor;
+        }
+    }
+    for (TabWidget *group : std::as_const(m_tabGroups)) {
+        if (SciEdit *editor = group->editorForDocId(docId)) {
+            return editor;
+        }
+    }
+    return nullptr;
 }
 
 QVector<SciEdit *> EditorArea::editorsForDocId(int docId) const
 {
-    return m_tabWidget->editorsForDocId(docId);
+    QVector<SciEdit *> result;
+    for (TabWidget *group : std::as_const(m_tabGroups)) {
+        if (SciEdit *editor = group->editorForDocId(docId)) {
+            result.append(editor);
+        }
+    }
+    return result;
 }
 
 int EditorArea::count() const
 {
-    return m_tabWidget->count();
+    int total = 0;
+    for (TabWidget *group : std::as_const(m_tabGroups)) {
+        total += group->count();
+    }
+    return total;
 }
 
 QVector<SciEdit *> EditorArea::editors() const
 {
-    return m_tabWidget->editors();
+    QVector<SciEdit *> result;
+    for (TabWidget *group : std::as_const(m_tabGroups)) {
+        result += group->editors();
+    }
+    return result;
 }
 
 QVector<int> EditorArea::documentIds() const
 {
-    return m_tabWidget->documentIds();
+    // Group 0 order first, then group 1; a document cloned into both groups
+    // is reported once (at its first occurrence).
+    QVector<int> result;
+    for (TabWidget *group : std::as_const(m_tabGroups)) {
+        const QVector<int> docIds = group->documentIds();
+        for (int docId : docIds) {
+            if (docId >= 0 && !result.contains(docId)) {
+                result.append(docId);
+            }
+        }
+    }
+    return result;
 }
 
 QWidget *EditorArea::viewWidget() const
 {
-    return m_tabWidget;
+    // New editors are created with this widget as parent; the receiving
+    // tab group reparents them when the tab is added.
+    return m_tabGroups.value(0);
 }
 
 void EditorArea::addEditor(int docId, SciEdit *editor, bool activate, NewTabPlacement placement)
 {
-    m_tabWidget->addEditor(docId, editor, activate, placement);
+    addEditorToGroup(m_activeGroup, docId, editor, activate, placement);
+}
+
+void EditorArea::addEditorToGroup(int group, int docId, SciEdit *editor, bool activate, NewTabPlacement placement)
+{
+    TabWidget *tabGroup = groupAt(group);
+    if (!tabGroup) {
+        tabGroup = groupAt(m_activeGroup);
+    }
+    Q_ASSERT(tabGroup);
+    if (!tabGroup) {
+        return;
+    }
+
+    tabGroup->addEditor(docId, editor, activate, placement);
+    editor->installEventFilter(this);
 }
 
 void EditorArea::removeEditor(SciEdit *editor)
 {
-    m_tabWidget->removeEditor(editor);
+    if (TabWidget *group = groupAt(groupOfEditor(editor))) {
+        group->removeEditor(editor);
+        removeSubViewIfEmpty();
+    }
 }
 
 void EditorArea::removeAllEditorsForDoc(int docId)
 {
-    m_tabWidget->removeAllEditorsForDoc(docId);
+    for (TabWidget *group : std::as_const(m_tabGroups)) {
+        group->removeAllEditorsForDoc(docId);
+    }
+    removeSubViewIfEmpty();
 }
 
 void EditorArea::switchToEditor(SciEdit *editor)
 {
-    m_tabWidget->switchToEditor(editor);
+    const int group = groupOfEditor(editor);
+    if (TabWidget *tabGroup = groupAt(group)) {
+        setActiveTabGroup(group);
+        tabGroup->switchToEditor(editor);
+    }
 }
 
 QVector<SciEdit *> EditorArea::editorsInSameTabGroup(SciEdit *editor) const
 {
-    return m_tabWidget->editorsInSameTabGroup(editor);
+    if (TabWidget *group = groupAt(groupOfEditor(editor))) {
+        return group->editorsInSameTabGroup(editor);
+    }
+    return {};
 }
 
 void EditorArea::refreshEditor(SciEdit *editor)
 {
-    m_tabWidget->refreshEditor(editor);
+    if (TabWidget *group = groupAt(groupOfEditor(editor))) {
+        group->refreshEditor(editor);
+    }
 }
 
 void EditorArea::activateNextTab()
 {
-    m_tabWidget->activateNextTab();
+    if (TabWidget *group = groupAt(m_activeGroup)) {
+        group->activateNextTab();
+    }
 }
 
 void EditorArea::activatePreviousTab()
 {
-    m_tabWidget->activatePreviousTab();
+    if (TabWidget *group = groupAt(m_activeGroup)) {
+        group->activatePreviousTab();
+    }
 }
 
 void EditorArea::activateTabAtIndex(int index)
 {
-    m_tabWidget->activateTabAtIndex(index);
+    if (TabWidget *group = groupAt(m_activeGroup)) {
+        group->activateTabAtIndex(index);
+    }
+}
+
+// EditorViewManager interface: per tab-group addressing
+
+int EditorArea::tabGroupCount() const
+{
+    return m_tabGroups.size();
+}
+
+QVector<int> EditorArea::documentIdsInGroup(int group) const
+{
+    if (TabWidget *tabGroup = groupAt(group)) {
+        return tabGroup->documentIds();
+    }
+    return {};
+}
+
+int EditorArea::activeIndexInGroup(int group) const
+{
+    if (TabWidget *tabGroup = groupAt(group)) {
+        return tabGroup->currentIndex();
+    }
+    return -1;
+}
+
+SciEdit *EditorArea::currentEditorInGroup(int group) const
+{
+    if (TabWidget *tabGroup = groupAt(group)) {
+        return tabGroup->currentEditor();
+    }
+    return nullptr;
+}
+
+SciEdit *EditorArea::editorInGroup(int group, int docId) const
+{
+    if (TabWidget *tabGroup = groupAt(group)) {
+        return tabGroup->editorForDocId(docId);
+    }
+    return nullptr;
+}
+
+int EditorArea::groupOfEditor(SciEdit *editor) const
+{
+    for (int i = 0; i < m_tabGroups.size(); ++i) {
+        if (m_tabGroups.at(i)->groupOfEditor(editor) == 0) {
+            return i;
+        }
+    }
+    return -1;
+}
+
+bool EditorArea::eventFilter(QObject *watched, QEvent *event)
+{
+    // An editor gaining focus activates its tab group (clicking into an
+    // already-current tab does not emit currentEditorChanged).
+    if (event->type() == QEvent::FocusIn) {
+        if (auto *editor = qobject_cast<SciEdit *>(watched)) {
+            const int group = groupOfEditor(editor);
+            if (group >= 0) {
+                setActiveTabGroup(group);
+            }
+        }
+    }
+    return QWidget::eventFilter(watched, event);
 }

@@ -39,6 +39,13 @@ public:
     void activatePreviousTab() override;
     void activateTabAtIndex(int index) override;
 
+    int tabGroupCount() const override;
+    QVector<int> documentIdsInGroup(int group) const override;
+    int activeIndexInGroup(int group) const override;
+    SciEdit *currentEditorInGroup(int group) const override;
+    SciEdit *editorInGroup(int group, int docId) const override;
+    int groupOfEditor(SciEdit *editor) const override;
+
     // Tab-specific (for SessionManager)
     SciEdit *editorAt(int index) const;
     int documentIdAt(int index) const;

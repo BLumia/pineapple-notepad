@@ -265,6 +265,39 @@ void TabWidget::activateTabAtIndex(int index)
     }
 }
 
+int TabWidget::tabGroupCount() const
+{
+    return 1;
+}
+
+QVector<int> TabWidget::documentIdsInGroup(int group) const
+{
+    if (group != 0) {
+        return {};
+    }
+    return documentIds();
+}
+
+int TabWidget::activeIndexInGroup(int group) const
+{
+    return (group == 0) ? currentIndex() : -1;
+}
+
+SciEdit *TabWidget::currentEditorInGroup(int group) const
+{
+    return (group == 0) ? currentEditor() : nullptr;
+}
+
+SciEdit *TabWidget::editorInGroup(int group, int docId) const
+{
+    return (group == 0) ? editorForDocId(docId) : nullptr;
+}
+
+int TabWidget::groupOfEditor(SciEdit *editor) const
+{
+    return (editor && indexOf(editor) >= 0) ? 0 : -1;
+}
+
 void TabWidget::onCurrentChanged(int index)
 {
     qCDebug(lcTabWidget) << "Current tab changed to index:" << index;
