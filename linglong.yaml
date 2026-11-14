@@ -3,7 +3,7 @@ version: "1"
 package:
   id: net.blumia.pineapple-notepad
   name: Pineapple Notepad
-  version: 1.5.0.0
+  version: 2.0.0.0
   kind: app
   description: |
     A Scintilla-based, cross-platform text editor.

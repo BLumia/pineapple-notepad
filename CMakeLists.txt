@@ -2,7 +2,7 @@
 
 cmake_minimum_required(VERSION 3.24)
 
-project(pineapple-notepad VERSION 1.5.0)
+project(pineapple-notepad VERSION 2.0.0)
 set(PROJECT_VERSION_SUFFIX "")
 
 set(CMAKE_CXX_STANDARD 20)
