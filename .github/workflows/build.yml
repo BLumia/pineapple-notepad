@@ -11,7 +11,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: [windows-2025, macos-26]
+        os: [windows-2025, macos-26, macos-26-intel]
         include:
           - os: windows-2025
             qt_ver: '6.12.0'
@@ -21,6 +21,10 @@ jobs:
             qt_ver: '6.12.0'
             aqt_arch: clang_64
             os_label: mac
+          - os: macos-26-intel
+            qt_ver: '6.12.0'
+            aqt_arch: clang_64
+            os_label: mac-intel
 
     steps:
     - uses: actions/checkout@v6
@@ -57,11 +61,7 @@ jobs:
         $deps = Join-Path $PWD "build_dependencies"
         New-Item -ItemType Directory -Force -Path $deps | Out-Null
 
-        if ($IsWindows) {
-          Invoke-WebRequest -Uri "https://github.com/BLumia/kf6redist/releases/download/kf6.31.0/win-x64-vs2022-qt6.12.0-kfv6.31.0.zip" -OutFile "kf6redist.zip"
-        } elseif ($IsMacOS) {
-          Invoke-WebRequest -Uri "https://github.com/BLumia/kf6redist/releases/download/kf6.31.0/mac-arm64-vs0-qt6.12.0-kfv6.31.0.zip" -OutFile "kf6redist.zip"
-        }
+        Invoke-WebRequest -Uri "https://github.com/BLumia/kf6redist/releases/download/kf6.32.0/${{ matrix.os }}-${{ matrix.aqt_arch }}-qt${{ matrix.qt_ver }}-kfv6.32.0.zip" -OutFile "kf6redist.zip"
 
         $kf6Dir = Join-Path $deps "kf6redist"
         7z x kf6redist.zip -y "-o$kf6Dir"
