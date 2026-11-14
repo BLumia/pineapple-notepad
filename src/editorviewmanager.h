@@ -33,4 +33,9 @@ public:
     virtual QVector<SciEdit *> editorsInSameTabGroup(SciEdit *editor) const = 0;
     virtual void refreshEditor(SciEdit *editor) = 0;
     void refreshEditorsForDoc(int docId) { for (auto *e : editorsForDocId(docId)) refreshEditor(e); }
+
+    // Tab navigation within the tab group of the current editor
+    virtual void activateNextTab() = 0;
+    virtual void activatePreviousTab() = 0;
+    virtual void activateTabAtIndex(int index) = 0;
 };

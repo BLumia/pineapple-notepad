@@ -1,7 +1,7 @@
 #include "mainwindow.h"
 
 #include "sciedit.h"
-#include "tabwidget.h"
+#include "editorarea.h"
 #include "documentmanager.h"
 #include "sessionmanager.h"
 #include "appsettings.h"
@@ -132,7 +132,7 @@ static QByteArray markTokenForEditor(SciEdit *editor)
 MainWindow::MainWindow(DocumentManager *documentManager, QWidget *parent)
     : KXmlGuiWindow(parent)
     , m_documentManager(documentManager)
-    , m_viewManager(new TabWidget(m_documentManager, this))
+    , m_viewManager(new EditorArea(m_documentManager, this))
     , m_sessionManager(new SessionManager(m_documentManager, this))
     , m_cursorPosStatusLabel(new StatusLabel(190, QStringLiteral("Ln: ?  Col: ?  Pos: ?"), this))
     , m_docStatsStatusLabel(new StatusLabel(180, QStringLiteral("Len: ?  Lines: ?"), this))
@@ -347,18 +347,18 @@ MainWindow::MainWindow(DocumentManager *documentManager, QWidget *parent)
         menu->popup(m_eolStatusLabel->mapToGlobal(pos));
     });
 
-    // Tab widget signals
-    connect(m_viewManager, &TabWidget::currentEditorChanged, this, &MainWindow::onCurrentEditorChanged);
-    connect(m_viewManager, &TabWidget::filesDropped, this, &MainWindow::openFiles);
-    connect(m_viewManager, &TabWidget::editorCloseRequested, this, [this](int docId) {
+    // Editor area signals
+    connect(m_viewManager, &EditorArea::currentEditorChanged, this, &MainWindow::onCurrentEditorChanged);
+    connect(m_viewManager, &EditorArea::filesDropped, this, &MainWindow::openFiles);
+    connect(m_viewManager, &EditorArea::editorCloseRequested, this, [this](int docId) {
         closeDocument(docId);
     });
-    connect(m_viewManager, &TabWidget::contextMenuRequested, this, &MainWindow::onContextMenuRequested);
-    connect(m_viewManager, &TabWidget::newDocumentRequested, this, [this]() {
+    connect(m_viewManager, &EditorArea::contextMenuRequested, this, &MainWindow::onContextMenuRequested);
+    connect(m_viewManager, &EditorArea::newDocumentRequested, this, [this]() {
         newFileInternal(NewTabPlacement::AppendToEnd);
         updateActions();
     });
-    connect(m_viewManager, &TabWidget::bookmarkMarginContextMenuRequested, this,
+    connect(m_viewManager, &EditorArea::bookmarkMarginContextMenuRequested, this,
             [this](SciEdit *, const QPoint &globalPos) {
         if (QWidget *container = guiFactory()->container(u"bookmark"_s, this)) {
             if (auto *menu = qobject_cast<QMenu *>(container)) {
@@ -1481,18 +1481,14 @@ void MainWindow::setupActions()
     nextTabAction->setText(tr("Next Tab"));
     KActionCollection::setDefaultShortcut(nextTabAction, Qt::CTRL | Qt::Key_PageDown);
     connect(nextTabAction, &QAction::triggered, this, [this]() {
-        const int n = m_viewManager->editorsInSameTabGroup(m_viewManager->currentEditor()).size();
-        if (n > 1)
-            m_viewManager->setCurrentIndex((m_viewManager->currentIndex() + 1) % n);
+        m_viewManager->activateNextTab();
     });
 
     QAction *prevTabAction = actionCollection()->addAction(u"tab_prev"_s);
     prevTabAction->setText(tr("Previous Tab"));
     KActionCollection::setDefaultShortcut(prevTabAction, Qt::CTRL | Qt::Key_PageUp);
     connect(prevTabAction, &QAction::triggered, this, [this]() {
-        const int n = m_viewManager->editorsInSameTabGroup(m_viewManager->currentEditor()).size();
-        if (n > 1)
-            m_viewManager->setCurrentIndex((m_viewManager->currentIndex() - 1 + n) % n);
+        m_viewManager->activatePreviousTab();
     });
 
     for (int i = 1; i <= 9; ++i) {
@@ -1500,9 +1496,7 @@ void MainWindow::setupActions()
         gotoTabAction->setText(tr("Tab %1").arg(i));
         KActionCollection::setDefaultShortcut(gotoTabAction, Qt::ControlModifier | Qt::KeypadModifier | static_cast<Qt::Key>(Qt::Key_0 + i));
         connect(gotoTabAction, &QAction::triggered, this, [this, i]() {
-            const int n = m_viewManager->editorsInSameTabGroup(m_viewManager->currentEditor()).size();
-            if (i <= n)
-                m_viewManager->setCurrentIndex(i - 1);
+            m_viewManager->activateTabAtIndex(i - 1);
         });
     }
 
@@ -2353,7 +2347,7 @@ void MainWindow::ensureDocumentMapDock()
     m_documentMap = new DocumentMap(m_documentManager, this);
     addDockWidget(Qt::RightDockWidgetArea, m_documentMap);
 
-    connect(m_viewManager, &TabWidget::currentEditorChanged, m_documentMap, [this](SciEdit *editor) {
+    connect(m_viewManager, &EditorArea::currentEditorChanged, m_documentMap, [this](SciEdit *editor) {
         if (m_documentMap->isVisible()) {
             m_documentMap->setActiveEditor(editor);
         }

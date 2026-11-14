@@ -46,6 +46,7 @@ PRIVATE
     sessionmanager.cpp sessionmanager.h
     favoritesstore.cpp favoritesstore.h
     editorviewmanager.h
+    editorarea.cpp editorarea.h
     tabwidget.cpp tabwidget.h
     findreplacedialog.cpp findreplacedialog.h
     findreplacecontroller.cpp findreplacecontroller.h

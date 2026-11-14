@@ -35,6 +35,10 @@ public:
     void refreshEditor(SciEdit *editor) override;
     QVector<SciEdit *> editorsInSameTabGroup(SciEdit *editor) const override;
 
+    void activateNextTab() override;
+    void activatePreviousTab() override;
+    void activateTabAtIndex(int index) override;
+
     // Tab-specific (for SessionManager)
     SciEdit *editorAt(int index) const;
     int documentIdAt(int index) const;

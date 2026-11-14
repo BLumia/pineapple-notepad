@@ -242,6 +242,29 @@ QVector<SciEdit *> TabWidget::editorsInSameTabGroup(SciEdit *editor) const
     return editors();
 }
 
+void TabWidget::activateNextTab()
+{
+    const int n = count();
+    if (n > 1) {
+        setCurrentIndex((currentIndex() + 1) % n);
+    }
+}
+
+void TabWidget::activatePreviousTab()
+{
+    const int n = count();
+    if (n > 1) {
+        setCurrentIndex((currentIndex() - 1 + n) % n);
+    }
+}
+
+void TabWidget::activateTabAtIndex(int index)
+{
+    if (index >= 0 && index < count()) {
+        setCurrentIndex(index);
+    }
+}
+
 void TabWidget::onCurrentChanged(int index)
 {
     qCDebug(lcTabWidget) << "Current tab changed to index:" << index;

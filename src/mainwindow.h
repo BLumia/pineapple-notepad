@@ -23,7 +23,7 @@
 
 class QLabel;
 class SciEdit;
-class TabWidget;
+class EditorArea;
 class DocumentManager;
 class SessionManager;
 class FindReplaceController;
@@ -156,7 +156,7 @@ private:
     void recomputeDocumentModified(int docId);
 
     DocumentManager *m_documentManager;
-    TabWidget *m_viewManager;
+    EditorArea *m_viewManager;
     SessionManager *m_sessionManager;
     StatusLabel *m_cursorPosStatusLabel;
     StatusLabel *m_docStatsStatusLabel;
