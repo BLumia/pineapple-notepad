@@ -1506,6 +1506,12 @@ void MainWindow::setupActions()
         moveDocumentToOtherView(m_viewManager->currentDocumentId());
     });
 
+    QAction *cloneToOtherViewAction = actionCollection()->addAction(u"view_clone_to_other_view"_s);
+    cloneToOtherViewAction->setText(tr("Clone to Other View"));
+    connect(cloneToOtherViewAction, &QAction::triggered, this, [this]() {
+        moveDocumentToOtherView(m_viewManager->currentDocumentId(), /*clone=*/true);
+    });
+
     // "Encoding" menu
     struct EncodingQuickEntry {
         QString displayName;
@@ -3202,6 +3208,15 @@ SciEdit *MainWindow::createEditor(int docId)
         doc->attachEditor(editor);
     }
 
+    // The change history display state is per-view (while its data lives in
+    // the shared document). A new editor of an already-open document (move
+    // or clone) inherits the state from the existing editor so both views
+    // show the same history.
+    const QVector<SciEdit *> existingEditors = m_viewManager->editorsForDocId(docId);
+    if (!existingEditors.isEmpty()) {
+        editor->setChangeHistoryEnabled(existingEditors.constFirst()->changeHistoryEnabled());
+    }
+
     connect(editor, &ScintillaEditBase::savePointChanged, this, [this, docId]() {
         recomputeDocumentModified(docId);
     });
@@ -3610,7 +3625,6 @@ QMenu *MainWindow::buildDocumentContextMenu(int docId, SciEdit *editor, QWidget 
     QAction *closeOthersAction = nullptr;
     QAction *closeLeftAction = nullptr;
     QAction *closeRightAction = nullptr;
-    QAction *moveToOtherViewAction = nullptr;
     if (editor) {
         closeOthersAction = menu->addAction(tr("Close Others"));
         closeLeftAction = menu->addAction(tr("Close to the Left"));
@@ -3630,8 +3644,13 @@ QMenu *MainWindow::buildDocumentContextMenu(int docId, SciEdit *editor, QWidget 
     auto *copyFullPath = copyMenu->addAction(tr("Full Path"));
     auto *copyFileName = copyMenu->addAction(tr("File Name"));
     auto *copyDirPath = copyMenu->addAction(tr("Directory Path"));
+    auto *moveDocMenu = menu->addMenu(ki18n("Move Document").toString());
+    moveDocMenu->setIcon(QIcon::fromTheme(u"view-split-left-right"_s));
+    QAction *moveToOtherViewAction = nullptr;
+    QAction *cloneToOtherViewAction = nullptr;
     if (editor) {
-        moveToOtherViewAction = menu->addAction(QIcon::fromTheme(u"view-split-left-right"_s), tr("Move to Other View"));
+        moveToOtherViewAction = moveDocMenu->addAction(QIcon::fromTheme(u"view-split-left-right"_s), tr("Move to Other View"));
+        cloneToOtherViewAction = moveDocMenu->addAction(QIcon::fromTheme(u"edit-clone"_s), tr("Clone to Other View"));
     }
 
     reloadAction->setEnabled(isLocalFile);
@@ -3675,6 +3694,11 @@ QMenu *MainWindow::buildDocumentContextMenu(int docId, SciEdit *editor, QWidget 
     if (moveToOtherViewAction) {
         QObject::connect(moveToOtherViewAction, &QAction::triggered, menu, [this, docId] {
             moveDocumentToOtherView(docId);
+        });
+    }
+    if (cloneToOtherViewAction) {
+        QObject::connect(cloneToOtherViewAction, &QAction::triggered, menu, [this, docId] {
+            moveDocumentToOtherView(docId, /*clone=*/true);
         });
     }
     QObject::connect(saveAction, &QAction::triggered, menu, [this, docId] {
@@ -4125,7 +4149,7 @@ void MainWindow::updateActions()
         "unfold_current_level"_L1, "summary"_L1, "go_to"_L1,
         "file_export_rtf"_L1, "file_export_html"_L1,
         "copy_as_html"_L1, "copy_as_rtf"_L1, "copy_all_formats"_L1,
-        "view_move_to_other_view"_L1,
+        "view_move_to_other_view"_L1, "view_clone_to_other_view"_L1,
     }) {
         QAction *a = actionCollection()->action(name);
         Q_CHECK_PTR(a);
