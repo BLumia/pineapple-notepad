@@ -12,6 +12,7 @@
 #include "tabwidget.h"
 
 #include <QSignalSpy>
+#include <QSplitter>
 #include <QtTest/QtTest>
 
 using Ids = QVector<int>;
@@ -45,6 +46,7 @@ private:
     }
 
 private slots:
+    void initTestCase();
     void init();
     void cleanup();
     void singleGroupBehavior();
@@ -53,7 +55,16 @@ private slots:
     void activeGroupTracking();
     void clonedDocQueries();
     void removalAggregation();
+    void lifecycleSignals();
+    void focusedEditorState();
+    void aggregatedCurrentEditorSignal();
 };
+
+void EditorAreaTest::initTestCase()
+{
+    // QSignalSpy needs to capture SciEdit* arguments of the lifecycle signals
+    qRegisterMetaType<SciEdit *>("SciEdit*");
+}
 
 void EditorAreaTest::init()
 {
@@ -102,6 +113,13 @@ void EditorAreaTest::subViewLifecycle()
     m_area->ensureSubView();
     QCOMPARE(m_area->tabGroupCount(), 2);
     QCOMPARE(m_area->subViewVisible(), true);
+
+    // The initial split gives both views the same size
+    QSplitter *splitter = m_area->findChild<QSplitter *>();
+    QVERIFY(splitter);
+    const QList<int> paneSizes = splitter->sizes();
+    QCOMPARE(paneSizes.size(), 2);
+    QVERIFY(qAbs(paneSizes.at(0) - paneSizes.at(1)) <= 1);
 
     m_area->ensureSubView(); // idempotent
     QCOMPARE(m_area->tabGroupCount(), 2);
@@ -225,6 +243,83 @@ void EditorAreaTest::removalAggregation()
     m_area->removeAllEditorsForDoc(docA);
     QCOMPARE(m_area->count(), 0);
     QCOMPARE(m_area->tabGroupCount(), 1);
+}
+
+void EditorAreaTest::lifecycleSignals()
+{
+    QSignalSpy addedSpy(m_area, &EditorArea::editorAdded);
+    QSignalSpy removedSpy(m_area, &EditorArea::editorAboutToBeRemoved);
+
+
+    const int docA = addDocumentToGroup(0);
+    QCOMPARE(addedSpy.size(), 1);
+    const QList<QVariant> addedArgs = addedSpy.takeFirst();
+    QCOMPARE(addedArgs.at(0).toInt(), docA);
+    QCOMPARE(addedArgs.at(1).value<SciEdit *>(), m_area->editorInGroup(0, docA));
+    QCOMPARE(addedArgs.at(2).toInt(), 0);
+
+    m_area->ensureSubView();
+    const int docB = addDocumentToGroup(1);
+    QCOMPARE(addedSpy.takeFirst().at(2).toInt(), 1); // group index
+
+    SciEdit *editorB = m_area->editorInGroup(1, docB);
+    QVERIFY(editorB);
+    m_area->removeEditor(editorB); // also hides the sub view
+    QCOMPARE(removedSpy.size(), 1);
+    const QList<QVariant> removedArgs = removedSpy.takeFirst();
+    QCOMPARE(removedArgs.at(0).toInt(), docB);
+    QCOMPARE(removedArgs.at(1).value<SciEdit *>(), editorB);
+    QCOMPARE(removedArgs.at(2).toInt(), 1);
+
+    m_area->removeAllEditorsForDoc(docA);
+    QCOMPARE(removedSpy.size(), 1);
+    QCOMPARE(removedSpy.takeFirst().at(0).toInt(), docA);
+}
+
+void EditorAreaTest::focusedEditorState()
+{
+    const int docA = addDocumentToGroup(0);
+    const int docB = addDocumentToGroup(0);
+    m_area->ensureSubView();
+    const int docC = addDocumentToGroup(1);
+    SciEdit *editorA = m_area->editorInGroup(0, docA);
+    SciEdit *editorB = m_area->editorInGroup(0, docB);
+    SciEdit *editorC = m_area->editorInGroup(1, docC);
+    QVERIFY(editorA && editorB && editorC);
+
+    // The caret-blink ("focused") state is held by at most one editor
+    m_area->setFocusedEditor(editorB);
+    QVERIFY(!editorA->focus());
+    QVERIFY(editorB->focus());
+    QVERIFY(!editorC->focus());
+
+    m_area->setFocusedEditor(editorC);
+    QVERIFY(!editorB->focus());
+    QVERIFY(editorC->focus());
+
+    m_area->setFocusedEditor(nullptr);
+    QVERIFY(!editorC->focus());
+}
+
+void EditorAreaTest::aggregatedCurrentEditorSignal()
+{
+    const int docA = addDocumentToGroup(0);
+    m_area->ensureSubView();
+    const int docB = addDocumentToGroup(1);
+    QCOMPARE(m_area->activeTabGroup(), 1);
+
+    QSignalSpy spy(m_area, &EditorArea::currentEditorChanged);
+    m_area->setActiveTabGroup(0);
+    QCOMPARE(m_area->currentDocumentId(), docA);
+    QCOMPARE(spy.size(), 1);
+    QCOMPARE(spy.takeFirst().at(0).value<SciEdit *>(), m_area->editorInGroup(0, docA));
+
+    // Closing the last tab of the (background) sub view ends with the
+    // primary view's current editor announced as current, not a stale null.
+    m_area->removeAllEditorsForDoc(docB);
+    QCOMPARE(m_area->currentDocumentId(), docA);
+    QVERIFY(spy.size() >= 1);
+    QCOMPARE(spy.takeLast().at(0).value<SciEdit *>(), m_area->editorInGroup(0, docA));
 }
 
 QTEST_MAIN(EditorAreaTest)

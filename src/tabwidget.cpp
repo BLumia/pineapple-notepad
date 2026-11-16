@@ -31,9 +31,10 @@ TabWidget::TabWidget(DocumentManager *documentManager, QWidget *parent)
     connect(quickopen, &QToolButton::clicked, this, &TabWidget::onQuickOpenTriggered);
     connect(this, &QTabWidget::currentChanged, this, &TabWidget::onCurrentChanged);
     connect(this, &QTabWidget::tabCloseRequested, this, [this](int index) {
+        SciEdit *editor = editorAt(index);
         const int docId = documentIdAt(index);
-        if (docId >= 0) {
-            emit editorCloseRequested(docId);
+        if (editor && docId >= 0) {
+            emit editorCloseRequested(editor, docId);
         }
     });
 
@@ -365,9 +366,10 @@ bool TabWidget::eventFilter(QObject *watched, QEvent *event)
         if (mouseEvent->button() == Qt::MiddleButton) {
             const int tabIndex = tabBar()->tabAt(mouseEvent->position().toPoint());
             if (tabIndex >= 0) {
+                SciEdit *editor = editorAt(tabIndex);
                 const int docId = documentIdAt(tabIndex);
-                if (docId >= 0) {
-                    emit editorCloseRequested(docId);
+                if (editor && docId >= 0) {
+                    emit editorCloseRequested(editor, docId);
                 }
                 return true;
             }

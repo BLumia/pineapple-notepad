@@ -350,8 +350,8 @@ MainWindow::MainWindow(DocumentManager *documentManager, QWidget *parent)
     // Editor area signals
     connect(m_viewManager, &EditorArea::currentEditorChanged, this, &MainWindow::onCurrentEditorChanged);
     connect(m_viewManager, &EditorArea::filesDropped, this, &MainWindow::openFiles);
-    connect(m_viewManager, &EditorArea::editorCloseRequested, this, [this](int docId) {
-        closeDocument(docId);
+    connect(m_viewManager, &EditorArea::editorCloseRequested, this, [this](SciEdit *editor, int docId) {
+        closeTabRequested(editor, docId);
     });
     connect(m_viewManager, &EditorArea::contextMenuRequested, this, &MainWindow::onContextMenuRequested);
     connect(m_viewManager, &EditorArea::newDocumentRequested, this, [this]() {
@@ -1499,6 +1499,12 @@ void MainWindow::setupActions()
             m_viewManager->activateTabAtIndex(i - 1);
         });
     }
+
+    QAction *moveToOtherViewAction = actionCollection()->addAction(u"view_move_to_other_view"_s);
+    moveToOtherViewAction->setText(tr("Move to Other View"));
+    connect(moveToOtherViewAction, &QAction::triggered, this, [this]() {
+        moveDocumentToOtherView(m_viewManager->currentDocumentId());
+    });
 
     // "Encoding" menu
     struct EncodingQuickEntry {
@@ -3065,11 +3071,125 @@ bool MainWindow::closeAllDocuments()
     return true;
 }
 
+void MainWindow::closeTabRequested(SciEdit *editor, int docId)
+{
+    if (!editor || docId < 0) {
+        return;
+    }
+
+    // The document is open in another view as well: closing this tab only
+    // removes it from this view; the document itself stays open.
+    if (m_viewManager->editorsForDocId(docId).size() > 1) {
+        m_viewManager->removeEditor(editor);
+        updateActions();
+        return;
+    }
+
+    closeDocument(docId);
+}
+
+bool MainWindow::moveDocumentToView(int docId, int targetGroup, bool clone)
+{
+    if (docId < 0) {
+        return false;
+    }
+
+    EditorArea *area = m_viewManager;
+    SciEdit *source = area->editorForDocId(docId);
+    if (!source) {
+        return false;
+    }
+    const int sourceGroup = area->groupOfEditor(source);
+    if (targetGroup == sourceGroup) {
+        return false;
+    }
+
+    // The document already has a tab in the target group (it was cloned
+    // before): reuse it instead of adding a second tab for the same
+    // document to one group; a move additionally removes the source tab.
+    if (SciEdit *existing = area->editorInGroup(targetGroup, docId)) {
+        if (!clone) {
+            area->removeEditor(source);
+        }
+        area->switchToEditor(existing);
+        updateActions();
+        return true;
+    }
+
+    // Capture the view state of the source editor before its tab goes away.
+    const sptr_t cursorPos = source->currentPos();
+    const sptr_t firstVisibleLine = source->firstVisibleLine();
+    const sptr_t xOffset = source->xOffset();
+
+    // Create the target editor while the source editor still exists so that
+    // Document::attachEditor() hands over the shared Scintilla document
+    // (including the undo history) instead of reloading content from disk.
+    SciEdit *editor = createEditor(docId);
+    editor->setSelection(cursorPos, cursorPos);
+    editor->setFirstVisibleLine(firstVisibleLine);
+    editor->setXOffset(xOffset);
+
+    if (!clone) {
+        area->removeEditor(source);
+    }
+    if (targetGroup == 1) {
+        area->ensureSubView();
+    }
+    area->addEditorToGroup(targetGroup, docId, editor, /*activate=*/true);
+
+    updateActions();
+    return true;
+}
+
+void MainWindow::moveDocumentToOtherView(int docId, bool clone)
+{
+    EditorArea *area = m_viewManager;
+    SciEdit *editor = area->editorForDocId(docId);
+    if (!editor) {
+        return;
+    }
+    const int sourceGroup = area->groupOfEditor(editor);
+    const int targetGroup = (sourceGroup == 0) ? 1 : 0;
+
+    // Moving the only tab of a view away while the other view is still hidden
+    // would just swap in an empty view, so do nothing in that case. Moving
+    // the last tab out is fine once a split exists.
+    if (!clone && !area->subViewVisible()
+            && area->documentIdsInGroup(sourceGroup).size() == 1) {
+        return;
+    }
+
+    moveDocumentToView(docId, targetGroup, clone);
+}
+
+int MainWindow::openFileInView(const QString &filePath, int group, bool activate)
+{
+    const QString normalizedPath = DocumentManager::normalizeFilePath(filePath);
+    const int existingDocId = m_documentManager->findDocumentByFilePath(normalizedPath);
+    if (existingDocId >= 0) {
+        SciEdit *editor = m_viewManager->editorForDocId(existingDocId);
+        if (editor && m_viewManager->groupOfEditor(editor) != group) {
+            moveDocumentToView(existingDocId, group, /*clone=*/false);
+        } else if (activate) {
+            m_viewManager->switchToDocId(existingDocId);
+        }
+        return existingDocId;
+    }
+
+    const int docId = openFileInternal(normalizedPath, activate);
+    if (docId >= 0 && group != 0) {
+        moveDocumentToView(docId, group, /*clone=*/false);
+    }
+    return docId;
+}
+
 SciEdit *MainWindow::createEditor(int docId)
 {
     SciEdit *editor = new SciEdit(m_viewManager->viewWidget());
-    m_documentManager->setDocumentIndentTabWidth(docId, AppSettings::tabWidth());
-    m_documentManager->setDocumentIndentUseTabs(docId, AppSettings::indentUseTabs());
+    // Note: per-document indent settings are initialized by the new/open
+    // document paths, not here — this function is also used to recreate an
+    // editor when a tab moves or is cloned into another view, and must not
+    // reset customized per-document settings.
     editor->setTabWidth(m_documentManager->getDocumentIndentTabWidth(docId));
     editor->setIndentUseTabs(m_documentManager->getDocumentIndentUseTabs(docId));
     editor->setEditorFont(AppSettings::editorFont());
@@ -3110,6 +3230,11 @@ int MainWindow::newFileInternal(NewTabPlacement placement, bool activate)
 
     SciEdit *editor = createEditor(docId);
 
+    m_documentManager->setDocumentIndentTabWidth(docId, AppSettings::tabWidth());
+    m_documentManager->setDocumentIndentUseTabs(docId, AppSettings::indentUseTabs());
+    editor->setTabWidth(m_documentManager->getDocumentIndentTabWidth(docId));
+    editor->setIndentUseTabs(m_documentManager->getDocumentIndentUseTabs(docId));
+
     const int eolMode = AppSettings::newDocumentEolMode();
     editor->setEOLMode(eolMode);
     m_documentManager->setDocumentEolMode(docId, eolMode);
@@ -3139,6 +3264,11 @@ int MainWindow::openFileInternal(const QString &filePath, bool activate, bool sk
     }
 
     SciEdit *editor = createEditor(docId);
+
+    m_documentManager->setDocumentIndentTabWidth(docId, AppSettings::tabWidth());
+    m_documentManager->setDocumentIndentUseTabs(docId, AppSettings::indentUseTabs());
+    editor->setTabWidth(m_documentManager->getDocumentIndentTabWidth(docId));
+    editor->setIndentUseTabs(m_documentManager->getDocumentIndentUseTabs(docId));
 
     if (!skipLexerApply) {
         const QString lexerName = m_documentManager->getDocumentLanguage(docId);
@@ -3400,10 +3530,7 @@ void MainWindow::saveAllFiles()
 
 void MainWindow::closeFile()
 {
-    const int docId = m_viewManager->currentDocumentId();
-    if (docId >= 0) {
-        closeDocument(docId);
-    }
+    closeTabRequested(m_viewManager->currentEditor(), m_viewManager->currentDocumentId());
 }
 
 void MainWindow::closeAllFiles()
@@ -3483,6 +3610,7 @@ QMenu *MainWindow::buildDocumentContextMenu(int docId, SciEdit *editor, QWidget 
     QAction *closeOthersAction = nullptr;
     QAction *closeLeftAction = nullptr;
     QAction *closeRightAction = nullptr;
+    QAction *moveToOtherViewAction = nullptr;
     if (editor) {
         closeOthersAction = menu->addAction(tr("Close Others"));
         closeLeftAction = menu->addAction(tr("Close to the Left"));
@@ -3502,6 +3630,9 @@ QMenu *MainWindow::buildDocumentContextMenu(int docId, SciEdit *editor, QWidget 
     auto *copyFullPath = copyMenu->addAction(tr("Full Path"));
     auto *copyFileName = copyMenu->addAction(tr("File Name"));
     auto *copyDirPath = copyMenu->addAction(tr("Directory Path"));
+    if (editor) {
+        moveToOtherViewAction = menu->addAction(QIcon::fromTheme(u"view-split-left-right"_s), tr("Move to Other View"));
+    }
 
     reloadAction->setEnabled(isLocalFile);
     readOnlyAction->setEnabled(!isMonitored);
@@ -3539,6 +3670,11 @@ QMenu *MainWindow::buildDocumentContextMenu(int docId, SciEdit *editor, QWidget 
                 const int id = m_viewManager->docIdForEditor(groupEditors[i]);
                 if (id >= 0 && !closeDocument(id, false)) return;
             }
+        });
+    }
+    if (moveToOtherViewAction) {
+        QObject::connect(moveToOtherViewAction, &QAction::triggered, menu, [this, docId] {
+            moveDocumentToOtherView(docId);
         });
     }
     QObject::connect(saveAction, &QAction::triggered, menu, [this, docId] {
@@ -3716,7 +3852,7 @@ void MainWindow::onCurrentEditorChanged(SciEdit *editor)
         });
         updateCursorStatusLabel(editor);
         updateDocumentStatsLabel(editor);
-        editor->setFocus(true);
+        m_viewManager->setFocusedEditor(editor);
     }
 }
 
@@ -3989,6 +4125,7 @@ void MainWindow::updateActions()
         "unfold_current_level"_L1, "summary"_L1, "go_to"_L1,
         "file_export_rtf"_L1, "file_export_html"_L1,
         "copy_as_html"_L1, "copy_as_rtf"_L1, "copy_all_formats"_L1,
+        "view_move_to_other_view"_L1,
     }) {
         QAction *a = actionCollection()->action(name);
         Q_CHECK_PTR(a);

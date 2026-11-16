@@ -341,6 +341,16 @@ void Document::attachEditor(SciEdit *targetEditor)
         return;
     }
 
+    // Drop references to editors that have been destroyed meanwhile (e.g.
+    // their tab was moved away to another view, which deletes the editor).
+    // Otherwise the primary lookup below could pick a stale reference and
+    // reload content from disk instead of sharing the live Scintilla document.
+    for (int i = m_editorRefs.size() - 1; i >= 0; --i) {
+        if (!m_editorRefs.at(i).editor) {
+            m_editorRefs.removeAt(i);
+        }
+    }
+
     if (m_editorRefs.isEmpty()) {
         m_editorRefs.append({targetEditor, 0, 0, 0});
         if (!untitled && !filePath.isEmpty()) {

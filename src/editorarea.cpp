@@ -30,16 +30,28 @@ TabWidget *EditorArea::groupAt(int group) const
 
 void EditorArea::connectTabWidget(TabWidget *tab)
 {
-    connect(tab, &TabWidget::currentEditorChanged, this, &EditorArea::currentEditorChanged);
     connect(tab, &TabWidget::filesDropped, this, &EditorArea::filesDropped);
     connect(tab, &TabWidget::editorCloseRequested, this, &EditorArea::editorCloseRequested);
     connect(tab, &TabWidget::contextMenuRequested, this, &EditorArea::contextMenuRequested);
     connect(tab, &TabWidget::newDocumentRequested, this, &EditorArea::newDocumentRequested);
     connect(tab, &TabWidget::bookmarkMarginContextMenuRequested, this, &EditorArea::bookmarkMarginContextMenuRequested);
     // Switching to a tab of a group also makes that group the active one.
+    // currentEditorChanged is emitted from the aggregated view (the active
+    // group's current editor) so that background events of a group (e.g.
+    // closing its last tab) do not announce a stale editor.
     connect(tab, &TabWidget::currentEditorChanged, this, [this, tab](SciEdit *) {
-        setActiveTabGroup(m_tabGroups.indexOf(tab));
+        const int group = m_tabGroups.indexOf(tab);
+        if (group != m_activeGroup) {
+            setActiveTabGroup(group);
+        } else {
+            emitCurrentEditorChanged();
+        }
     });
+}
+
+void EditorArea::emitCurrentEditorChanged()
+{
+    emit currentEditorChanged(currentEditor());
 }
 
 int EditorArea::activeTabGroup() const
@@ -54,6 +66,8 @@ void EditorArea::setActiveTabGroup(int group)
     }
     m_activeGroup = group;
     emit activeTabGroupChanged(group);
+    // The aggregated "current editor" changes with the active group.
+    emitCurrentEditorChanged();
 }
 
 bool EditorArea::subViewVisible() const
@@ -75,6 +89,17 @@ void EditorArea::ensureSubView()
     m_splitter->setStretchFactor(1, 1);
     m_tabGroups.append(subView);
     connectTabWidget(subView);
+
+    // Give both views the same size. Equal stretch factors only distribute
+    // extra space on later resizes; the initial split follows the widgets'
+    // current sizes (the primary view joins the splitter with the full width).
+    int total = m_splitter->width();
+    if (total <= 0) {
+        total = m_splitter->sizeHint().width();
+    }
+    if (total > 0) {
+        m_splitter->setSizes({total / 2, total - total / 2});
+    }
 }
 
 void EditorArea::removeSubViewIfEmpty()
@@ -229,18 +254,26 @@ void EditorArea::addEditorToGroup(int group, int docId, SciEdit *editor, bool ac
 
     tabGroup->addEditor(docId, editor, activate, placement);
     editor->installEventFilter(this);
+    emit editorAdded(docId, editor, m_tabGroups.indexOf(tabGroup));
 }
 
 void EditorArea::removeEditor(SciEdit *editor)
 {
-    if (TabWidget *group = groupAt(groupOfEditor(editor))) {
-        group->removeEditor(editor);
+    const int group = groupOfEditor(editor);
+    if (TabWidget *tabGroup = groupAt(group)) {
+        emit editorAboutToBeRemoved(tabGroup->docIdForEditor(editor), editor, group);
+        tabGroup->removeEditor(editor);
         removeSubViewIfEmpty();
     }
 }
 
 void EditorArea::removeAllEditorsForDoc(int docId)
 {
+    for (int i = 0; i < m_tabGroups.size(); ++i) {
+        if (SciEdit *editor = m_tabGroups.at(i)->editorForDocId(docId)) {
+            emit editorAboutToBeRemoved(docId, editor, i);
+        }
+    }
     for (TabWidget *group : std::as_const(m_tabGroups)) {
         group->removeAllEditorsForDoc(docId);
     }
@@ -341,6 +374,16 @@ int EditorArea::groupOfEditor(SciEdit *editor) const
     return -1;
 }
 
+void EditorArea::setFocusedEditor(SciEdit *editor)
+{
+    for (TabWidget *group : std::as_const(m_tabGroups)) {
+        const QVector<SciEdit *> groupEditors = group->editors();
+        for (SciEdit *e : groupEditors) {
+            e->setFocus(e == editor);
+        }
+    }
+}
+
 bool EditorArea::eventFilter(QObject *watched, QEvent *event)
 {
     // An editor gaining focus activates its tab group (clicking into an
@@ -350,6 +393,10 @@ bool EditorArea::eventFilter(QObject *watched, QEvent *event)
             const int group = groupOfEditor(editor);
             if (group >= 0) {
                 setActiveTabGroup(group);
+                // The freshly focused editor is the only one that may keep
+                // the caret blinking (switching the current editor or group
+                // programmatically never sends focus events to the others).
+                setFocusedEditor(editor);
             }
         }
     }

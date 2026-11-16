@@ -219,6 +219,7 @@ Template: https://github.com/KDE/kxmlgui/blob/master/src/ui_standards.rc
         <Action name="view_zoom_out"/>
         <Action name="zoom_reset"/>
       </Menu>
+      <Action name="view_move_to_other_view" />
       <Menu><text>&amp;Tab</text>
         <Action name="tab_goto_1" />
         <Action name="tab_goto_2" />

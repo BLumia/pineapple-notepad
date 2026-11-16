@@ -72,14 +72,24 @@ public:
     void addEditorToGroup(int group, int docId, SciEdit *editor, bool activate = true,
                           NewTabPlacement placement = NewTabPlacement::AppendToEnd);
 
+    // Scintilla's caret-blink ("focused") state is per-editor and independent
+    // of Qt widget focus. Keep it set on at most one editor at a time; pass
+    // nullptr to clear it everywhere.
+    void setFocusedEditor(SciEdit *editor);
+
 signals:
     void currentEditorChanged(SciEdit *editor);
     void filesDropped(const QStringList &paths);
-    void editorCloseRequested(int docId);
+    void editorCloseRequested(SciEdit *editor, int docId);
     void contextMenuRequested(SciEdit *editor, int docId);
     void newDocumentRequested();
     void bookmarkMarginContextMenuRequested(SciEdit *editor, const QPoint &globalPos);
     void activeTabGroupChanged(int group);
+    // A tab was added to a group / is about to be removed from one. Moving a
+    // tab between views recreates the editor object, so consumers holding a
+    // SciEdit pointer must re-resolve by docId (or reconnect here) on change.
+    void editorAdded(int docId, SciEdit *editor, int group);
+    void editorAboutToBeRemoved(int docId, SciEdit *editor, int group);
 
 protected:
     bool eventFilter(QObject *watched, QEvent *event) override;
@@ -87,6 +97,7 @@ protected:
 private:
     TabWidget *groupAt(int group) const;
     void connectTabWidget(TabWidget *tab);
+    void emitCurrentEditorChanged();
     void wrapInSplitter();
     void unwrapSplitter();
 

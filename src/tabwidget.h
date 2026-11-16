@@ -56,7 +56,7 @@ public:
 signals:
     void currentEditorChanged(SciEdit *editor);
     void filesDropped(const QStringList &paths);
-    void editorCloseRequested(int docId);
+    void editorCloseRequested(SciEdit *editor, int docId);
     void contextMenuRequested(SciEdit *editor, int docId);
     void newDocumentRequested();
     void bookmarkMarginContextMenuRequested(SciEdit *editor, const QPoint &globalPos);

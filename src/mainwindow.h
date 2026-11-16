@@ -99,6 +99,16 @@ private:
     bool saveAllDocuments();
     bool closeDocument(int docId, bool createNewIfEmpty = true);
     bool closeAllDocuments();
+    // Closes a single tab of one view. If the document is also open in
+    // another view, only that tab is removed and the document stays open.
+    void closeTabRequested(SciEdit *editor, int docId);
+    // Moves or clones the document's tab of the (active) source view into
+    // targetGroup (0 or 1), creating the sub view on demand. The editor is
+    // recreated in the target view and shares the Scintilla document.
+    bool moveDocumentToView(int docId, int targetGroup, bool clone);
+    void moveDocumentToOtherView(int docId, bool clone = false);
+    // Opens (or activates) a file's tab in a specific view group.
+    int openFileInView(const QString &filePath, int group, bool activate = true);
     QMenu *buildDocumentContextMenu(int docId, SciEdit *editor, QWidget *parent);
     void applySettingsToEditor(SciEdit *editor);
     void applySettingsToAllEditors();
