@@ -111,24 +111,6 @@ Q_LOGGING_CATEGORY(lcMainWindow, "pnotepad.mainwindow")
 
 using namespace Qt::Literals::StringLiterals;
 
-// Returns the text to be styled by "Style All/One Occurrences of Token":
-// the current selection, or the word at the caret when nothing is selected.
-static QByteArray markTokenForEditor(SciEdit *editor)
-{
-    const sptr_t selStart = editor->selectionStart();
-    const sptr_t selEnd = editor->selectionEnd();
-    if (selStart != selEnd) {
-        return editor->get_text_range(int(qMin(selStart, selEnd)), int(qMax(selStart, selEnd)));
-    }
-    const int pos = int(editor->currentPos());
-    const int wordStart = int(editor->wordStartPosition(pos, true));
-    const int wordEnd = int(editor->wordEndPosition(pos, true));
-    if (wordStart < wordEnd) {
-        return editor->get_text_range(wordStart, wordEnd);
-    }
-    return {};
-}
-
 MainWindow::MainWindow(DocumentManager *documentManager, QWidget *parent)
     : KXmlGuiWindow(parent)
     , m_documentManager(documentManager)
@@ -1270,7 +1252,7 @@ void MainWindow::setupActions()
         markStyleAllAction->setIcon(styleIcon);
         connect(markStyleAllAction, &QAction::triggered, this, [this, i, withEditor]() {
             withEditor([i](SciEdit *e) {
-                const QByteArray token = markTokenForEditor(e);
+                const QByteArray token = e->tokenText();
                 if (token.isEmpty()) {
                     return;
                 }
@@ -1291,21 +1273,9 @@ void MainWindow::setupActions()
         markStyleOneAction->setIcon(styleIcon);
         connect(markStyleOneAction, &QAction::triggered, this, [this, i, withEditor]() {
             withEditor([i](SciEdit *e) {
-                const QByteArray token = markTokenForEditor(e);
-                if (token.isEmpty()) {
-                    return;
-                }
-                const sptr_t selStart = e->selectionStart();
-                const sptr_t selEnd = e->selectionEnd();
-                if (selStart != selEnd) {
-                    e->styleTokenRange(int(qMin(selStart, selEnd)), int(qMax(selStart, selEnd) - qMin(selStart, selEnd)), i);
-                } else {
-                    const int pos = int(e->currentPos());
-                    const int wordStart = int(e->wordStartPosition(pos, true));
-                    const int wordEnd = int(e->wordEndPosition(pos, true));
-                    if (wordStart < wordEnd) {
-                        e->styleTokenRange(wordStart, wordEnd - wordStart, i);
-                    }
+                const QPair<sptr_t, sptr_t> range = e->tokenRange();
+                if (range.first >= 0 && range.first < range.second) {
+                    e->styleTokenRange(int(range.first), int(range.second - range.first), i);
                 }
                 e->setFocus(true);
             });

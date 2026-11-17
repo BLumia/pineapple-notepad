@@ -127,6 +127,14 @@ public:
                        int styleIndex, bool bookmarkLine);
     void clearMarks(int styleIndex, int start = -1, int end = -1);
     void clearAllMarkStyles();
+    // Token range for features acting on "the current selection, or the word
+    // at the caret when nothing is selected" (style token, quick find,
+    // filling the find field). Returns an ordered (start, end) pair, or
+    // (-1, -1) when there is neither a selection nor a word at the caret.
+    QPair<sptr_t, sptr_t> tokenRange();
+    // The text of tokenRange() in UTF-8, or an empty byte array when there
+    // is no token.
+    QByteArray tokenText();
     void styleTokenRange(int start, int length, int styleIndex);
     QList<QPair<int, QString>> markedTexts(int styleMask);
     static QString joinMarkedTexts(const QList<QPair<int, QString>> &texts);

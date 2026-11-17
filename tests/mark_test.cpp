@@ -80,6 +80,12 @@ private slots:
     void clearMarks_range();
     void clearAllMarkStyles();
     void styleTokenRange();
+    void tokenRange_selection();
+    void tokenRange_reversedSelection();
+    void tokenRange_multilineSelection();
+    void tokenRange_wordAtCaret();
+    void tokenRange_noToken();
+    void tokenText_extraction();
     void joinMarkedTexts_noEol();
     void joinMarkedTexts_withEol();
     void joinMarkedTexts_single();
@@ -218,6 +224,105 @@ void MarkTest::styleTokenRange()
     edit->styleTokenRange(6, 5, 4);
 
     QCOMPARE(textsOf(1 << 4, edit), QStringList({"world"}));
+    delete edit;
+}
+
+void MarkTest::tokenRange_selection()
+{
+    SciEdit *edit = createEditor();
+    edit->setText("alpha beta gamma");
+    edit->setSelection(6, 10); // "beta"
+
+    const QPair<sptr_t, sptr_t> range = edit->tokenRange();
+    QCOMPARE(range.first, sptr_t(6));
+    QCOMPARE(range.second, sptr_t(10));
+    QCOMPARE(edit->get_text_range(int(range.first), int(range.second)), QByteArray("beta"));
+    delete edit;
+}
+
+void MarkTest::tokenRange_reversedSelection()
+{
+    SciEdit *edit = createEditor();
+    edit->setText("alpha beta gamma");
+    edit->setSelection(10, 6); // caret before the anchor
+
+    const QPair<sptr_t, sptr_t> range = edit->tokenRange();
+    QCOMPARE(range.first, sptr_t(6));
+    QCOMPARE(range.second, sptr_t(10));
+    delete edit;
+}
+
+void MarkTest::tokenRange_multilineSelection()
+{
+    SciEdit *edit = createEditor();
+    edit->setText("one\ntwo\nthree");
+    edit->setSelection(2, 9);
+
+    const QPair<sptr_t, sptr_t> range = edit->tokenRange();
+    QCOMPARE(range.first, sptr_t(2));
+    QCOMPARE(range.second, sptr_t(9));
+    QCOMPARE(edit->get_text_range(int(range.first), int(range.second)), QByteArray("e\ntwo\nt"));
+    delete edit;
+}
+
+void MarkTest::tokenRange_wordAtCaret()
+{
+    SciEdit *edit = createEditor();
+    edit->setText("alpha beta gamma");
+
+    // Caret in the middle of "beta"
+    edit->gotoPos(7);
+    QPair<sptr_t, sptr_t> range = edit->tokenRange();
+    QCOMPARE(range.first, sptr_t(6));
+    QCOMPARE(range.second, sptr_t(10));
+    QCOMPARE(edit->get_text_range(int(range.first), int(range.second)), QByteArray("beta"));
+
+    // Caret right after "beta" still resolves to that word
+    edit->gotoPos(10);
+    range = edit->tokenRange();
+    QCOMPARE(range.first, sptr_t(6));
+    QCOMPARE(range.second, sptr_t(10));
+
+    // Caret at the start of "gamma"
+    edit->gotoPos(11);
+    range = edit->tokenRange();
+    QCOMPARE(range.first, sptr_t(11));
+    QCOMPARE(range.second, sptr_t(16));
+    delete edit;
+}
+
+void MarkTest::tokenRange_noToken()
+{
+    SciEdit *edit = createEditor();
+
+    edit->setText("   ");
+    edit->gotoPos(1); // caret on whitespace, no selection
+    QPair<sptr_t, sptr_t> range = edit->tokenRange();
+    QCOMPARE(range.first, sptr_t(-1));
+    QCOMPARE(range.second, sptr_t(-1));
+
+    edit->setText("");
+    edit->gotoPos(0);
+    range = edit->tokenRange();
+    QCOMPARE(range.first, sptr_t(-1));
+    QCOMPARE(range.second, sptr_t(-1));
+    delete edit;
+}
+
+void MarkTest::tokenText_extraction()
+{
+    SciEdit *edit = createEditor();
+    edit->setText("alpha beta gamma");
+
+    edit->setSelection(6, 10);
+    QCOMPARE(edit->tokenText(), QByteArray("beta"));
+
+    edit->gotoPos(7); // no selection, caret inside "beta"
+    QCOMPARE(edit->tokenText(), QByteArray("beta"));
+
+    edit->setText("   ");
+    edit->gotoPos(1);
+    QCOMPARE(edit->tokenText(), QByteArray());
     delete edit;
 }
 

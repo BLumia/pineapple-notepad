@@ -124,21 +124,12 @@ void FindReplaceController::prepareDialogCommon()
     // way the text must stay within the configured character limit.
     if (AppSettings::fillFindFieldWithSelection()) {
         if (SciEdit *editor = m_editorProvider()) {
-            const sptr_t selStart = editor->selectionStart();
-            const sptr_t selEnd = editor->selectionEnd();
-
+            // The selection fills the field unconditionally; the word at the
+            // caret only when the respective option is enabled.
+            const bool hasSelection = editor->selectionStart() != editor->selectionEnd();
             QString text;
-            if (selStart != selEnd) {
-                const sptr_t start = qMin(selStart, selEnd);
-                const sptr_t end = qMax(selStart, selEnd);
-                text = QString::fromUtf8(editor->textRange(start, end));
-            } else if (AppSettings::fillFindFieldWithWordAtCaret()) {
-                const sptr_t pos = editor->currentPos();
-                const sptr_t wordStart = editor->wordStartPosition(pos, true);
-                const sptr_t wordEnd = editor->wordEndPosition(pos, true);
-                if (wordEnd > wordStart) {
-                    text = QString::fromUtf8(editor->textRange(wordStart, wordEnd));
-                }
+            if (hasSelection || AppSettings::fillFindFieldWithWordAtCaret()) {
+                text = QString::fromUtf8(editor->tokenText());
             }
 
             if (!text.isEmpty() && text.size() <= AppSettings::fillFindFieldMaxChars()) {
@@ -442,20 +433,7 @@ bool FindReplaceController::quickFindNext(bool forward)
         return false;
     }
 
-    const int selStart = static_cast<int>(editor->selectionStart());
-    const int selEnd = static_cast<int>(editor->selectionEnd());
-
-    QByteArray needleBytes;
-    if (selStart != selEnd) {
-        needleBytes = editor->get_text_range(selStart, selEnd);
-    } else {
-        const int pos = static_cast<int>(editor->currentPos());
-        const int wordS = static_cast<int>(editor->wordStartPosition(pos, true));
-        const int wordE = static_cast<int>(editor->wordEndPosition(pos, true));
-        if (wordS < wordE) {
-            needleBytes = editor->get_text_range(wordS, wordE);
-        }
-    }
+    const QByteArray needleBytes = editor->tokenText();
 
     if (needleBytes.isEmpty()) {
         return false;

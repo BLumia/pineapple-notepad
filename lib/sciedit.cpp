@@ -1389,6 +1389,32 @@ void SciEdit::clearAllMarkStyles()
     }
 }
 
+QPair<sptr_t, sptr_t> SciEdit::tokenRange()
+{
+    const sptr_t selStart = selectionStart();
+    const sptr_t selEnd = selectionEnd();
+    if (selStart != selEnd) {
+        return qMakePair(qMin(selStart, selEnd), qMax(selStart, selEnd));
+    }
+
+    const sptr_t pos = currentPos();
+    const sptr_t wordStart = wordStartPosition(pos, true);
+    const sptr_t wordEnd = wordEndPosition(pos, true);
+    if (wordStart < wordEnd) {
+        return qMakePair(wordStart, wordEnd);
+    }
+    return qMakePair(sptr_t(-1), sptr_t(-1));
+}
+
+QByteArray SciEdit::tokenText()
+{
+    const QPair<sptr_t, sptr_t> range = tokenRange();
+    if (range.first < 0 || range.first >= range.second) {
+        return {};
+    }
+    return get_text_range(int(range.first), int(range.second));
+}
+
 void SciEdit::styleTokenRange(int start, int length, int styleIndex)
 {
     if (length <= 0) {
