@@ -2,6 +2,7 @@
 
 #include <QWidget>
 #include <QList>
+#include <QSplitter>
 #include <QVector>
 #include <QStringList>
 
@@ -11,6 +12,31 @@ class QSplitter;
 class TabWidget;
 class SciEdit;
 class DocumentManager;
+class QContextMenuEvent;
+
+/*
+ * The splitter between the two views. Context menu and double click events
+ * on the splitter handle are not consumed by QSplitterHandle and propagate
+ * up to the splitter.
+ */
+class EditorAreaSplitter : public QSplitter
+{
+    Q_OBJECT
+
+public:
+    explicit EditorAreaSplitter(QWidget *parent)
+        : QSplitter(Qt::Horizontal, parent)
+    {
+    }
+
+signals:
+    void contextMenuRequested(const QPoint &globalPos);
+    void handleDoubleClicked();
+
+protected:
+    void contextMenuEvent(QContextMenuEvent *event) override;
+    void mouseDoubleClickEvent(QMouseEvent *event) override;
+};
 
 /*
  * The central widget of a MainWindow, hosting one or two tab groups
@@ -77,12 +103,30 @@ public:
     // nullptr to clear it everywhere.
     void setFocusedEditor(SciEdit *editor);
 
+    // Split layout (only meaningful with two groups). Qt::Horizontal places
+    // the views side by side, Qt::Vertical stacks them. "firstGroup" is the
+    // tab group shown first (left/top); group indexes are logical and do not
+    // change with the layout order.
+    Qt::Orientation splitOrientation() const;
+    int firstTabGroupInLayout() const;
+    void setSplitLayout(Qt::Orientation orientation, int firstGroup);
+    // Reset the split to an even distribution.
+    void equalizeSplit();
+    // Exchange the two views, keeping the current orientation (the sizes
+    // follow the widgets).
+    void swapSplitViews();
+    // Rotate the layout by 90 degrees like the splitter context menu of
+    // other editors: clockwise==true rotates right; the rotation decides
+    // whether the first view ends up first again (so both the direction and
+    // the view order can change).
+    void rotateSplit(bool clockwise);
+
 signals:
     void currentEditorChanged(SciEdit *editor);
     void filesDropped(const QStringList &paths);
     void editorCloseRequested(SciEdit *editor, int docId);
     void contextMenuRequested(SciEdit *editor, int docId);
-    void newDocumentRequested();
+    void newDocumentRequested(int group);
     void bookmarkMarginContextMenuRequested(SciEdit *editor, const QPoint &globalPos);
     void activeTabGroupChanged(int group);
     // A tab was added to a group / is about to be removed from one. Moving a
@@ -100,6 +144,8 @@ private:
     void emitCurrentEditorChanged();
     void wrapInSplitter();
     void unwrapSplitter();
+    void collapseSplitIfSideEmpty();
+    void showSplitterContextMenu(const QPoint &globalPos);
 
     DocumentManager *m_documentManager = nullptr;
     QList<TabWidget *> m_tabGroups;

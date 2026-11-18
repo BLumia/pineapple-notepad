@@ -336,8 +336,8 @@ MainWindow::MainWindow(DocumentManager *documentManager, QWidget *parent)
         closeTabRequested(editor, docId);
     });
     connect(m_viewManager, &EditorArea::contextMenuRequested, this, &MainWindow::onContextMenuRequested);
-    connect(m_viewManager, &EditorArea::newDocumentRequested, this, [this]() {
-        newFileInternal(NewTabPlacement::AppendToEnd);
+    connect(m_viewManager, &EditorArea::newDocumentRequested, this, [this](int group) {
+        newFileInternal(NewTabPlacement::AppendToEnd, /*activate=*/true, group);
         updateActions();
     });
     connect(m_viewManager, &EditorArea::bookmarkMarginContextMenuRequested, this,
@@ -1480,6 +1480,24 @@ void MainWindow::setupActions()
     cloneToOtherViewAction->setText(tr("Clone to Other View"));
     connect(cloneToOtherViewAction, &QAction::triggered, this, [this]() {
         moveDocumentToOtherView(m_viewManager->currentDocumentId(), /*clone=*/true);
+    });
+
+    QAction *swapSplitViewsAction = actionCollection()->addAction(u"view_split_swap"_s);
+    swapSplitViewsAction->setText(tr("Swap Views"));
+    connect(swapSplitViewsAction, &QAction::triggered, this, [this]() {
+        m_viewManager->swapSplitViews();
+    });
+
+    QAction *rotateSplitLeftAction = actionCollection()->addAction(u"view_split_rotate_left"_s);
+    rotateSplitLeftAction->setText(tr("Rotate Split to Left"));
+    connect(rotateSplitLeftAction, &QAction::triggered, this, [this]() {
+        m_viewManager->rotateSplit(false);
+    });
+
+    QAction *rotateSplitRightAction = actionCollection()->addAction(u"view_split_rotate_right"_s);
+    rotateSplitRightAction->setText(tr("Rotate Split to Right"));
+    connect(rotateSplitRightAction, &QAction::triggered, this, [this]() {
+        m_viewManager->rotateSplit(true);
     });
 
     // "Encoding" menu
@@ -3206,7 +3224,7 @@ void MainWindow::recomputeDocumentModified(int docId)
     m_documentManager->setDocumentModified(docId, modified);
 }
 
-int MainWindow::newFileInternal(NewTabPlacement placement, bool activate)
+int MainWindow::newFileInternal(NewTabPlacement placement, bool activate, int group)
 {
     int docId = m_documentManager->createNewDocument();
     if (docId == -1) {
@@ -3224,7 +3242,8 @@ int MainWindow::newFileInternal(NewTabPlacement placement, bool activate)
     editor->setEOLMode(eolMode);
     m_documentManager->setDocumentEolMode(docId, eolMode);
 
-    m_viewManager->addEditor(docId, editor, activate, placement);
+    // group == -1 (or an unknown group) falls back to the active one
+    m_viewManager->addEditorToGroup(group, docId, editor, activate, placement);
     editor->requestUrlScan();
 
     return docId;
@@ -4157,6 +4176,17 @@ void MainWindow::updateActions()
         QAction *a = actionCollection()->action(name);
         Q_CHECK_PTR(a);
         a->setEnabled(hasEditor && !isReadOnly);
+    }
+
+    // Need an existing split
+    for (const auto &name : {
+        "view_split_swap"_L1,
+        "view_split_rotate_left"_L1,
+        "view_split_rotate_right"_L1,
+    }) {
+        QAction *a = actionCollection()->action(name);
+        Q_CHECK_PTR(a);
+        a->setEnabled(m_viewManager->subViewVisible());
     }
 
     // Toggle actions: enabled when hasEditor, checked tracks a setting

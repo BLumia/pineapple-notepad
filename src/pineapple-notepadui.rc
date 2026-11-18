@@ -222,6 +222,10 @@ Template: https://github.com/KDE/kxmlgui/blob/master/src/ui_standards.rc
       <Menu><text>Move/Clone Current Document</text>
         <Action name="view_move_to_other_view" />
         <Action name="view_clone_to_other_view" />
+        <Separator/>
+        <Action name="view_split_swap" />
+        <Action name="view_split_rotate_left" />
+        <Action name="view_split_rotate_right" />
       </Menu>
       <Menu><text>&amp;Tab</text>
         <Action name="tab_goto_1" />

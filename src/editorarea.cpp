@@ -3,9 +3,28 @@
 #include "sciedit.h"
 #include "tabwidget.h"
 
+#include <QContextMenuEvent>
 #include <QEvent>
+#include <QMenu>
+#include <QMouseEvent>
 #include <QSplitter>
 #include <QVBoxLayout>
+
+void EditorAreaSplitter::contextMenuEvent(QContextMenuEvent *event)
+{
+    emit contextMenuRequested(event->globalPos());
+    event->accept();
+}
+
+void EditorAreaSplitter::mouseDoubleClickEvent(QMouseEvent *event)
+{
+    if (event->button() == Qt::LeftButton) {
+        emit handleDoubleClicked();
+        event->accept();
+        return;
+    }
+    QSplitter::mouseDoubleClickEvent(event);
+}
 
 EditorArea::EditorArea(DocumentManager *documentManager, QWidget *parent)
     : QWidget(parent)
@@ -33,7 +52,9 @@ void EditorArea::connectTabWidget(TabWidget *tab)
     connect(tab, &TabWidget::filesDropped, this, &EditorArea::filesDropped);
     connect(tab, &TabWidget::editorCloseRequested, this, &EditorArea::editorCloseRequested);
     connect(tab, &TabWidget::contextMenuRequested, this, &EditorArea::contextMenuRequested);
-    connect(tab, &TabWidget::newDocumentRequested, this, &EditorArea::newDocumentRequested);
+    connect(tab, &TabWidget::newDocumentRequested, this, [this, tab]() {
+        emit newDocumentRequested(m_tabGroups.indexOf(tab));
+    });
     connect(tab, &TabWidget::bookmarkMarginContextMenuRequested, this, &EditorArea::bookmarkMarginContextMenuRequested);
     // Switching to a tab of a group also makes that group the active one.
     // currentEditorChanged is emitted from the aggregated view (the active
@@ -102,20 +123,40 @@ void EditorArea::ensureSubView()
     }
 }
 
-void EditorArea::removeSubViewIfEmpty()
+void EditorArea::collapseSplitIfSideEmpty()
 {
     if (m_tabGroups.size() < 2) {
         return;
     }
-    TabWidget *subView = m_tabGroups.at(1);
-    if (subView->count() != 0) {
+    TabWidget *primary = m_tabGroups.at(0);
+    TabWidget *secondary = m_tabGroups.at(1);
+    const bool primaryEmpty = (primary->count() == 0);
+    const bool secondaryEmpty = (secondary->count() == 0);
+
+    if (secondaryEmpty) {
+        // The secondary view became empty (or nothing is left at all):
+        // drop it and keep the canonical primary view.
+        m_tabGroups.removeAt(1);
+        secondary->deleteLater();
+        setActiveTabGroup(0);
+        unwrapSplitter();
         return;
     }
 
-    m_tabGroups.removeAt(1);
-    subView->deleteLater();
-    setActiveTabGroup(0);
-    unwrapSplitter();
+    if (primaryEmpty) {
+        // The primary side became empty (e.g. its tabs were closed while it
+        // was shown as the second side after a swap): promote the secondary
+        // view to the primary slot so the split collapses to a single view.
+        m_tabGroups[0] = secondary;
+        m_tabGroups.removeAt(1);
+        setActiveTabGroup(0);
+        // Reparents the promoted view out of the splitter; deleting the
+        // splitter also deletes the emptied old primary view.
+        unwrapSplitter();
+        // The surviving current editor may not have been announced (e.g.
+        // when the emptied side was the active one).
+        emitCurrentEditorChanged();
+    }
 }
 
 void EditorArea::wrapInSplitter()
@@ -123,10 +164,15 @@ void EditorArea::wrapInSplitter()
     if (m_splitter) {
         return;
     }
-    m_splitter = new QSplitter(Qt::Horizontal, this);
-    m_splitter->setChildrenCollapsible(false);
-    m_splitter->addWidget(m_tabGroups.at(0));
-    layout()->addWidget(m_splitter);
+    auto *splitter = new EditorAreaSplitter(this);
+    splitter->setChildrenCollapsible(false);
+    splitter->addWidget(m_tabGroups.at(0));
+    connect(splitter, &EditorAreaSplitter::contextMenuRequested,
+            this, &EditorArea::showSplitterContextMenu);
+    connect(splitter, &EditorAreaSplitter::handleDoubleClicked,
+            this, &EditorArea::equalizeSplit);
+    layout()->addWidget(splitter);
+    m_splitter = splitter;
 }
 
 void EditorArea::unwrapSplitter()
@@ -140,6 +186,100 @@ void EditorArea::unwrapSplitter()
     primary->setParent(this);
     layout()->addWidget(primary);
     splitter->deleteLater();
+}
+
+Qt::Orientation EditorArea::splitOrientation() const
+{
+    return m_splitter ? m_splitter->orientation() : Qt::Horizontal;
+}
+
+int EditorArea::firstTabGroupInLayout() const
+{
+    if (!m_splitter || m_tabGroups.size() < 2) {
+        return 0;
+    }
+    return (m_splitter->widget(0) == m_tabGroups.at(1)) ? 1 : 0;
+}
+
+void EditorArea::setSplitLayout(Qt::Orientation orientation, int firstGroup)
+{
+    if (m_tabGroups.size() < 2 || !m_splitter) {
+        return;
+    }
+    if (firstGroup != 0 && firstGroup != 1) {
+        return;
+    }
+
+    const int currentFirst = firstTabGroupInLayout();
+    const QList<int> oldSizes = m_splitter->sizes();
+    const bool hasSizes = (oldSizes.size() == 2 && (oldSizes.at(0) > 0 || oldSizes.at(1) > 0));
+
+    m_splitter->setOrientation(orientation);
+    if (firstGroup != currentFirst) {
+        // The sizes belong to the widgets, so they swap along with them.
+        m_splitter->insertWidget(0, m_splitter->widget(1));
+        if (hasSizes) {
+            m_splitter->setSizes({oldSizes.at(1), oldSizes.at(0)});
+        }
+    } else if (hasSizes) {
+        m_splitter->setSizes(oldSizes);
+    }
+}
+
+void EditorArea::swapSplitViews()
+{
+    if (m_tabGroups.size() < 2 || !m_splitter) {
+        return;
+    }
+    setSplitLayout(m_splitter->orientation(), 1 - firstTabGroupInLayout());
+}
+
+void EditorArea::rotateSplit(bool clockwise)
+{
+    if (m_tabGroups.size() < 2 || !m_splitter) {
+        return;
+    }
+    const bool sideBySide = (m_splitter->orientation() == Qt::Horizontal);
+    const Qt::Orientation target = sideBySide ? Qt::Vertical : Qt::Horizontal;
+    const int first = firstTabGroupInLayout();
+    // Rotating clockwise keeps the leading view leading when starting side
+    // by side (left becomes top), and swaps it when starting stacked (top
+    // becomes right); counter-clockwise behaves the other way round.
+    const bool swapOrder = sideBySide ? !clockwise : clockwise;
+    setSplitLayout(target, swapOrder ? 1 - first : first);
+}
+
+void EditorArea::showSplitterContextMenu(const QPoint &globalPos)
+{
+    if (m_tabGroups.size() < 2) {
+        return;
+    }
+    QMenu menu;
+    QAction *rotateLeft = menu.addAction(tr("Rotate to Left"));
+    QAction *rotateRight = menu.addAction(tr("Rotate to Right"));
+
+    QAction *chosen = menu.exec(globalPos);
+    if (chosen == rotateLeft) {
+        rotateSplit(false);
+    } else if (chosen == rotateRight) {
+        rotateSplit(true);
+    }
+}
+
+void EditorArea::equalizeSplit()
+{
+    if (!m_splitter || m_splitter->count() != 2) {
+        return;
+    }
+    const bool sideBySide = (m_splitter->orientation() == Qt::Horizontal);
+    int total = sideBySide ? m_splitter->width() : m_splitter->height();
+    if (total <= 0) {
+        const QSize hint = m_splitter->sizeHint();
+        total = sideBySide ? hint.width() : hint.height();
+    }
+    if (total > 0) {
+        m_splitter->setSizes({total / 2, total - total / 2});
+    }
 }
 
 // EditorViewManager interface
@@ -263,7 +403,7 @@ void EditorArea::removeEditor(SciEdit *editor)
     if (TabWidget *tabGroup = groupAt(group)) {
         emit editorAboutToBeRemoved(tabGroup->docIdForEditor(editor), editor, group);
         tabGroup->removeEditor(editor);
-        removeSubViewIfEmpty();
+        collapseSplitIfSideEmpty();
     }
 }
 
@@ -277,7 +417,7 @@ void EditorArea::removeAllEditorsForDoc(int docId)
     for (TabWidget *group : std::as_const(m_tabGroups)) {
         group->removeAllEditorsForDoc(docId);
     }
-    removeSubViewIfEmpty();
+    collapseSplitIfSideEmpty();
 }
 
 void EditorArea::switchToEditor(SciEdit *editor)

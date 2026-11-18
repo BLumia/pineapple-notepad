@@ -58,6 +58,8 @@ private slots:
     void lifecycleSignals();
     void focusedEditorState();
     void aggregatedCurrentEditorSignal();
+    void splitLayoutRotation();
+    void collapseWhenPrimarySideEmpties();
 };
 
 void EditorAreaTest::initTestCase()
@@ -320,6 +322,82 @@ void EditorAreaTest::aggregatedCurrentEditorSignal()
     QCOMPARE(m_area->currentDocumentId(), docA);
     QVERIFY(spy.size() >= 1);
     QCOMPARE(spy.takeLast().at(0).value<SciEdit *>(), m_area->editorInGroup(0, docA));
+}
+
+void EditorAreaTest::splitLayoutRotation()
+{
+    addDocumentToGroup(0);
+    m_area->ensureSubView();
+    addDocumentToGroup(1);
+
+    QSplitter *splitter = m_area->findChild<QSplitter *>();
+    QVERIFY(splitter);
+
+    // Default layout: side by side, group 0 first
+    QCOMPARE(m_area->splitOrientation(), Qt::Horizontal);
+    QCOMPARE(m_area->firstTabGroupInLayout(), 0);
+
+    // Rotating right (clockwise) from side by side keeps the order
+    m_area->rotateSplit(true);
+    QCOMPARE(m_area->splitOrientation(), Qt::Vertical);
+    QCOMPARE(m_area->firstTabGroupInLayout(), 0);
+
+    // Rotating right again from a stacked layout swaps the order
+    m_area->rotateSplit(true);
+    QCOMPARE(m_area->splitOrientation(), Qt::Horizontal);
+    QCOMPARE(m_area->firstTabGroupInLayout(), 1);
+
+    // Rotating left (counter-clockwise) from side by side swaps the order:
+    // the left view (group 1) ends up at the bottom
+    m_area->rotateSplit(false);
+    QCOMPARE(m_area->splitOrientation(), Qt::Vertical);
+    QCOMPARE(m_area->firstTabGroupInLayout(), 0);
+
+    // Swapping the views keeps the orientation, exchanges the sides
+    m_area->swapSplitViews();
+    QCOMPARE(m_area->splitOrientation(), Qt::Vertical);
+    QCOMPARE(m_area->firstTabGroupInLayout(), 1);
+
+    // Sizes: a hidden splitter recalculates them from the children's size
+    // hints on every change, so exact preservation cannot be asserted here;
+    // the even split from equalizeSplit() is stable, though.
+    m_area->equalizeSplit();
+    const QList<int> equalSizes = splitter->sizes();
+    QCOMPARE(equalSizes.size(), 2);
+    QVERIFY(qAbs(equalSizes.at(0) - equalSizes.at(1)) <= 1);
+
+    // All layout operations are no-ops without a split
+    m_area->removeAllEditorsForDoc(m_area->documentIdsInGroup(0).first());
+    m_area->removeAllEditorsForDoc(m_area->documentIds().first());
+    QCOMPARE(m_area->tabGroupCount(), 1);
+    m_area->rotateSplit(true);
+    m_area->swapSplitViews();
+}
+
+void EditorAreaTest::collapseWhenPrimarySideEmpties()
+{
+    const int docA = addDocumentToGroup(0);
+    m_area->ensureSubView();
+    const int docB = addDocumentToGroup(1);
+
+    // Swap sides: group 1 is now shown first (left/top), group 0 second
+    m_area->swapSplitViews();
+    QCOMPARE(m_area->firstTabGroupInLayout(), 1);
+
+    // Closing all tabs of the logical primary group (the side shown second)
+    // collapses the split; the surviving view keeps its tabs.
+    m_area->removeAllEditorsForDoc(docA);
+    QCOMPARE(m_area->tabGroupCount(), 1);
+    QCOMPARE(m_area->subViewVisible(), false);
+    QCOMPARE(m_area->documentIds(), Ids({docB}));
+    QCOMPARE(m_area->currentDocumentId(), docB);
+    QVERIFY(m_area->currentEditor());
+
+    // The promoted view works as the primary group
+    m_area->ensureSubView();
+    const int docC = addDocumentToGroup(1);
+    QCOMPARE(m_area->documentIdsInGroup(0), Ids({docB}));
+    QCOMPARE(m_area->documentIdsInGroup(1), Ids({docC}));
 }
 
 QTEST_MAIN(EditorAreaTest)

@@ -162,7 +162,8 @@ private:
 
     SciEdit *createEditor(int docId);
     int openFileInternal(const QString &filePath, bool activate = true, bool skipLexerApply = false);
-    int newFileInternal(NewTabPlacement placement = NewTabPlacement::AppendToEnd, bool activate = true);
+    int newFileInternal(NewTabPlacement placement = NewTabPlacement::AppendToEnd, bool activate = true,
+                        int group = -1);
     void recomputeDocumentModified(int docId);
 
     DocumentManager *m_documentManager;
