@@ -11,8 +11,10 @@
 #include "sciedit.h"
 #include "tabwidget.h"
 
+#include <QApplication>
 #include <QSignalSpy>
 #include <QSplitter>
+#include <QTabBar>
 #include <QtTest/QtTest>
 
 using Ids = QVector<int>;
@@ -45,6 +47,12 @@ private:
         return docId;
     }
 
+    QTabBar *tabBarForGroup(int group)
+    {
+        TabWidget *tabGroup = m_area->tabGroupAt(group);
+        return tabGroup ? tabGroup->findChild<QTabBar *>() : nullptr;
+    }
+
 private slots:
     void initTestCase();
     void init();
@@ -60,6 +68,7 @@ private slots:
     void aggregatedCurrentEditorSignal();
     void splitLayoutRotation();
     void collapseWhenPrimarySideEmpties();
+    void tabDraggedOutSignal();
 };
 
 void EditorAreaTest::initTestCase()
@@ -398,6 +407,70 @@ void EditorAreaTest::collapseWhenPrimarySideEmpties()
     const int docC = addDocumentToGroup(1);
     QCOMPARE(m_area->documentIdsInGroup(0), Ids({docB}));
     QCOMPARE(m_area->documentIdsInGroup(1), Ids({docC}));
+}
+
+void EditorAreaTest::tabDraggedOutSignal()
+{
+    const int docA = addDocumentToGroup(0);
+    const int docB = addDocumentToGroup(0);
+    m_area->ensureSubView();
+    const int docC = addDocumentToGroup(1);
+
+    QTabBar *bar0 = tabBarForGroup(0);
+    QTabBar *bar1 = tabBarForGroup(1);
+    QVERIFY(bar0);
+    QVERIFY(bar1);
+    const int indexB = m_area->documentIdsInGroup(0).indexOf(docB);
+    QVERIFY(indexB >= 0);
+
+    // Real coordinates need a mapped widget
+    m_area->resize(800, 600);
+    m_area->show();
+    QVERIFY(QTest::qWaitForWindowExposed(m_area));
+    QTest::qWait(50);
+
+    // Pressing a tab of group 0 and releasing outside its tab bar reports
+    // the drag-out with the source group and tab index. While the drag
+    // hovers outside the bar, a drop-hint cursor is active (its exact shape
+    // needs an unobscured window, so only presence is asserted here).
+    QSignalSpy spy(m_area, &EditorArea::tabDraggedOut);
+    QTest::mousePress(bar0, Qt::LeftButton, {}, bar0->tabRect(indexB).center());
+    const QPoint outsideBar(bar0->width() + 40, bar0->height() + 40);
+    QTest::mouseMove(bar0, outsideBar);
+    QVERIFY(QApplication::overrideCursor());
+
+    // Moving back into the tab bar ends the cursor feedback
+    QTest::mouseMove(bar0, bar0->tabRect(indexB).center());
+    QCOMPARE(static_cast<const QCursor *>(QApplication::overrideCursor()), nullptr);
+
+    QTest::mouseRelease(bar0, Qt::LeftButton, {}, outsideBar);
+    QVERIFY(spy.wait(100));
+    QCOMPARE(spy.size(), 1);
+    QCOMPARE(spy.at(0).at(0).toInt(), 0);
+    QCOMPARE(spy.at(0).at(1).toInt(), indexB);
+    QCOMPARE(static_cast<const QCursor *>(QApplication::overrideCursor()), nullptr);
+
+    // The cursor shape follows the drop target and the copy modifier
+    QCOMPARE(m_area->tabDragCursorShape(m_area->editorInGroup(0, docA), false), Qt::DragMoveCursor);
+    QCOMPARE(m_area->tabDragCursorShape(m_area->editorInGroup(1, docC), false), Qt::DragMoveCursor);
+    QCOMPARE(m_area->tabDragCursorShape(m_area->editorInGroup(1, docC), true), Qt::DragCopyCursor);
+    QCOMPARE(m_area->tabDragCursorShape(nullptr, false), Qt::ForbiddenCursor);
+    QCOMPARE(m_area->tabDragCursorShape(m_area, false), Qt::ForbiddenCursor); // not a group widget
+
+    m_area->hide();
+
+    // Releasing inside the tab bar (a click or a reorder) does not
+    spy.clear();
+    QTest::mousePress(bar0, Qt::LeftButton, {}, bar0->tabRect(0).center());
+    QTest::mouseRelease(bar0, Qt::LeftButton, {}, bar0->tabRect(0).center());
+    QTest::qWait(50);
+    QCOMPARE(spy.size(), 0);
+
+    // A right-button press is not tracked as a drag source
+    QTest::mousePress(bar1, Qt::RightButton, {}, bar1->tabRect(0).center());
+    QTest::mouseRelease(bar1, Qt::RightButton, {}, QPoint(bar1->width() + 20, bar1->height() / 2));
+    QTest::qWait(50);
+    QCOMPARE(spy.size(), 0);
 }
 
 QTEST_MAIN(EditorAreaTest)

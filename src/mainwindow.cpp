@@ -340,6 +340,7 @@ MainWindow::MainWindow(DocumentManager *documentManager, QWidget *parent)
         newFileInternal(NewTabPlacement::AppendToEnd, /*activate=*/true, group);
         updateActions();
     });
+    connect(m_viewManager, &EditorArea::tabDraggedOut, this, &MainWindow::onTabDraggedOut);
     connect(m_viewManager, &EditorArea::bookmarkMarginContextMenuRequested, this,
             [this](SciEdit *, const QPoint &globalPos) {
         if (QWidget *container = guiFactory()->container(u"bookmark"_s, this)) {
@@ -3175,6 +3176,40 @@ int MainWindow::openFileInView(const QString &filePath, int group, bool activate
         moveDocumentToView(docId, group, /*clone=*/false);
     }
     return docId;
+}
+
+void MainWindow::onTabDraggedOut(int sourceGroup, int tabIndex, const QPoint &globalPos)
+{
+    const QVector<int> groupDocIds = m_viewManager->documentIdsInGroup(sourceGroup);
+    if (tabIndex < 0 || tabIndex >= groupDocIds.size()) {
+        return;
+    }
+    const int docId = groupDocIds.at(tabIndex);
+
+    const int targetGroup = m_viewManager->groupForWidget(QApplication::widgetAt(globalPos));
+    if (targetGroup < 0) {
+        // Released over some other part of the window (or nowhere): nothing
+        // to do; tearing off a new window is a later step.
+        return;
+    }
+
+    if (targetGroup != sourceGroup) {
+        const bool clone = QGuiApplication::queryKeyboardModifiers().testFlag(Qt::ControlModifier);
+        moveDocumentToView(docId, targetGroup, clone);
+        return;
+    }
+
+    // Released over the view the tab came from: offer the split actions.
+    QMenu menu;
+    QAction *moveAction = menu.addAction(QIcon::fromTheme(u"view-split-left-right"_s), tr("Move to Other View"));
+    QAction *cloneAction = menu.addAction(QIcon::fromTheme(u"edit-clone"_s), tr("Clone to Other View"));
+
+    QAction *chosen = menu.exec(globalPos);
+    if (chosen == moveAction) {
+        moveDocumentToOtherView(docId);
+    } else if (chosen == cloneAction) {
+        moveDocumentToOtherView(docId, /*clone=*/true);
+    }
 }
 
 SciEdit *MainWindow::createEditor(int docId)

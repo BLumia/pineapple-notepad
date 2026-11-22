@@ -107,6 +107,10 @@ private:
     // recreated in the target view and shares the Scintilla document.
     bool moveDocumentToView(int docId, int targetGroup, bool clone);
     void moveDocumentToOtherView(int docId, bool clone = false);
+    // A tab was dragged out of its tab bar and released over the window:
+    // onto another view it moves (Ctrl clones) the tab there, onto its own
+    // view it offers the move/clone actions in a popup menu.
+    void onTabDraggedOut(int sourceGroup, int tabIndex, const QPoint &globalPos);
     // Opens (or activates) a file's tab in a specific view group.
     int openFileInView(const QString &filePath, int group, bool activate = true);
     QMenu *buildDocumentContextMenu(int docId, SciEdit *editor, QWidget *parent);

@@ -121,6 +121,16 @@ public:
     // the view order can change).
     void rotateSplit(bool clockwise);
 
+    // Returns the group whose view (tab bar or editor area) contains or is
+    // the given widget, or -1 if the widget is not part of this area.
+    int groupForWidget(const QWidget *widget) const;
+    // The tab group widget (nullptr for an unknown group index).
+    TabWidget *tabGroupAt(int group) const;
+
+    // Cursor feedback for an ongoing tab drag: the shape shown while
+    // hovering over the given drop target (nullptr -> refusing).
+    Qt::CursorShape tabDragCursorShape(const QWidget *dropTarget, bool copyModifier) const;
+
 signals:
     void currentEditorChanged(SciEdit *editor);
     void filesDropped(const QStringList &paths);
@@ -129,6 +139,9 @@ signals:
     void newDocumentRequested(int group);
     void bookmarkMarginContextMenuRequested(SciEdit *editor, const QPoint &globalPos);
     void activeTabGroupChanged(int group);
+    // A tab was pressed and the mouse released outside its tab bar. The drop
+    // position resolves via groupForWidget().
+    void tabDraggedOut(int sourceGroup, int tabIndex, const QPoint &globalPos);
     // A tab was added to a group / is about to be removed from one. Moving a
     // tab between views recreates the editor object, so consumers holding a
     // SciEdit pointer must re-resolve by docId (or reconnect here) on change.
@@ -146,9 +159,12 @@ private:
     void unwrapSplitter();
     void collapseSplitIfSideEmpty();
     void showSplitterContextMenu(const QPoint &globalPos);
+    void updateTabDragCursor(const QPoint &globalPos);
+    void restoreTabDragCursor();
 
     DocumentManager *m_documentManager = nullptr;
     QList<TabWidget *> m_tabGroups;
     QSplitter *m_splitter = nullptr;
     int m_activeGroup = 0;
+    bool m_tabDragCursorActive = false;
 };

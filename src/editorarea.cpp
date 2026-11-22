@@ -4,7 +4,9 @@
 #include "tabwidget.h"
 
 #include <QContextMenuEvent>
+#include <QApplication>
 #include <QEvent>
+#include <QGuiApplication>
 #include <QMenu>
 #include <QMouseEvent>
 #include <QSplitter>
@@ -40,7 +42,11 @@ EditorArea::EditorArea(DocumentManager *documentManager, QWidget *parent)
     connectTabWidget(primary);
 }
 
-EditorArea::~EditorArea() = default;
+EditorArea::~EditorArea()
+{
+    // The override cursor is application-global; never leave it behind.
+    restoreTabDragCursor();
+}
 
 TabWidget *EditorArea::groupAt(int group) const
 {
@@ -55,6 +61,20 @@ void EditorArea::connectTabWidget(TabWidget *tab)
     connect(tab, &TabWidget::newDocumentRequested, this, [this, tab]() {
         emit newDocumentRequested(m_tabGroups.indexOf(tab));
     });
+    connect(tab, &TabWidget::tabDraggedOut, this, [this, tab](int tabIndex, const QPoint &globalPos) {
+        emit tabDraggedOut(m_tabGroups.indexOf(tab), tabIndex, globalPos);
+    });
+    // Drag feedback: while the pressed tab hovers outside its tab bar, show
+    // a drop hint cursor depending on what is under the mouse.
+    connect(tab, &TabWidget::tabDragMoved, this,
+            [this](int, const QPoint &globalPos, bool outsideTabBar) {
+        if (outsideTabBar) {
+            updateTabDragCursor(globalPos);
+        } else {
+            restoreTabDragCursor();
+        }
+    });
+    connect(tab, &TabWidget::tabDragFinished, this, &EditorArea::restoreTabDragCursor);
     connect(tab, &TabWidget::bookmarkMarginContextMenuRequested, this, &EditorArea::bookmarkMarginContextMenuRequested);
     // Switching to a tab of a group also makes that group the active one.
     // currentEditorChanged is emitted from the aggregated view (the active
@@ -514,6 +534,24 @@ int EditorArea::groupOfEditor(SciEdit *editor) const
     return -1;
 }
 
+int EditorArea::groupForWidget(const QWidget *widget) const
+{
+    if (!widget) {
+        return -1;
+    }
+    for (int i = 0; i < m_tabGroups.size(); ++i) {
+        if (m_tabGroups.at(i) == widget || m_tabGroups.at(i)->isAncestorOf(widget)) {
+            return i;
+        }
+    }
+    return -1;
+}
+
+TabWidget *EditorArea::tabGroupAt(int group) const
+{
+    return groupAt(group);
+}
+
 void EditorArea::setFocusedEditor(SciEdit *editor)
 {
     for (TabWidget *group : std::as_const(m_tabGroups)) {
@@ -521,6 +559,40 @@ void EditorArea::setFocusedEditor(SciEdit *editor)
         for (SciEdit *e : groupEditors) {
             e->setFocus(e == editor);
         }
+    }
+}
+
+void EditorArea::updateTabDragCursor(const QPoint &globalPos)
+{
+    // The drop target resolution needs a real (visible, unobscured) window,
+    // which is always the case for an actual drag within this application.
+    const bool copy = QGuiApplication::queryKeyboardModifiers().testFlag(Qt::ControlModifier);
+    const Qt::CursorShape shape = tabDragCursorShape(QApplication::widgetAt(globalPos), copy);
+
+    if (m_tabDragCursorActive) {
+        QApplication::changeOverrideCursor(QCursor(shape));
+    } else {
+        QApplication::setOverrideCursor(QCursor(shape));
+        m_tabDragCursorActive = true;
+    }
+}
+
+Qt::CursorShape EditorArea::tabDragCursorShape(const QWidget *dropTarget, bool copyModifier) const
+{
+    // A view (of this window) accepts the drop: moving the tab, or cloning
+    // it with Ctrl held. Anywhere else — dock widgets, other panels, outside
+    // the window — currently refuses it.
+    if (groupForWidget(dropTarget) >= 0) {
+        return copyModifier ? Qt::DragCopyCursor : Qt::DragMoveCursor;
+    }
+    return Qt::ForbiddenCursor;
+}
+
+void EditorArea::restoreTabDragCursor()
+{
+    if (m_tabDragCursorActive) {
+        QApplication::restoreOverrideCursor();
+        m_tabDragCursorActive = false;
     }
 }
 

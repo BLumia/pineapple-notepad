@@ -60,6 +60,12 @@ signals:
     void contextMenuRequested(SciEdit *editor, int docId);
     void newDocumentRequested();
     void bookmarkMarginContextMenuRequested(SciEdit *editor, const QPoint &globalPos);
+    // Emitted on mouse moves while a tab is pressed: outsideTabBar tells
+    // whether the cursor has left the tab bar (the potential drop phase).
+    void tabDragMoved(int tabIndex, const QPoint &globalPos, bool outsideTabBar);
+    // The pressed tab was released (anywhere) — ends the drag feedback.
+    void tabDragFinished();
+    void tabDraggedOut(int tabIndex, const QPoint &globalPos);
 
 private slots:
     void onCurrentChanged(int index);
@@ -70,6 +76,7 @@ private slots:
 private:
     DocumentManager *m_documentManager;
     QHash<int, SciEdit*> m_editors;
+    int m_dragPressedTabIndex = -1;
 
     int removeTabAt(int index);
 

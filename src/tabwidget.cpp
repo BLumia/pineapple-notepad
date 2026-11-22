@@ -361,6 +361,40 @@ bool TabWidget::eventFilter(QObject *watched, QEvent *event)
         }
     }
 
+    if (watched == tabBar()) {
+        if (event->type() == QEvent::MouseButtonPress) {
+            auto *mouseEvent = static_cast<QMouseEvent *>(event);
+            m_dragPressedTabIndex = (mouseEvent->button() == Qt::LeftButton)
+                ? tabBar()->tabAt(mouseEvent->position().toPoint()) : -1;
+        } else if (event->type() == QEvent::MouseMove) {
+            if (m_dragPressedTabIndex >= 0) {
+                auto *mouseEvent = static_cast<QMouseEvent *>(event);
+                const bool outsideTabBar = !tabBar()->rect().adjusted(-2, -2, 2, 2)
+                        .contains(mouseEvent->position().toPoint());
+                emit tabDragMoved(m_dragPressedTabIndex,
+                                  mouseEvent->globalPosition().toPoint(), outsideTabBar);
+            }
+        } else if (event->type() == QEvent::MouseButtonRelease) {
+            auto *mouseEvent = static_cast<QMouseEvent *>(event);
+            const int pressedTab = m_dragPressedTabIndex;
+            m_dragPressedTabIndex = -1;
+            if (pressedTab >= 0 && mouseEvent->button() == Qt::LeftButton) {
+                emit tabDragFinished();
+                // Releasing the mouse outside the tab bar while a tab was pressed
+                // counts as dragging that tab out (QTabBar itself cancels the
+                // reorder). Queued so the bar finishes its own release handling
+                // (and releases the mouse grab) before anything reacts.
+                if (!tabBar()->rect().adjusted(-2, -2, 2, 2)
+                            .contains(mouseEvent->position().toPoint())) {
+                    const QPoint globalPos = mouseEvent->globalPosition().toPoint();
+                    QMetaObject::invokeMethod(this, [this, pressedTab, globalPos]() {
+                        emit tabDraggedOut(pressedTab, globalPos);
+                    }, Qt::QueuedConnection);
+                }
+            }
+        }
+    }
+
     if (watched == tabBar() && event->type() == QEvent::MouseButtonRelease) {
         auto *mouseEvent = static_cast<QMouseEvent *>(event);
         if (mouseEvent->button() == Qt::MiddleButton) {
