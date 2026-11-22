@@ -10,6 +10,10 @@ Pineapple Notepad is an advanced and easy-to-use multi-document text editor. It 
 
 Pineapple Notepad aims to be a cross-platform alternative to Notepad++. It's based on [Scintilla](https://www.scintilla.org/), [Qt](https://www.qt.io/) and [KDE Framework](https://develop.kde.org/products/frameworks/).
 
+## Help Translation!
+
+[Translate this project on Codeberg's Weblate!](https://translate.codeberg.org/projects/pineapple-apps/pineapple-notepad/)
+
 ## Sponsorship
 
 With the support of our sponsors, Pineapple Notepad has now achieved its open-source goals: the complete code for this project has been released under an OSI-approved open-source license, and the version available on GitHub will directly include all features.

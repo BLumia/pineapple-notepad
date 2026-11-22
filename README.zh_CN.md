@@ -10,6 +10,10 @@
 
 菠萝记事本旨在提供 Notepad++ 的跨平台替代。此项目基于 [Scintilla](https://www.scintilla.org/)、[Qt](https://www.qt.io/) 和 [KDE Framework](https://develop.kde.org/products/frameworks/)。
 
+## 帮助翻译!
+
+[在 Codeberg 的 Weblate 上帮助此项目翻译到更多语言!](https://translate.codeberg.org/projects/pineapple-apps/pineapple-notepad/)
+
 ## 赞助
 
 在现有赞助者们的大力支持下，菠萝记事本现已达成了其开源目标：此项目的完整代码已经在 OSI 认可的开源许可协议下发布，并且 GitHub 上所提供的版本将会直接包含所有特性。
