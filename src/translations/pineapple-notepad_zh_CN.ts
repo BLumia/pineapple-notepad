@@ -124,6 +124,17 @@
     </message>
 </context>
 <context>
+    <name>EditorArea</name>
+    <message>
+        <source>Rotate to Left</source>
+        <translation>向左旋转</translation>
+    </message>
+    <message>
+        <source>Rotate to Right</source>
+        <translation>向右旋转</translation>
+    </message>
+</context>
+<context>
     <name>EditorPopupConfigDialog</name>
     <message>
         <source>Configure Editor Context Menu</source>
@@ -2194,6 +2205,26 @@ Issued at: %2</source>
         <translation>复制以所有样式标记的文本</translation>
     </message>
     <message>
+        <source>Move to Other View</source>
+        <translation>移动到另一视图</translation>
+    </message>
+    <message>
+        <source>Clone to Other View</source>
+        <translation>复制到另一视图</translation>
+    </message>
+    <message>
+        <source>Swap Views</source>
+        <translation>交换两侧视图</translation>
+    </message>
+    <message>
+        <source>Rotate Split to Left</source>
+        <translation>向左旋转分屏</translation>
+    </message>
+    <message>
+        <source>Rotate Split to Right</source>
+        <translation>向左旋转分屏</translation>
+    </message>
+    <message>
         <source>Highlighting</source>
         <translation>高亮</translation>
     </message>
@@ -2288,10 +2319,6 @@ Do you want to save your changes?</source>
     <message>
         <source>Reload now?</source>
         <translation>现在就重新加载吗？</translation>
-    </message>
-    <message>
-        <source>All Files (*)</source>
-        <translation>所有文件 (*)</translation>
     </message>
     <message>
         <source>Save Macro</source>
@@ -2915,7 +2942,7 @@ You can view the list of sponsors in the About dialog too. If you like this appl
 You can learn more about sponsor benefits at [GitHub](https://github.com/BLumia/pineapple-notepad)
 or [Gitee](https://gitee.com/BLumia/pineapple-notepad) from project README, and donate to us via
 [Ko-fi](https://ko-fi.com/blumia), [Afdian](https://afdian.com/a/BLumia) or
-[Itch.io](https://blumia.itch.io/pineapple-notepad). Thanks to our sponsors, we've reached our
+[Itch.io](https://blumia.itch.io/pineapple-notepad). Thanks to our sponsors, we&apos;ve reached our
 open source goal. Pineapple Notepad is now open source software! If you like this application,
 please consider becoming a sponsor to support its continued development.
 
