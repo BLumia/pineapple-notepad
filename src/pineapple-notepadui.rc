@@ -4,7 +4,7 @@ DTD: https://github.com/KDE/kxmlgui/blob/master/src/kpartgui.dtd
 Template: https://github.com/KDE/kxmlgui/blob/master/src/ui_standards.rc
 -->
 <gui name="pineapple-notepad"
-     version="15"
+     version="16"
      xmlns="http://www.kde.org/standards/kxmlgui/1.0"
      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
      xsi:schemaLocation="http://www.kde.org/standards/kxmlgui/1.0
