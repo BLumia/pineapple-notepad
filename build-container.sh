@@ -25,6 +25,8 @@ if [ ${#DISTROS[@]} -eq 0 ]; then
         "ubuntu-26.04"
         "deepin-crimson"
         "loong64-cross-deepin-crimson"
+        "arm64-cross-deepin-crimson"
+        "riscv64-cross-deepin-crimson"
     )
 fi
 
@@ -35,8 +37,26 @@ for distro in "${DISTROS[@]}"; do
     DOCKERFILE="containers/$distro.Dockerfile"
 
     # 根据 distro 名称选择构建脚本
+    CROSS_TRIPLE=""
+    CROSS_DPKG_ARCH=""
+    CROSS_CMAKE_PROCESSOR=""
     if [[ "$distro" == loong64-cross-* ]]; then
-        BUILD_SCRIPT="containers/build_inside_loong64_cross.sh"
+        BUILD_SCRIPT="containers/build_inside_cross.sh"
+        CROSS_TRIPLE="loongarch64-linux-gnu"
+        CROSS_DPKG_ARCH="loong64"
+        CROSS_CMAKE_PROCESSOR="loongarch64"
+        DEB_DIR="build-container"
+    elif [[ "$distro" == arm64-cross-* ]]; then
+        BUILD_SCRIPT="containers/build_inside_cross.sh"
+        CROSS_TRIPLE="aarch64-linux-gnu"
+        CROSS_DPKG_ARCH="arm64"
+        CROSS_CMAKE_PROCESSOR="aarch64"
+        DEB_DIR="build-container"
+    elif [[ "$distro" == riscv64-cross-* ]]; then
+        BUILD_SCRIPT="containers/build_inside_cross.sh"
+        CROSS_TRIPLE="riscv64-linux-gnu"
+        CROSS_DPKG_ARCH="riscv64"
+        CROSS_CMAKE_PROCESSOR="riscv64"
         DEB_DIR="build-container"
     else
         BUILD_SCRIPT="containers/build_inside.sh"
@@ -64,6 +84,9 @@ for distro in "${DISTROS[@]}"; do
     podman run --rm \
         -v $(pwd):/workspace:Z \
         -v $(pwd)/output/$distro:/output:Z \
+        -e CROSS_TRIPLE="$CROSS_TRIPLE" \
+        -e CROSS_DPKG_ARCH="$CROSS_DPKG_ARCH" \
+        -e CROSS_CMAKE_PROCESSOR="$CROSS_CMAKE_PROCESSOR" \
         $IMAGE \
         bash -c "
             chmod +x $BUILD_SCRIPT

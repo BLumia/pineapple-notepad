@@ -1,23 +1,33 @@
 #!/usr/bin/env bash
 #
-# build_inside_loong64_cross.sh
-# Cross-build .deb package for loongarch64 inside a container (amd64 host).
+# build_inside_cross.sh
+# Cross-build .deb package for a foreign architecture inside a container
+# (amd64 host).
+#
+# Target information is provided via environment variables:
+#   CROSS_TRIPLE           GCC cross toolchain triple, e.g. aarch64-linux-gnu
+#   CROSS_DPKG_ARCH        dpkg architecture of the target, e.g. arm64
+#   CROSS_CMAKE_PROCESSOR  CMAKE_SYSTEM_PROCESSOR of the target, e.g. aarch64
 #
 set -e
 
+: "${CROSS_TRIPLE:?CROSS_TRIPLE is not set}"
+: "${CROSS_DPKG_ARCH:?CROSS_DPKG_ARCH is not set}"
+: "${CROSS_CMAKE_PROCESSOR:?CROSS_CMAKE_PROCESSOR is not set}"
+
 BUILD_DIR=build-container
-PACKAGE_DIR=${BUILD_DIR}/_CPack_Packages
-GCC_TRIPLE=loongarch64-linux-gnu
-DPKG_TARGET_ARCH=loong64
+GCC_TRIPLE=${CROSS_TRIPLE}
+DPKG_TARGET_ARCH=${CROSS_DPKG_ARCH}
+CMAKE_SYSTEM_PROCESSOR=${CROSS_CMAKE_PROCESSOR}
 HOST_MULTIARCH=x86_64-linux-gnu
 
 rm -rf $BUILD_DIR
 mkdir -p $BUILD_DIR
 
-# Generate cmake toolchain file for loong64 cross-compilation
-cat > ${BUILD_DIR}/toolchain-loong64.cmake <<EOF
+# Generate cmake toolchain file for cross-compilation
+cat > ${BUILD_DIR}/toolchain-${DPKG_TARGET_ARCH}.cmake <<EOF
 set(CMAKE_SYSTEM_NAME Linux)
-set(CMAKE_SYSTEM_PROCESSOR loongarch64)
+set(CMAKE_SYSTEM_PROCESSOR ${CMAKE_SYSTEM_PROCESSOR})
 set(CMAKE_C_COMPILER   ${GCC_TRIPLE}-gcc)
 set(CMAKE_CXX_COMPILER ${GCC_TRIPLE}-g++)
 
@@ -43,7 +53,7 @@ EOF
 # FetchContent sources otherwise.
 cmake -S . -B $BUILD_DIR \
     -G Ninja \
-    -DCMAKE_TOOLCHAIN_FILE=${BUILD_DIR}/toolchain-loong64.cmake \
+    -DCMAKE_TOOLCHAIN_FILE=${BUILD_DIR}/toolchain-${DPKG_TARGET_ARCH}.cmake \
     -DCMAKE_BUILD_TYPE=Release \
     -DCMAKE_INSTALL_PREFIX=/usr \
     -DBUILD_TESTING=OFF \
