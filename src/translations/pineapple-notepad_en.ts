@@ -975,6 +975,14 @@ If you&apos;ve applied a custom font and want to reset the font by unchecking, y
         <source>Backspace to unindent</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Default Behavior</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Indentation Options</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>KeygenTab</name>

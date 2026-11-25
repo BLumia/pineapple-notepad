@@ -992,6 +992,14 @@ If you&apos;ve applied a custom font and want to reset the font by unchecking, y
         <source>Backspace to unindent</source>
         <translation>使用退格键减少缩进</translation>
     </message>
+    <message>
+        <source>Default Behavior</source>
+        <translation>默认行为</translation>
+    </message>
+    <message>
+        <source>Indentation Options</source>
+        <translation>缩进选项</translation>
+    </message>
 </context>
 <context>
     <name>KeygenTab</name>

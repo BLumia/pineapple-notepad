@@ -7,89 +7,120 @@
     <x>0</x>
     <y>0</y>
     <width>406</width>
-    <height>330</height>
+    <height>280</height>
    </rect>
   </property>
-  <layout class="QFormLayout" name="formLayout">
-   <item row="0" column="0">
-    <widget class="QLabel" name="label">
-     <property name="text">
-      <string>Tab width</string>
+  <layout class="QVBoxLayout" name="verticalLayout">
+   <item>
+    <widget class="QGroupBox" name="defaultBehaviorGroup">
+     <property name="title">
+      <string>Default Behavior</string>
      </property>
+     <layout class="QFormLayout" name="formLayout">
+      <item row="0" column="0">
+       <widget class="QLabel" name="label">
+        <property name="text">
+         <string>Tab width</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="1">
+       <widget class="QSpinBox" name="kcfg_tabWidth">
+        <property name="minimum">
+         <number>1</number>
+        </property>
+        <property name="maximum">
+         <number>16</number>
+        </property>
+        <property name="value">
+         <number>4</number>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="0">
+       <widget class="QLabel" name="label_2">
+        <property name="text">
+         <string>Indent using tabs</string>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="1">
+       <widget class="QCheckBox" name="kcfg_indentUseTabs">
+        <property name="toolTip">
+         <string>Use tabs instead of spaces for indentation</string>
+        </property>
+        <property name="text">
+         <string>Enabled</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
     </widget>
    </item>
-   <item row="0" column="1">
-    <widget class="QSpinBox" name="kcfg_tabWidth">
-     <property name="minimum">
-      <number>1</number>
+   <item>
+    <widget class="QGroupBox" name="indentationOptionsGroup">
+     <property name="title">
+      <string>Indentation Options</string>
      </property>
-     <property name="maximum">
-      <number>16</number>
-     </property>
-     <property name="value">
-      <number>4</number>
-     </property>
+     <layout class="QFormLayout" name="formLayout_2">
+      <item row="0" column="0">
+       <widget class="QLabel" name="label_3">
+        <property name="text">
+         <string>Auto-indent</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="1">
+       <widget class="QComboBox" name="kcfg_autoIndentMode">
+        <item>
+         <property name="text">
+          <string>None</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>Basic</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>Advanced</string>
+         </property>
+        </item>
+       </widget>
+      </item>
+      <item row="1" column="0">
+       <widget class="QLabel" name="label_4">
+        <property name="text">
+         <string>Backspace to unindent</string>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="1">
+       <widget class="QCheckBox" name="kcfg_backspaceUnindent">
+        <property name="toolTip">
+         <string>When pressing Backspace in the indentation area, decrease indentation by one level instead of deleting a single space</string>
+        </property>
+        <property name="text">
+         <string>Enabled</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
     </widget>
    </item>
-   <item row="1" column="0">
-    <widget class="QLabel" name="label_2">
-     <property name="text">
-      <string>Auto-indent</string>
+   <item>
+    <spacer name="verticalSpacer">
+     <property name="orientation">
+      <enum>Qt::Orientation::Vertical</enum>
      </property>
-    </widget>
-   </item>
-   <item row="1" column="1">
-    <widget class="QComboBox" name="kcfg_autoIndentMode">
-     <item>
-      <property name="text">
-       <string>None</string>
-      </property>
-     </item>
-     <item>
-      <property name="text">
-       <string>Basic</string>
-      </property>
-     </item>
-     <item>
-      <property name="text">
-       <string>Advanced</string>
-      </property>
-     </item>
-    </widget>
-   </item>
-   <item row="2" column="0">
-    <widget class="QLabel" name="label_3">
-     <property name="text">
-      <string>Indent using tabs</string>
+     <property name="sizeHint" stdset="0">
+      <size>
+       <width>20</width>
+       <height>40</height>
+      </size>
      </property>
-    </widget>
-   </item>
-   <item row="2" column="1">
-    <widget class="QCheckBox" name="kcfg_indentUseTabs">
-     <property name="toolTip">
-      <string>Use tabs instead of spaces for indentation</string>
-     </property>
-     <property name="text">
-      <string>Enabled</string>
-     </property>
-    </widget>
-   </item>
-   <item row="3" column="1">
-    <widget class="QCheckBox" name="kcfg_backspaceUnindent">
-     <property name="toolTip">
-      <string>When pressing Backspace in the indentation area, decrease indentation by one level instead of deleting a single space</string>
-     </property>
-     <property name="text">
-      <string>Enabled</string>
-     </property>
-    </widget>
-   </item>
-   <item row="3" column="0">
-    <widget class="QLabel" name="label_4">
-     <property name="text">
-      <string>Backspace to unindent</string>
-     </property>
-    </widget>
+    </spacer>
    </item>
   </layout>
  </widget>
