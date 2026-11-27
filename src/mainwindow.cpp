@@ -3668,7 +3668,7 @@ QMenu *MainWindow::buildDocumentContextMenu(int docId, SciEdit *editor, QWidget 
     auto *copyFullPath = copyMenu->addAction(tr("Full Path"));
     auto *copyFileName = copyMenu->addAction(tr("File Name"));
     auto *copyDirPath = copyMenu->addAction(tr("Directory Path"));
-    auto *moveDocMenu = menu->addMenu(ki18n("Move Document").toString());
+    auto *moveDocMenu = menu->addMenu(ki18n("Move/Clone Current Document").toString());
     moveDocMenu->setIcon(QIcon::fromTheme(u"view-split-left-right"_s));
     QAction *moveToOtherViewAction = nullptr;
     QAction *cloneToOtherViewAction = nullptr;
