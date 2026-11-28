@@ -130,6 +130,9 @@
     <entry name="backspaceUnindent" type="Bool" key="backspace-unindent">
       <default>true</default>
     </entry>
+    <entry name="autoDetectIndent" type="Bool" key="auto-detect-indent">
+      <default>true</default>
+    </entry>
     <entry name="multiSelection" type="Bool" key="multi-selection">
       <default>true</default>
     </entry>

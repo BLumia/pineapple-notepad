@@ -23,6 +23,7 @@ PRIVATE
     editorpopupconfig.cpp editorpopupconfig.h
     editorviewhelper.cpp editorviewhelper.h
     exporters.cpp exporters.h
+    indentguesser.cpp indentguesser.h
     languageconfigstore.cpp languageconfigstore.h
     kshlexer.cpp kshlexer.h
     loglexer.cpp loglexer.h

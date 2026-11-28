@@ -1000,6 +1000,14 @@ If you&apos;ve applied a custom font and want to reset the font by unchecking, y
         <source>Indentation Options</source>
         <translation>缩进选项</translation>
     </message>
+    <message>
+        <source>Auto detect indentation</source>
+        <translation>自动检测缩进格式</translation>
+    </message>
+    <message>
+        <source>When a document is opened, guess from its content whether indentation uses tabs or spaces, and how many spaces one indent level takes</source>
+        <translation>打开文档时根据内容判断缩进使用制表符还是空格，以及每级缩进占用多少个空格</translation>
+    </message>
 </context>
 <context>
     <name>KeygenTab</name>

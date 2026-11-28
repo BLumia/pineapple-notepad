@@ -99,6 +99,20 @@ set_tests_properties(tab_space_convert_test PROPERTIES
     ENVIRONMENT "QT_FORCE_STDERR_LOGGING=1"
 )
 
+add_executable(indent_detect_test)
+target_sources(indent_detect_test PRIVATE
+    indent_detect_test.cpp
+)
+target_link_libraries(indent_detect_test PRIVATE
+    pineapple-notepad-lib
+    Qt6::Test
+    Qt6::Widgets
+)
+add_test(NAME indent_detect_test COMMAND indent_detect_test)
+set_tests_properties(indent_detect_test PROPERTIES
+    ENVIRONMENT "QT_FORCE_STDERR_LOGGING=1"
+)
+
 add_executable(encode_decode_test)
 target_sources(encode_decode_test PRIVATE
     encode_decode_test.cpp

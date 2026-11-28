@@ -983,6 +983,14 @@ If you&apos;ve applied a custom font and want to reset the font by unchecking, y
         <source>Indentation Options</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Auto detect indentation</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>When a document is opened, guess from its content whether indentation uses tabs or spaces, and how many spaces one indent level takes</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>KeygenTab</name>

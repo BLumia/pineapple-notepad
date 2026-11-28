@@ -36,6 +36,7 @@
 #include "userlanguageeditordialog.h"
 #include "languageconfigstore.h"
 #include "exporters.h"
+#include "indentguesser.h"
 
 #include <optional>
 
@@ -3304,10 +3305,20 @@ int MainWindow::openFileInternal(const QString &filePath, bool activate, bool sk
 
     SciEdit *editor = createEditor(docId);
 
-    m_documentManager->setDocumentIndentTabWidth(docId, AppSettings::tabWidth());
-    m_documentManager->setDocumentIndentUseTabs(docId, AppSettings::indentUseTabs());
-    editor->setTabWidth(m_documentManager->getDocumentIndentTabWidth(docId));
-    editor->setIndentUseTabs(m_documentManager->getDocumentIndentUseTabs(docId));
+    int indentWidth = AppSettings::tabWidth();
+    bool indentUseTabs = AppSettings::indentUseTabs();
+    if (AppSettings::autoDetectIndent() && editor->length() > 0) {
+        // Detection is a single bounded pass over the leading whitespace of
+        // at most the first 10,000 lines, so it does not noticeably delay
+        // opening the document.
+        const auto guessed = IndentGuesser::guessIndentation(editor, indentWidth, !indentUseTabs);
+        indentWidth = guessed.indentWidth;
+        indentUseTabs = !guessed.indentUsingSpaces;
+    }
+    m_documentManager->setDocumentIndentTabWidth(docId, indentWidth);
+    m_documentManager->setDocumentIndentUseTabs(docId, indentUseTabs);
+    editor->setTabWidth(indentWidth);
+    editor->setIndentUseTabs(indentUseTabs);
 
     if (!skipLexerApply) {
         const QString lexerName = m_documentManager->getDocumentLanguage(docId);
